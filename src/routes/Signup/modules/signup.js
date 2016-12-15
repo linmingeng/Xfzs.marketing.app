@@ -8,11 +8,11 @@ const singupSchema = new Schema('singup')
 // ------------------------------------
 export const SUBMIT_SINGUP_REQUEST = 'SUBMIT_SINGUP_REQUEST'
 export const SUBMIT_SINGUP_SUCCESS = 'SUBMIT_SINGUP_SUCCESS'
-export const SUBMIT_SIGNUP_FAILURE = 'SUBMIT_SIGNUP_FAILURE'
+export const SUBMIT_SIGNUP_FAILURE = 'FAILURE'
 
 export const SINGUP_REQUEST = 'SINGUP_REQUEST'
 export const SINGUP_SUCCESS = 'SINGUP_SUCCESS'
-export const SINGUP_FAILURE = 'SINGUP_FAILURE'
+export const SINGUP_FAILURE = 'FAILURE'
 
 // ------------------------------------
 // Actions

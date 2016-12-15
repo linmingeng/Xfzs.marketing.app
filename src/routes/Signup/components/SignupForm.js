@@ -210,7 +210,6 @@ class SignupFrom extends React.Component {
             this.state.phoneNumber !== '' &&
             this.state.desc !== '' &&
             this.state.images.length > 0) {
-            this.setState({ loading: true })
             this.props.onSubmit({
                 name: this.state.name,
                 phoneNumber: this.state.phoneNumber,
@@ -218,7 +217,6 @@ class SignupFrom extends React.Component {
                 topicId: '',
                 headerimage: this.state.images[0].url
             }, () => {
-                this.setState({ loading: false })
             })
         } else {
             this.showWarn('您的报名信息不完整')
