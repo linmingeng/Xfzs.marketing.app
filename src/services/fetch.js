@@ -3,9 +3,9 @@ import { normalize } from 'normalizr'
 import fetch from 'isomorphic-fetch'
 import auth from './auth'
 
-const baseUrl = 'http://localhost:62114'
+// const baseUrl = 'http://localhost:62114'
 // const baseUrl = 'http://api.dev.shop.hxzcgf.cn'
-// const baseUrl = 'http://api.shop.hxzcgf.cn'
+const baseUrl = 'http://api.shop.hxzcgf.cn'
 
 export const api = {
     login: baseUrl + '/api/app/account',
