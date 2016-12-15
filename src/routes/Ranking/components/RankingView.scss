@@ -1,0 +1,76 @@
+.ranking-view {
+    margin-top: 10px;
+}
+
+.ranking-view .ranking-list {
+    list-style: none;
+    display: block;
+    background:#eeecec; 
+    margin-top: 10px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.ranking-list .row {
+    display: -webkit-flex;
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.ranking-list .row:last-child {
+    border-bottom: 0;
+}
+
+.ranking-list .row .col {
+    flex-grow: 1;
+    flex-basis: 25%;   
+}
+
+.ranking-list .title {
+    font-weight: bold;
+}
+
+.ranking-list .ranking-top-1 {
+    color:#eb4040;
+    font-weight: bold;
+}
+
+.ranking-list .ranking-top-2 {
+    color:#ea6c06;
+    font-weight: bold;
+}
+
+.ranking-list .ranking-top-3 {
+    color:#eaac06;
+    font-weight: bold;
+}
+
+.ranking-list .ranking-top-other {
+    color:#767676;
+    font-weight: bold;
+}
+
+.ranking-list .voter {
+    position: relative;
+    overflow: hidden;
+    flex-grow: 2 !important;
+    flex-basis: 50%;
+}
+
+.ranking-list .voter a {
+    color: #000;
+}
+
+.voter .voter-headerimage {
+    width: 70px;
+    display: inline-block;
+}
+
+.voter .voter-desc {
+    display: inline-block;
+    text-align: left;
+    margin-left: 5px;
+}

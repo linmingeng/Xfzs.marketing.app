@@ -1,0 +1,27 @@
+.traffic-count {
+    display: -webkit-flex;
+    display: flex;
+    padding-bottom: 10px;
+}
+
+.traffic-count .count {
+    flex-basis: 32%;
+}
+
+.traffic-count .count p {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.traffic-count .line {
+    flex-basis: 2%;
+}
+
+.traffic-count .line p{
+    display: block;
+    width: 1px;
+    border-left: 1px solid #ccc;
+    margin: 0 auto;
+    height: 80%;
+}

@@ -1,3 +1,4 @@
+import NProgress from 'nprogress'
 import { injectReducer } from '../../store/reducers'
 
 export default (store) => ({
@@ -10,6 +11,11 @@ export default (store) => ({
             injectReducer(store, { key: 'login', reducer })
 
             cb(null, Container)
+
+            NProgress.done()
         }, 'login')
+    },
+    onEnter: () => {
+        NProgress.start()
     }
 })

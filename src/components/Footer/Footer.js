@@ -1,10 +1,10 @@
 import React from 'react'
-import './Footer.scss'
+import { Footer as WeuiFooter } from 'react-weui'
 
 export const Footer = () => (
-    <div className="ant-layout-footer">
-        版权所有 © 2016 商城管理系统
-    </div>
+    <WeuiFooter className="footer">
+        版权所有 © 2016 小蜂找事社区
+    </WeuiFooter>
 )
 
 export default Footer

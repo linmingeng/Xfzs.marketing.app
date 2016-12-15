@@ -1,39 +1,36 @@
 import React from 'react'
-import Header from '../../components/Header'
-import Nav from '../../components/Nav'
+import { connect } from 'react-redux'
+import { Toast } from 'react-weui'
 import Footer from '../../components/Footer'
-import 'antd/dist/antd.css'
-import 'nprogress/nprogress.css'
 import './CoreLayout.scss'
-import '../../styles/core.scss'
 
 export const CoreLayout = (props) => {
     const contentMinHeightCls = {
-        minHeight: (document.body.offsetHeight || document.documentElement.clientHeight) - 104 + 'px'
+        minHeight: document.documentElement.clientHeight - 24 + 'px'
     }
 
     return (
-        <div className="ant-layout-aside">
-            <aside className="ant-layout-sider">
-                <div className="ant-layout-logo" />
-                <Nav pathname={props.location.pathname} />
-            </aside>
-            <div className="ant-layout-main">
-                <Header />
-                <div className="ant-layout-container">
-                    <div className="ant-layout-content" style={contentMinHeightCls}>
-                        {props.children}
-                    </div>
-                </div>
-                <Footer />
+        <div>
+            <div style={contentMinHeightCls}>
+                {props.children}
             </div>
-        </div>
+            <Footer />
+            <Toast icon="loading" show={props.loading}>加载中</Toast>
+            <Toast icon="" iconSize="small" show={!!props.error} className="toast-error">{props.error}</Toast>
+        </div >
     )
 }
 
 CoreLayout.propTypes = {
     children: React.PropTypes.element.isRequired,
-    location: React.PropTypes.object.isRequired
+    location: React.PropTypes.object.isRequired,
+    loading: React.PropTypes.bool,
+    error: React.PropTypes.string
 }
 
-export default CoreLayout
+const mapStateToProps = (state) => ({
+    loading: state.home.loading || false,
+    error: state.home.error || ''
+})
+
+export default connect(mapStateToProps, {})(CoreLayout)

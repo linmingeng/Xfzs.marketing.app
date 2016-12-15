@@ -1,74 +1,53 @@
 import React from 'react'
-import { Form, Input, Button } from 'antd'
+import {
+    ButtonArea,
+    Button,
+    CellHeader,
+    CellBody,
+    Form,
+    FormCell,
+    Input,
+    Label
+} from 'react-weui'
 
-export const LoginForm = (props) => {
-    const { form, loading, onSubmit } = props
-    const { getFieldDecorator } = form
-
-    const formItemLayout = {
-        labelCol: { span: 4 },
-        wrapperCol: { span: 18 }
-    }
-
-    const formButtonLayout = {
-        wrapperCol: { span: 18, offset: 4 }
-    }
-
-    const usernameProps = getFieldDecorator('username', {
-        valuePropName: '',
-        rules: [{ required: true, message: '请填写用户名' }]
-    })
-
-    const passwordProps = getFieldDecorator('passwd', {
-        valuePropName: '',
-        rules: [{ required: true, message: '请填写密码' }]
-    })
-
-    const required = () => {
-        form.validateFields((errors) => {
-            if (errors) {
-                return
-            }
-
-            onSubmit(
-                form.getFieldValue('username'),
-                form.getFieldValue('passwd')
-            )
-        })
-    }
-
+export const LoginForm = ({ onSubmit, onChangePhoneNumber, onChangePassowrd, loading, phoneNumber, password }) => {
     return (
-        <Form horizontal>
-            <Form.Item
-                {...formItemLayout}
-                hasFeedback
-                label="用户名：">
-                {usernameProps(
-                    <Input type="text" autoComplete="off" />
-                )}
-            </Form.Item>
-            <Form.Item
-                {...formItemLayout}
-                hasFeedback
-                label="密码：">
-                {passwordProps(
-                    <Input type="password" autoComplete="off" />
-                )}
-            </Form.Item>
-            <Form.Item
-                {...formButtonLayout}>
-                <Button type="primary" loading={loading} onClick={required}>
-                    登录
+        <div>
+            <Form>
+                <FormCell>
+                    <CellHeader>
+                        <Label>手机号</Label>
+                    </CellHeader>
+                    <CellBody>
+                        <Input type="tel" placeholder="请输入您的手机号" value={phoneNumber} onChange={onChangePhoneNumber} />
+                    </CellBody>
+                </FormCell>
+                <FormCell>
+                    <CellHeader>
+                        <Label>密码</Label>
+                    </CellHeader>
+                    <CellBody>
+                        <Input type="password" placeholder="请输入您的密码" required="required"
+                            value={password} onChange={onChangePassowrd} />
+                    </CellBody>
+                </FormCell>
+            </Form>
+            <ButtonArea>
+                <Button onClick={onSubmit} className="weui-btn_xf">
+                    {loading ? '登录中...' : '登录'}
                 </Button>
-            </Form.Item>
-        </Form>
+            </ButtonArea>
+        </div>
     )
 }
 
 LoginForm.propTypes = {
     onSubmit: React.PropTypes.func.isRequired,
+    onChangePassowrd: React.PropTypes.func.isRequired,
+    onChangePhoneNumber: React.PropTypes.func.isRequired,
     loading: React.PropTypes.bool.isRequired,
-    form: React.PropTypes.object.isRequired
+    phoneNumber: React.PropTypes.string,
+    password: React.PropTypes.string
 }
 
-export default Form.create()(LoginForm)
+export default LoginForm

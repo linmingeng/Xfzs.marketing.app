@@ -1,52 +1,54 @@
 import React from 'react'
-import { Link } from 'react-router'
-import { Menu, Icon } from 'antd'
-import createRoutes from 'routes/index'
 import './Nav.scss'
+import index from './assets/index.png'
+import topicDate from './assets/topic-date.png'
+import topicDesc from './assets/topic-desc.png'
+import ranking from './assets/ranking.png'
+import search from './assets/search.png'
+import singup from './assets/singup.png'
+import usercenter from './assets/usercenter.png'
+import share from './assets/share.png'
+import auth from 'services/auth'
 
-export const Nav = ({ pathname }) => {
-    const routes = createRoutes(null)
-    let matchName = routes[0].name
-
-    const renderSingle = (route) => {
-        if (route.path === pathname) {
-            matchName = route.name
+export const Nav = ({ onSearch, onShowTopicDate }, context) => {
+    const navs = [
+        { icon: <img src={index} />, label: '投票评选', onClick: () => context.router.push('/') },
+        { icon: <img src={topicDate} />, label: '活动日期', onClick: onShowTopicDate },
+        { icon: <img src={topicDesc} />, label: '活动介绍', onClick: () => context.router.push('/topic/desc') },
+        { icon: <img src={ranking} />, label: '实时排名', onClick: () => context.router.push('/topic/ranking') },
+        { icon: <img src={singup} />, label: '我要报名', onClick: () => context.router.push('/topic/signup') },
+        { icon: <img src={search} />, label: '投票搜索', onClick: onSearch },
+        { icon: <img src={share} />, label: '分享拉票', onClick: () => context.router.push('/topic/signup') },
+        {
+            icon: <img src={usercenter} />,
+            label: '注销登录',
+            onClick: () => { auth.loggOut(); context.router.push('/login') }
         }
+    ]
 
-        return (<Menu.Item key={route.name}>
-            <Link to={route.path}>{route.name}</Link>
-        </Menu.Item>)
-    }
-
-    const rendrChildren = (route) => {
-        if (route.path === pathname) {
-            matchName = route.name
-        }
-
-        return (
-            <Menu.SubMenu
-                key={route.name}
-                title={<span><Icon type="laptop" />{route.name}</span>}
-                children={[route.childRoutes.filter(c => c.show).map(renderSingle.bind(this))]} />)
-    }
-
-    const renderAll = routes[0].childRoutes.map(r => {
-        return (r.childRoutes ? rendrChildren(r) : renderSingle(r))
-    })
-    
     return (
-        <Menu mode="inline" theme="dark"
-            defaultSelectedKeys={[matchName]}>
+        <div className="navs">
             {
-                renderSingle(routes[0])
+                navs.map(n => <a className="nav" key={n.label} href="javascript:void(0);" onClick={n.onClick}>
+                    <div className="nav-icon">
+                        {n.icon}
+                    </div>
+                    <p className="nav-label">
+                        {n.label}
+                    </p>
+                </a>)
             }
-            {renderAll}
-        </Menu>
+        </div >
     )
 }
 
 Nav.propTypes = {
-    pathname: React.PropTypes.string.isRequired
+    onShowTopicDate: React.PropTypes.func.isRequired,
+    onSearch: React.PropTypes.func.isRequired
+}
+
+Nav.contextTypes = {
+    router: React.PropTypes.object.isRequired
 }
 
 export default Nav

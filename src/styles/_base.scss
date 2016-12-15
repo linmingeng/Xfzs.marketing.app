@@ -10,3 +10,11 @@ For example:
 @import './variables/components';
 @import './themes/default';
 */
+
+body{
+    background-color: #f8f8f8;
+}
+
+textarea:disabled{
+    background-color: #fff;
+}

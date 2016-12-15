@@ -5,15 +5,14 @@ export default {
         fetchJson(api.login, { usernameOrEmailAddress: userName, password: pass })
             .then(({ json }) => {
                 if (json.success) {
-                    sessionStorage.token = `Bearer ${json.result.token}`
-                    sessionStorage.name = json.result.user.name
+                    localStorage.token = `Bearer ${json.result.token}`
+                    localStorage.name = json.result.user.name
 
                     cb({
                         authenticated: true
                     })
 
-                    fetchJson(api.antiForgery, {}, 'get')
-                        .then(({ json }) => { sessionStorage.XSRFTOKEN = json })
+                    this.fetchAntiForgery()
                 } else {
                     cb({
                         authenticated: false,
@@ -23,24 +22,38 @@ export default {
             })
     },
 
+    register(userInfo) {
+        return fetchJson(api.register, userInfo).then(({ json }) => json)
+    },
+
+    sendVcode(phoneNumber) {
+        return fetchJson(api.sms, { phoneNumber }).then(({ json }) => json)
+    },
+
     loggedIn() {
-        return sessionStorage.token !== '' && sessionStorage.token !== undefined
+        return localStorage.token !== '' && localStorage.token !== undefined
     },
 
     loggOut() {
-        sessionStorage.token = ''
-        sessionStorage.name = ''
+        localStorage.token = ''
+        localStorage.name = ''
+        localStorage.XSRFTOKEN = ''
+    },
+
+    fetchAntiForgery() {
+        fetchJson(api.antiForgery, {}, 'get')
+            .then(({ json }) => { localStorage.XSRFTOKEN = json })
     },
 
     getCurrentUserName() {
-        return sessionStorage.name
+        return localStorage.name
     },
 
     getCurrentUserToken() {
-        return sessionStorage.token
+        return localStorage.token
     },
 
     getAntiForgeryToken() {
-        return sessionStorage.XSRFTOKEN || ''
+        return localStorage.XSRFTOKEN || ''
     }
 }

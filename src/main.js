@@ -1,7 +1,27 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import NProgress from 'nprogress'
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
+
+import 'babel-polyfill'
+import 'nprogress/nprogress.css'
+import 'weui'
+import 'react-weui/lib/react-weui.min.css'
+import 'styles/core.scss'
+
+import './services/log'
+import auth from './services/auth'
+
+// ========================================================
+// Set AntiForgery
+// ========================================================
+auth.fetchAntiForgery()
+
+// ========================================================
+// Set Touch Click
+// ========================================================
+NProgress.configure({ showSpinner: false })
 
 // ========================================================
 // Store Instantiation
