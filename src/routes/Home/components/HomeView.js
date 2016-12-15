@@ -37,6 +37,7 @@ class HomeView extends React.Component {
                     <Masonry options={options}>
                         {voters.map(v => <VoterItem key={v.id} voter={v} onVoting={voting} />)}
                     </Masonry>
+                    {voters.length === 0 && <h3 style={{ textAlign: 'center' }}>活动还未开始</h3>}
                 </VoterList>
             </TopicContainer>
         )
