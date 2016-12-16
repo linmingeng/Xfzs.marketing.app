@@ -48,8 +48,8 @@ class Share extends React.Component {
         })
 
         wxSdk.share(
-            '小蜂找事社区-平安夜秀出来',
-            voter ? voter.desc : '小蜂找事社区-平安夜秀出来',
+            '支持我得千元约会现金',
+            voter ? voter.desc : '支持我得千元约会现金',
             voter
                 ? `http://${window.location.host}/topic/voter/${voter.id}`
                 : `http://${window.location.host}/`,
