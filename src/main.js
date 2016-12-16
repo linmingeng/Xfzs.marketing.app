@@ -4,6 +4,7 @@ import NProgress from 'nprogress'
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
 
+import FastClick from 'fastclick'
 import 'babel-polyfill'
 import 'nprogress/nprogress.css'
 import 'weui'
@@ -22,6 +23,7 @@ auth.fetchAntiForgery()
 // Set Touch Click
 // ========================================================
 NProgress.configure({ showSpinner: false })
+window.addEventListener('load', () => { FastClick.attach(document.body) })
 
 // ========================================================
 // Store Instantiation

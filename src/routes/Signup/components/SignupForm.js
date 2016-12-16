@@ -56,6 +56,8 @@ class SignupFrom extends React.Component {
                 images: [{ url: signup.headerimage }],
                 disabled: true
             })
+
+            window.scrollTo(0, document.documentElement.clientHeight)
         }
     }
 
@@ -103,7 +105,7 @@ class SignupFrom extends React.Component {
                     </FormCell>
                     <FormCell>
                         <CellBody>
-                            <TextArea placeholder="请输入您的报名宣言" rows="3" maxlength="200" {...descField}
+                            <TextArea placeholder="请输入您的表白宣言" rows="3" maxlength="200" {...descField}
                                 disabled={this.state.disabled} />
                         </CellBody>
                     </FormCell>

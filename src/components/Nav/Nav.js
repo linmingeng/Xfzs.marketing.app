@@ -12,7 +12,7 @@ import auth from 'services/auth'
 
 export const Nav = ({ onSearch, onShowTopicDate }, context) => {
     const navs = [
-        { icon: <img src={index} />, label: '投票评选', onClick: () => context.router.push('/') },
+        { icon: <img src={index} />, label: '投票首页', onClick: () => context.router.push('/') },
         { icon: <img src={topicDate} />, label: '活动日期', onClick: onShowTopicDate },
         { icon: <img src={topicDesc} />, label: '活动介绍', onClick: () => context.router.push('/topic/desc') },
         { icon: <img src={ranking} />, label: '实时排名', onClick: () => context.router.push('/topic/ranking') },
