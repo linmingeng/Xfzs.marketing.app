@@ -79,7 +79,8 @@ class Share extends React.Component {
     }
 
     renderWebShare() {
-        const joinLink = (webid) => `http://www.jiathis.com/send/?webid=${webid}&url=${window.location.href}&title=${this.shareTitle}`
+        const joinLink = (webid) =>
+            `http://www.jiathis.com/send/?webid=${webid}&url=${window.location.href}&title=${this.shareTitle}`
 
         return (
             <Popup
