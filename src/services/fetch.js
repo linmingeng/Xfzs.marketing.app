@@ -3,6 +3,10 @@ import { normalize } from 'normalizr'
 import fetch from 'isomorphic-fetch'
 import auth from './auth'
 
+export const DEFAULT_FAILURE = 'FAILURE'
+export const LOADING = 'LOADING'
+export const CLEART_ERROR = 'CLEART_ERROR'
+
 // const baseUrl = 'http://localhost:62114'
 const baseUrl = 'http://api.dev.shop.hxzcgf.cn'
 // const baseUrl = 'http://api.shop.hxzcgf.cn'

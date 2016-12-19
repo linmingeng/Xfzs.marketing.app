@@ -38,13 +38,13 @@ export const createRoutes = (store) => ([
             VoterRoute(store)
         ],
         onEnter: (nextState, replace) => {
-            const nextPathname = nextState.location.pathname
-            if (!auth.loggedIn() && nextPathname !== '/login') {
-                replace({
-                    pathname: '/login',
-                    state: { nextPathname }
-                })
-            }
+            // const nextPathname = nextState.location.pathname
+            // if (!auth.loggedIn() && nextPathname !== '/login') {
+            //     replace({
+            //         pathname: '/login',
+            //         state: { nextPathname }
+            //     })
+            // }
         }
     },
     LoginRoute(store),

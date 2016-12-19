@@ -43,7 +43,8 @@ class SignupFrom extends React.Component {
 
     state = {
         images: [],
-        loading: false
+        loading: false,
+        showShare: false
     }
 
     mapPropsToState(props) {

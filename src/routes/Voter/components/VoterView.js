@@ -70,7 +70,7 @@ class VoterView extends React.Component {
                     </div>
                     <ButtonArea direction="horizontal" className="button-area">
                         <VotingButton voterId={voter.id} onVoting={voting} className="weui-btn_xf" />
-                        <Button onClick={this.handleShare}>为TA拉票</Button>
+                        <Button onClick={this.handleShare}>拉票</Button>
                         <Button type="default" onClick={this.handleToNext}>下一条</Button>
                     </ButtonArea>
                     <Share show={this.state.showShare} voter={voter} onHide={this.handleHideShare} />
