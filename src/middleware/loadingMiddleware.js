@@ -8,10 +8,6 @@ export default ({ dispatch, getState }) => next => action => {
     } else if (requestType === 'SUCCESS' && loading) {
         dispatch({ type: 'LOADING', loading: false })
     } else if (requestType === 'FAILURE') {
-        // 临时放这里
-        setTimeout(() => {
-            dispatch({ type: 'CLEART_ERROR' })
-        }, 1500)
         dispatch({ type: 'LOADING', loading: false })
     }
     return next(action)

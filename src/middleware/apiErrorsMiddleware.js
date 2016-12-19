@@ -1,0 +1,21 @@
+import auth from '../services/auth'
+import { browserHistory } from 'react-router'
+
+export default ({ dispatch, getState }) => next => action => {
+    if (action.payload && action.payload.constructor.name === 'ApiError') {
+        if (action.payload.status === 401) {
+            auth.loggOut()
+            browserHistory.push('/login')
+            return
+        }
+    }
+
+    const requestType = action.type.slice(action.type.lastIndexOf('_') + 1)
+    if (requestType === 'FAILURE') {
+        setTimeout(() => {
+            dispatch({ type: 'CLEART_ERROR' })
+        }, 1500)
+    }
+
+    return next(action)
+}

@@ -1,4 +1,4 @@
-import { api, injectApi } from 'services/fetch'
+import { api, injectApi, DEFAULT_FAILURE, LOADING, CLEART_ERROR } from 'services/fetch'
 import { Schema, arrayOf } from 'normalizr'
 
 const topicSchema = new Schema('topic')
@@ -9,22 +9,20 @@ const voterSchema = new Schema('voter')
 // ------------------------------------
 export const TOPIC_INFO_REQUEST = 'TOPIC_INFO_REQUEST'
 export const TOPIC_INFO_SUCCESS = 'TOPIC_INFO_SUCCESS'
-export const TOPIC_INFO_FAILURE = 'TOPIC_INFO_FAILURE'
+export const TOPIC_INFO_FAILURE = DEFAULT_FAILURE
 
 export const VOTER_LIST_REQUEST = 'VOTER_LIST_REQUEST'
 export const VOTER_LIST_SUCCESS = 'VOTER_LIST_SUCCESS'
-export const VOTER_LIST_FAILURE = 'VOTER_LIST_FAILURE'
+export const VOTER_LIST_FAILURE = DEFAULT_FAILURE
 
 export const MY_VOTER_REQUEST = 'MY_VOTER_REQUEST'
 export const MY_VOTER_SUCCESS = 'MY_VOTER_SUCCESS'
-export const MY_VOTER_FAILURE = 'FAILURE'
+export const MY_VOTER_FAILURE = DEFAULT_FAILURE
 
 export const VOTING_REQUEST = 'VOTING_REQUEST'
 export const VOTING_SUCCESS = 'VOTING_SUCCESS'
-export const VOTING_FAILURE = 'FAILURE'
+export const VOTING_FAILURE = DEFAULT_FAILURE
 
-const LOADING = 'LOADING'
-const CLEART_ERROR = 'CLEART_ERROR'
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -117,7 +115,7 @@ const ACTION_HANDLERS = {
         return Object.assign({}, state)
     },
 
-    [VOTING_FAILURE]: (state, action) => {
+    [DEFAULT_FAILURE]: (state, action) => {
         return Object.assign({}, state, {
             error: action.payload.response.error.message
         })
