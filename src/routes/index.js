@@ -1,7 +1,6 @@
 // We only need to import the modules necessary for initial render
 import NProgress from 'nprogress'
 import { injectReducer } from '../store/reducers'
-import auth from '../services/auth'
 import CoreLayout from '../layouts/CoreLayout/CoreLayout'
 import Home from './Home'
 import TopicDescRoute from './TopicDesc'
@@ -36,16 +35,7 @@ export const createRoutes = (store) => ([
             SignupRoute(store),
             RankingRoute(store),
             VoterRoute(store)
-        ],
-        onEnter: (nextState, replace) => {
-            const nextPathname = nextState.location.pathname
-            if (!auth.loggedIn() && nextPathname !== '/login') {
-                replace({
-                    pathname: '/login',
-                    state: { nextPathname }
-                })
-            }
-        }
+        ]
     },
     LoginRoute(store),
     RegisterRoute(store)
