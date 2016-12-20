@@ -2,7 +2,7 @@ import auth from '../services/auth'
 import { browserHistory } from 'react-router'
 
 export default ({ dispatch, getState }) => next => action => {
-    if (action.payload && action.payload.constructor.name === 'ApiError') {
+    if (action.type === 'FAILURE') {
         if (action.payload.status === 401) {
             auth.loggOut()
             browserHistory.push('/login')
