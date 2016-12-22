@@ -15,6 +15,7 @@ export default (store) => ({
 
             NProgress.done()
         }, 'signup')
+<<<<<<< HEAD
     },
     onEnter: (nextState, replace) => {
         NProgress.start()
@@ -26,5 +27,7 @@ export default (store) => ({
                 state: { nextPathname }
             })
         }
+=======
+>>>>>>> dev
     }
 })

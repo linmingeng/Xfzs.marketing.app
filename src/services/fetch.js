@@ -12,11 +12,7 @@ export const CLEART_ERROR = 'CLEART_ERROR'
 const baseUrl = 'http://api.shop.hxzcgf.cn'
 
 export const api = {
-    login: baseUrl + '/api/app/account',
-
-    register: baseUrl + '/api/wx/account',
-
-    sms: baseUrl + '/api/wx/account/sms',
+    passport: 'http://passport.dev.hxzcgf.cn',
 
     upload: baseUrl + '/api/file',
 
@@ -42,7 +38,6 @@ function defaultOptions() {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': auth.getCurrentUserToken() || '',
             'X-XSRF-TOKEN': auth.getAntiForgeryToken()
         },
         credentials: 'include'
