@@ -1,5 +1,4 @@
 import NProgress from 'nprogress'
-import auth from '../../services/auth'
 import { injectReducer } from '../../store/reducers'
 
 export default (store) => ({
@@ -15,15 +14,5 @@ export default (store) => ({
 
             NProgress.done()
         }, 'signup')
-    },
-    onEnter: (nextState, replace) => {
-        NProgress.start()
-        const nextPathname = nextState.location.pathname
-        if (!auth.loggedIn() && nextPathname !== '/login') {
-            replace({
-                pathname: '/login',
-                state: { nextPathname }
-            })
-        }
     }
 })

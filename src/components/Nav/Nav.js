@@ -22,7 +22,7 @@ export const Nav = ({ onSearch, onShowTopicDate }, context) => {
         {
             icon: <img src={usercenter} />,
             label: '注销登录',
-            onClick: () => { auth.loggOut(); context.router.push('/login') }
+            onClick: auth.logout
         }
     ]
 
