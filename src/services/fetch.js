@@ -12,7 +12,7 @@ export const CLEART_ERROR = 'CLEART_ERROR'
 const baseUrl = 'http://api.shop.hxzcgf.cn'
 
 export const api = {
-    passport: 'http://passport.dev.hxzcgf.cn',
+    passport: 'http://passport.hxzcgf.cn',
 
     upload: baseUrl + '/api/file',
 
