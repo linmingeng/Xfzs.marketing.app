@@ -8,8 +8,7 @@ import SignupRoute from './Signup'
 import RankingRoute from './Ranking'
 import VoterRoute from './Voter'
 import CounterRoute from './Counter'
-import LoginRoute from './Login'
-import RegisterRoute from './Register'
+import LotteryRoute from './Lottery'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -34,11 +33,10 @@ export const createRoutes = (store) => ([
             TopicDescRoute(store),
             SignupRoute(store),
             RankingRoute(store),
-            VoterRoute(store)
+            VoterRoute(store),
+            LotteryRoute(store)
         ]
-    },
-    LoginRoute(store),
-    RegisterRoute(store)
+    }
 ])
 
 /*  Note: childRoutes can be chunked or otherwise loaded programmatically

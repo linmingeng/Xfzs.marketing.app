@@ -1,0 +1,35 @@
+.lottery-container {
+    background: rgb(230, 45, 45);
+    padding: 10px 10px;
+}
+
+.lottery-container .user-wallet {
+    margin-top: 20px;
+    text-align: center;
+    color: #FFFFFF
+}
+
+.lottery-container .my-draw-record {
+    display: inline-block;
+    background: url('./assets/my-draw-bg.png');
+    color: #353535;
+    width: 92px;
+    height: 36px;
+    font-size: 16px;
+    line-height: 35px;
+}
+
+.lottery-container .rule {
+    margin-top: 10px;
+}
+
+.lottery-container .rule ul {
+    color: #FFFFFF;
+    margin-top: 5px;
+}
+
+.lottery-container .area-banner {
+    margin: 10px 0;
+    background: url('./assets/area-banner.png');
+    padding-top: 9px;
+}

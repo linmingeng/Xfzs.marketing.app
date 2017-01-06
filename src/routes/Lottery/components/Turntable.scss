@@ -1,0 +1,26 @@
+.turntable-banner {
+    background: url(./assets/turntable-banner.png) no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    display: block;
+}
+
+.turntable {
+    width: 100%;
+    display: block;
+    position: relative;
+    background: url(./assets/turntable-bg.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.turntable .pointer {
+    position: absolute;
+    width: 31.5%;
+    height: 42.5%;
+    left: 34.6%;
+    top: 23%;
+}
+
+.turntable .prize-list {
+    width: 100%;
+}

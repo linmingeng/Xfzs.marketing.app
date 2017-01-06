@@ -45,7 +45,6 @@ const config = {
         colors: true
     },
     compiler_vendors: [
-        'babel-polyfill',
         'react',
         'react-redux',
         'react-router',

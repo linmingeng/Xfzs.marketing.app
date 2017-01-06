@@ -7,14 +7,14 @@ export const DEFAULT_FAILURE = 'FAILURE'
 export const LOADING = 'LOADING'
 export const CLEART_ERROR = 'CLEART_ERROR'
 
-// const baseUrl = 'http://localhost:62114'
-// const baseUrl = 'http://api.dev.shop.hxzcgf.cn'
 const baseUrl = 'http://api.shop.hxzcgf.cn'
+
+const imageUrl = 'http://img.hxzcgf.com'
 
 export const api = {
     passport: 'http://passport.hxzcgf.cn',
 
-    upload: baseUrl + '/api/file',
+    upload: imageUrl + '/api/upload/base64',
 
     antiForgery: baseUrl + '/api/antiForgery',
 
@@ -24,7 +24,15 @@ export const api = {
 
     log: baseUrl + '/api/app/log',
 
-    topicId: 'aa94a9f7-2d74-374a-a0f7-9f5728669014'
+    imgHost: imageUrl,
+
+    topicId: 'aa94a9f7-2d74-374a-a0f7-9f5728669014',
+
+    lottery: baseUrl + '/api/services/app/lottery',
+
+    order: baseUrl + '/api/services/app/order',
+
+    delivery: baseUrl + '/api/services/app/delivery'
 }
 
 function isNotConent(response) {

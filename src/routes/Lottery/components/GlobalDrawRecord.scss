@@ -1,0 +1,26 @@
+.global-draw-record {
+    display: block;
+}
+
+.global-draw-record .global-draw-record-warp {
+    background:rgba(255, 255, 255, 0.3);
+    border-radius: 5px 5px;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 5px;
+}
+
+.global-draw-record .global-draw-record-warp ul {
+    list-style: none;
+}
+
+.label-bg {
+    display: inline-block;
+    background: url('./assets/label-bg.png');
+    width: 103px;
+    height: 32px;
+    font-size: 16px;
+    padding-left: 10px;
+    line-height: 32px;
+}
