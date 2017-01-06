@@ -21,7 +21,7 @@ export const AddressPopup = ({ onRequestClose, onRequestOk, onEdit, onChange, sh
             left="关闭"
             right="确定"
             leftOnClick={onRequestClose}
-            rightOnClick={() => onRequestOk()} />
+            rightOnClick={onRequestOk} />
         <Form className="form" radio>
             {
                 shippingAddress.map(sa =>

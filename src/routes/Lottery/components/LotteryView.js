@@ -44,6 +44,11 @@ class LotteryView extends React.PureComponent {
         this.handleSetAddress = this.handleSetAddress.bind(this)
         this.handleSelectedAddress = this.handleSelectedAddress.bind(this)
         this.handleSaveeditorAddress = this.handleSaveeditorAddress.bind(this)
+        this.handleShowResult = this.handleShowResult.bind(this)
+        this.handleAddressPopupOnRequestClose = this.handleAddressPopupOnRequestClose.bind(this)
+        this.handleAddressPopupOnEdit = this.handleAddressPopupOnEdit.bind(this)
+        this.handleAddressPopupOnChange = this.handleAddressPopupOnChange.bind(this)
+        this.handleAddressEditorOnRequestClose = this.handleAddressEditorOnRequestClose.bind(this)
     }
 
     componentDidMount() {
@@ -106,17 +111,17 @@ class LotteryView extends React.PureComponent {
                     this.state.showResult && <LotteryResult
                         result={this.state.result}
                         onAgain={this.handleRotate}
-                        onCancel={() => this.setState({ showResult: false })} />
+                        onCancel={this.handleShowResult} />
                 }
                 <AddressPopup
                     show={this.state.showAddress}
                     shippingAddress={shippingAddress}
-                    onRequestClose={() => this.setState({ showAddress: false })}
+                    onRequestClose={this.handleAddressPopupOnRequestClose}
                     onRequestOk={this.handleSelectedAddress}
-                    onEdit={() => this.setState({ showAddressEditor: true, showAddress: false })}
-                    onChange={(e) => this.setState({ selectedAddress: e.target.value })} />
+                    onEdit={this.handleAddressPopupOnEdit}
+                    onChange={this.handleAddressPopupOnChange} />
                 <AddressEditor
-                    onRequestClose={() => this.setState({ showAddressEditor: false, showAddress: true })}
+                    onRequestClose={this.handleAddressEditorOnRequestClose}
                     onRequestSave={this.handleSaveeditorAddress}
                     show={this.state.showAddressEditor} />
             </div>
@@ -185,6 +190,26 @@ class LotteryView extends React.PureComponent {
         const { saveShippingAddress } = this.props
 
         saveShippingAddress(address)
+        this.setState({ showAddressEditor: false, showAddress: true })
+    }
+
+    handleShowResult() {
+        this.setState({ showResult: false })
+    }
+
+    handleAddressPopupOnRequestClose() {
+        this.setState({ showAddress: false })
+    }
+
+    handleAddressPopupOnEdit() {
+        this.setState({ showAddressEditor: true, showAddress: false })
+    }
+
+    handleAddressPopupOnChange(e) {
+        this.setState({ selectedAddress: e.target.value })
+    }
+
+    handleAddressEditorOnRequestClose() {
         this.setState({ showAddressEditor: false, showAddress: true })
     }
 }
