@@ -1,0 +1,26 @@
+.lottery-result {
+    display: block;
+}
+
+.lottery-result .msg {
+    margin: 15px 0 0 0;
+    color: red;
+}
+
+.lottery-result .span {
+    font-size: 13px;
+    color: #999;
+    margin-top: 3px;
+}
+
+.lottery-result .weui-dialog__bd:first-child {
+    padding: 1.2em 20px 1.2em;
+}
+
+.lottery-result .weui-dialog__ft {
+    line-height: 50px;
+}
+
+.lottery-result .weui-dialog__btn_primary {
+    color: #f36700;
+}
