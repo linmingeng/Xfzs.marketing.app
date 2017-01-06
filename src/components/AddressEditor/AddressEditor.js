@@ -33,8 +33,8 @@ class AddressEditor extends React.PureComponent {
 
         this.handleChangeForm = this.handleChangeForm.bind(this)
         this.handleSave = this.handleSave.bind(this)
-        this.handleShowCity = this.handShowCity.bind(this)
-        this.handleHideCity = this.handeHideCity.bind(this)
+        this.handleShowCity = this.handleShowCity.bind(this)
+        this.handleHideCity = this.handleHideCity.bind(this)
         this.handleChangeCity = this.handleChangeCity.bind(this)
     }
 
