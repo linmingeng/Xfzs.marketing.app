@@ -28,10 +28,10 @@ export const LotteryResult = ({ result, onAgain, onCancel }) => {
             <ButtonArea direction="horizontal">
                 <Button onClick={onCancel} type="default">
                     关闭
-                        </Button>
+                </Button>
                 <Button className="weui-btn_xf" onClick={onClick}>
                     再抽一次
-                        </Button>
+                </Button>
             </ButtonArea>
         </Dialog>
     </div >

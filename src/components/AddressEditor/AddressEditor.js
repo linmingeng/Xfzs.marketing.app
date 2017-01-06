@@ -33,6 +33,9 @@ class AddressEditor extends React.PureComponent {
 
         this.handleChangeForm = this.handleChangeForm.bind(this)
         this.handleSave = this.handleSave.bind(this)
+        this.handleShowCity = this.handShowCity.bind(this)
+        this.handleHideCity = this.handeHideCity.bind(this)
+        this.handleChangeCity = this.handleChangeCity.bind(this)
     }
 
     render() {
@@ -72,7 +75,7 @@ class AddressEditor extends React.PureComponent {
                             type="text"
                             placeholder="请选择您的地区"
                             value={this.state.selectedCityGroups.map(g => g.name).join('')}
-                            onClick={() => this.setState({ showCity: true })}
+                            onClick={this.handleShowCity}
                             readOnly />
                     </CellBody>
                 </FormCell>
@@ -98,8 +101,8 @@ class AddressEditor extends React.PureComponent {
             </ButtonArea>
             <CityPicker
                 data={cnCity}
-                onCancel={e => this.setState({ showCity: false })}
-                onChange={text => this.setState({ selectedCityGroups: text, showCity: false })}
+                onCancel={this.handleHideCity}
+                onChange={this.handleChangeCity}
                 show={this.state.showCity}
                 />
         </Popup>
@@ -125,6 +128,18 @@ class AddressEditor extends React.PureComponent {
 
             onRequestSave(editAddress)
         }
+    }
+
+    handleShowCity() {
+        this.setState({ showCity: true })
+    }
+
+    handleHideCity() {
+        this.setState({ showCity: false })
+    }
+
+    handleChangeCity(text) {
+        this.setState({ selectedCityGroups: text, showCity: false })
     }
 }
 

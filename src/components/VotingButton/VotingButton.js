@@ -29,7 +29,7 @@ class VotingButton extends React.Component {
         return (
             <Button className={this.props.className} onClick={this.handleClick}>
                 投票
-                    <Toast icon="success-no-circle" show={this.state.showToast}>投票成功</Toast>
+                <Toast icon="success-no-circle" show={this.state.showToast}>投票成功</Toast>
             </Button>
         )
     }
