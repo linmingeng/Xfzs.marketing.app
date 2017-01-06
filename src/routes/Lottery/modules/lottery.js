@@ -182,6 +182,7 @@ const ACTION_HANDLERS = {
         const { entities: { drawRecord }, result } = payload
         const dr = drawRecord[result]
         state.drawRecords[result] = drawRecord[result]
+        state.userDrawRecordPagination.ids.push(result)
 
         state.userWallet.points -= dr.payPoints
 

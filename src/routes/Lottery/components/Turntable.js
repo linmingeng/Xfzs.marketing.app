@@ -2,7 +2,6 @@ import React from 'react'
 import './Turntable.scss'
 import pointerImage from './assets/turntable-pointer.png'
 import './wilq32'
-import { api } from 'services/fetch'
 
 class Turntable extends React.PureComponent {
     static propTypes = {
@@ -33,6 +32,16 @@ class Turntable extends React.PureComponent {
         if (nextProps.rotate) {
             this.handleRotate()
         }
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if (nextProps.products.length === this.props.products.length &&
+            nextProps.rotate === this.props.rotate &&
+            nextState.isStop === this.state.isStop) {
+            return false
+        }
+
+        return true
     }
 
     render() {
@@ -89,11 +98,8 @@ class Turntable extends React.PureComponent {
             var text = products[i].name
             ctx.fillText(text, -ctx.measureText(text).width / 2, 0)
 
-            const img = new Image()
-            img.src = `${api.imgHost}/40_40_w/${products[i].image}`
-            if (img.complete) {
-                ctx.drawImage(img, -20, 10)
-            }
+            // img是先在外部先download下
+            ctx.drawImage(document.getElementById(products[i].id), -20, 10)
 
             // 把当前画布返回调整到上一个save状态之前
             ctx.restore()

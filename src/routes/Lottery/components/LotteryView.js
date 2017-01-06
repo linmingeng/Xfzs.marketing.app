@@ -1,5 +1,6 @@
 import React from 'react'
 import './LotteryView.scss'
+import { api } from 'services/fetch'
 import Turntable from './Turntable'
 import LotteryResult from './LotteryResult'
 import GlobalDrawRecord from './GlobalDrawRecord'
@@ -27,12 +28,7 @@ class LotteryView extends React.PureComponent {
     }
 
     state = {
-        result: {
-            isWinning: true,
-            isPoints: true,
-            points: 50,
-            name: '50蜂币'
-        },
+        result: {},
         showResult: false,
         rotate: false,
         showAddress: false,
@@ -77,6 +73,12 @@ class LotteryView extends React.PureComponent {
 
         return (
             <div className="lottery-container">
+                <div style={{ position: 'absolute', top: '-100px' }}>
+                    {
+                        // 这里的代码是为了兼容Turntable组件里的canvas画图
+                        products.map(p => <img key={p.id} src={`${api.imgHost}/40_40_w/${p.image}`} id={p.id} />)
+                    }
+                </div>
                 <Turntable
                     products={products}
                     rotate={this.state.rotate}
