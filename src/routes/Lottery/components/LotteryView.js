@@ -98,7 +98,7 @@ class LotteryView extends React.PureComponent {
                 <div className="rule">
                     <label className="label-bg">抽奖规则</label>
                     <ul>
-                        <li>1.每次抽奖消耗9蜂币</li>
+                        <li>1.每次抽奖消耗20蜂币</li>
                         <li>2.实物奖品将在7个工作日内寄出</li>
                         <li>3.本活动在法律法规范围内,最终解释权归小蜂找事所有</li>
                     </ul>
