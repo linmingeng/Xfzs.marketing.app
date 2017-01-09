@@ -20,6 +20,10 @@ export const createRoutes = (store) => ([
         getComponent: (nextState, cb) => {
             NProgress.start()
 
+            if (nextState.location.query.id) {
+                sessionStorage.setItem('id', nextState.location.query.id)
+            }
+
             const reducer = require('./Home/modules/home').default
             injectReducer(store, { key: 'home', reducer })
 

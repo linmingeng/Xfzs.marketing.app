@@ -5,6 +5,7 @@ import TopicContainer from 'components/TopicContainer'
 import VotingButton from 'components/VotingButton'
 import Share from 'components/Share'
 import './VoterView.scss'
+import { api } from 'services/fetch'
 
 class VoterView extends React.Component {
     static propTypes = {
@@ -62,10 +63,15 @@ class VoterView extends React.Component {
                             <p>昵称：{voter.name}</p>
                             <p>编号：{voter.number}</p>
                             <p>与上一名差距：{voter.difference}票</p>
-                            <p>参与宣言：{voter.desc}</p>
-                            <p className="headerimage">
-                                <img src={voter.headerimage} />
-                            </p>
+                            {
+                                voter.descriptions &&
+                                voter.descriptions.map(d => <div key={d.id} className="voter-info">
+                                    <p className="headerimage">
+                                        <img src={`${api.imgHost}/500x500_w/${d.image}`} />
+                                    </p>
+                                    <p>{d.text}</p>
+                                </div>)
+                            }
                         </div>
                     </div>
                     <ButtonArea direction="horizontal" className="button-area">
@@ -75,7 +81,7 @@ class VoterView extends React.Component {
                     </ButtonArea>
                     <Share show={this.state.showShare} voter={voter} onHide={this.handleHideShare} />
                 </div>
-            </TopicContainer>
+            </TopicContainer >
         )
     }
 

@@ -4,6 +4,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import './RankingView.scss'
 import TopicContainer from 'components/TopicContainer'
 import RegionTitle from 'components/RegionTitle'
+import { api } from 'services/fetch'
 
 class RankingView extends React.Component {
     static propTypes = {
@@ -51,7 +52,7 @@ class RankingView extends React.Component {
             <div className={cls}>{index + 1}</div>
             <div className="col voter">
                 <Link to={`/topic/voter/${voter.id}`}>
-                    <img src={voter.headerimage} className="voter-headerimage" />
+                    <img src={`${api.imgHost}/50x50_w/${voter.faceDescription.image}`} className="voter-headerimage" />
                     <div className="voter-desc">
                         <p>NO.{voter.number}</p>
                         <p>{voter.name}</p>

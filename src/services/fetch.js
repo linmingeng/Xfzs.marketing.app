@@ -7,8 +7,8 @@ export const DEFAULT_FAILURE = 'FAILURE'
 export const LOADING = 'LOADING'
 export const CLEART_ERROR = 'CLEART_ERROR'
 
-// const baseUrl = 'http://dev.hxzcgf.cn:62115'
-const baseUrl = 'http://api.dev.shop.hxzcgf.cn'
+const baseUrl = 'http://dev.hxzcgf.cn:62115'
+// const baseUrl = 'http://api.dev.shop.hxzcgf.cn'
 
 const imageUrl = 'http://img.hxzcgf.com'
 
@@ -26,8 +26,6 @@ export const api = {
     log: baseUrl + '/api/app/log',
 
     imgHost: imageUrl,
-
-    topicId: 'aa94a9f7-2d74-374a-a0f7-9f5728669014',
 
     lottery: baseUrl + '/api/services/app/lottery',
 

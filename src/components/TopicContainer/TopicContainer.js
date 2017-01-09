@@ -4,8 +4,8 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import Nav from 'components/Nav'
 import TrafficCount from 'components/TrafficCount'
 import MiniSearch from 'components/MiniSearch'
-import banner from './assets/banner.png'
 import './TopicContainer.scss'
+import { api } from 'services/fetch'
 
 class TopicContainer extends React.Component {
     static propTypes = {
@@ -46,7 +46,9 @@ class TopicContainer extends React.Component {
 
         return (
             <div className="container">
-                <img src={banner} className="banner" />
+                {
+                    topic.focus && <img src={`${api.imgHost}/100_100_h/${topic.focus}`} className="banner" />
+                }
                 <div className="region">
                     <TrafficCount
                         {...topic} />

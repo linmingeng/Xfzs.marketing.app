@@ -1,13 +1,13 @@
 import React from 'react'
 import TopicContainer from 'components/TopicContainer'
-// import RegionTitle from 'components/RegionTitle'
 import './TopicDescView.scss'
+import { api } from 'services/fetch'
 
 export const TopicDescView = (props) => {
     return (
         <TopicContainer {...props}>
             <div className="region topic-desc-view">
-                <img src={props.topic.desc} />
+                <img src={`${api.imgHost}/${props.topic.desc}`} />
             </div>
         </TopicContainer>
     )

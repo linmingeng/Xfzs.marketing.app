@@ -20,7 +20,7 @@ export const SINGUP_FAILURE = DEFAULT_FAILURE
 export const upload = (file) => fetchJson(
     api.upload,
     { data: file.data },
-    'put'
+    'post'
 )
 
 export const submitSingup = (singup, onSuccess) => injectApi({
