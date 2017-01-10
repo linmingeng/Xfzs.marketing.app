@@ -134,7 +134,7 @@ const ACTION_HANDLERS = {
 const initialState =
     {
         topic: {
-            id: api.topicId,
+            id: sessionStorage.getItem('id'),
             voterSum: 0,
             numberOfVoteSum: 0,
             viewSum: 0,

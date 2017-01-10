@@ -7,6 +7,7 @@ import GlobalDrawRecord from './GlobalDrawRecord'
 import UserDrawRecord from './UserDrawRecord'
 import AddressPopup from 'components/AddressPopup'
 import AddressEditor from 'components/AddressEditor'
+import Share from 'components/Share'
 
 class LotteryView extends React.PureComponent {
     static propTypes = {
@@ -32,7 +33,15 @@ class LotteryView extends React.PureComponent {
         showResult: false,
         rotate: false,
         showAddress: false,
-        showAddressEditor: false
+        showAddressEditor: false,
+        showShare: false
+    }
+
+    shareContent = {
+        title: '蜂币抽奖 - 小蜂找事',
+        desc: '蜂动全城,百分百中奖,百万蜂币等你来抽',
+        link: window.location.href,
+        headerimage: `${api.imgHost}/f0/f0a3e45b5957dd55916085198212abd3.png`
     }
 
     constructor(props) {
@@ -49,6 +58,8 @@ class LotteryView extends React.PureComponent {
         this.handleAddressPopupOnEdit = this.handleAddressPopupOnEdit.bind(this)
         this.handleAddressPopupOnChange = this.handleAddressPopupOnChange.bind(this)
         this.handleAddressEditorOnRequestClose = this.handleAddressEditorOnRequestClose.bind(this)
+        this.handleShowShare = this.handleShowShare.bind(this)
+        this.handleHideShare = this.handleHideShare.bind(this)
     }
 
     componentDidMount() {
@@ -91,6 +102,7 @@ class LotteryView extends React.PureComponent {
                 <div className="user-wallet">
                     <h3>我的蜂币{userWallet.points}个</h3>
                     <a className="my-draw-record" href="#userDrawRecord">中奖记录</a>
+                    <a className="my-draw-record" onClick={this.handleShowShare}>点击分享</a>
                 </div>
                 <div className="area-banner" />
                 <GlobalDrawRecord
@@ -124,6 +136,7 @@ class LotteryView extends React.PureComponent {
                     onRequestClose={this.handleAddressEditorOnRequestClose}
                     onRequestSave={this.handleSaveeditorAddress}
                     show={this.state.showAddressEditor} />
+                <Share show={this.state.showShare} content={this.shareContent} onHide={this.handleHideShare} />
             </div>
         )
     }
@@ -211,6 +224,14 @@ class LotteryView extends React.PureComponent {
 
     handleAddressEditorOnRequestClose() {
         this.setState({ showAddressEditor: false, showAddress: true })
+    }
+
+    handleHideShare() {
+        this.setState({ showShare: false })
+    }
+
+    handleShowShare() {
+        this.setState({ showShare: true })
     }
 }
 

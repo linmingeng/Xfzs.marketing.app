@@ -2,13 +2,14 @@ import React from 'react'
 import { Link } from 'react-router'
 import './VoterItem.scss'
 import VotingButton from 'components/VotingButton'
+import { api } from 'services/fetch'
 
 export const VoterItem = ({ voter, onVoting }) => (
     <div className="voter-item">
         <div className="voter-item-warp">
             <Link to={`/topic/voter/${voter.id}`}>
                 <div className="headerimage">
-                    <img src={voter.headerimage} />
+                    <img src={`${api.imgHost}/180x180_w/${voter.faceDescription.image}`} />
                 </div>
                 <div className="desc-warp">
                     <p>{voter.number}.{voter.name}</p>

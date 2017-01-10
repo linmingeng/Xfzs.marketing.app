@@ -20,6 +20,14 @@
     padding: 3px 15px;
 }
 
+.voter-view .voter-warp .voter-info {
+    border-bottom: 1px solid #ccc;
+}
+
+.voter-view .voter-warp .voter-info:last-child {
+    border-bottom: 0;
+}
+
 .voter-view .voter-warp .voter-info p {
     padding: 3px 0;
 }

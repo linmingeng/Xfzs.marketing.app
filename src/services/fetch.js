@@ -26,8 +26,6 @@ export const api = {
 
     imgHost: imageUrl,
 
-    topicId: 'aa94a9f7-2d74-374a-a0f7-9f5728669014',
-
     lottery: baseUrl + '/api/services/app/lottery',
 
     order: baseUrl + '/api/services/app/order',

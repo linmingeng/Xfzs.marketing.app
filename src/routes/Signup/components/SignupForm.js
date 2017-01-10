@@ -1,5 +1,6 @@
 import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import { api } from 'services/fetch'
 import Share from 'components/Share'
 import './SignupForm.scss'
 import {
@@ -32,6 +33,7 @@ class SignupFrom extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleShare = this.handleShare.bind(this)
         this.handleHideShare = this.handleHideShare.bind(this)
+        this.handleAddDescription = this.handleAddDescription.bind(this)
     }
 
     static propTypes = {
@@ -42,9 +44,9 @@ class SignupFrom extends React.Component {
     }
 
     state = {
-        images: [],
         loading: false,
-        showShare: false
+        showShare: false,
+        descriptions: [{}]
     }
 
     mapPropsToState(props) {
@@ -53,8 +55,10 @@ class SignupFrom extends React.Component {
             this.setState({
                 name: signup.name,
                 phoneNumber: signup.phoneNumber,
-                desc: signup.desc,
-                images: [{ url: signup.headerimage }],
+                descriptions: signup.descriptions.map(d => {
+                    d.url = `${api.imgHost}/75x75_wh/${d.image}`
+                    return d
+                }),
                 disabled: true
             })
 
@@ -81,7 +85,6 @@ class SignupFrom extends React.Component {
     render() {
         const nameField = this.setField('name')
         const phoneNumberField = this.setField('phoneNumber')
-        const descField = this.setField('desc')
 
         return (
             <div className="signup-form">
@@ -104,27 +107,37 @@ class SignupFrom extends React.Component {
                                 disabled={this.state.disabled} />
                         </CellBody>
                     </FormCell>
-                    <FormCell>
-                        <CellBody>
-                            <TextArea placeholder="请输入您的表白宣言" rows="3" maxlength="200" {...descField}
-                                disabled={this.state.disabled} />
-                        </CellBody>
-                    </FormCell>
-                    <FormCell>
-                        <CellBody>
-                            <Uploader
-                                title="上传您的头像"
-                                maxCount={1}
-                                files={this.state.images}
-                                onError={this.handleUploadError}
-                                onChange={this.handleUploadChange}
-                                onFileClick={this.handleClickImage}
-                                disabled={this.state.disabled}
-                                />
-                        </CellBody>
-                    </FormCell>
+                    {
+                        this.state.descriptions
+                            .concat(this.state.descriptions)
+                            .map((desc, index) => {
+                                return index % 2 === 0
+                                    ? <FormCell key={index}>
+                                        <CellBody>
+                                            <Uploader
+                                                title={`${index / 2 + 1}.图片上传`}
+                                                maxCount={1}
+                                                disabled={this.state.disabled}
+                                                {...this.setDescImageField(index / 2) }
+                                                />
+                                        </CellBody>
+                                    </FormCell>
+                                    : <FormCell key={index}>
+                                        <CellBody>
+                                            <TextArea placeholder="请输入图片介绍" rows="3" maxlength="200"
+                                                {...this.setDescTextField((index - 1) / 2) }
+                                                disabled={this.state.disabled} />
+                                        </CellBody>
+                                    </FormCell>
+                            })
+                    }
                 </Form>
-                <ButtonArea>
+                <ButtonArea direction="horizontal">
+                    {!this.state.disabled &&
+                        <Button type="default" onClick={this.handleAddDescription}>
+                            添加图片
+                        </Button>
+                    }
                     {!this.state.disabled &&
                         <Button className="weui-btn_xf" onClick={this.handleSubmit}>
                             确定报名
@@ -138,7 +151,7 @@ class SignupFrom extends React.Component {
                 </ButtonArea>
                 <Toptips type="default" show={this.state.showWarn}>{this.state.showWarnText}</Toptips>
                 <Toast icon="loading" show={this.state.loading}>加载中</Toast>
-                <Share show={this.state.showShare} voter={this.props.signup} onHide={this.handleHideShare} />
+                <Share show={this.state.showShare} content={this.getShareContent()} onHide={this.handleHideShare} />
             </div>
         )
     }
@@ -170,6 +183,30 @@ class SignupFrom extends React.Component {
         }
     }
 
+    setDescImageField(index) {
+        const description = this.state.descriptions[index]
+
+        return {
+            files: description.url ? [description] : [],
+            onError: this.handleUploadError,
+            onChange: (file) => this.handleUploadChange(index, file),
+            onFileClick: (e, file) => this.handleClickImage(index, e, file)
+        }
+    }
+
+    setDescTextField(index) {
+        const description = this.state.descriptions[index]
+
+        return {
+            value: description.text || '',
+            onChange: (e) => {
+                description.text = e.target.value
+
+                this.setState({ descriptions: this.state.descriptions.concat([]) })
+            }
+        }
+    }
+
     showWarn(text) {
         this.setState({ showWarn: true, showWarnText: text })
 
@@ -179,9 +216,10 @@ class SignupFrom extends React.Component {
     }
 
     handleUploadError(msg) {
+        alert(msg)
     }
 
-    handleUploadChange(file) {
+    handleUploadChange(index, file) {
         const { onUpload } = this.props
 
         this.setState({ loading: true })
@@ -189,38 +227,53 @@ class SignupFrom extends React.Component {
         onUpload(file)
             .then(({ json }) => {
                 this.setState({ loading: false })
-                if (json.success && json.result.result === 'success') {
-                    this.setState({ images: [{ url: json.result.data.absoluteUrl }] })
+                if (json.success) {
+                    const description = this.state.descriptions[index]
+
+                    description.url = `${api.imgHost}/75x75_wh/${json.url}`
+                    description.originalUrl = json.url
+
+                    this.setState({ descriptions: this.state.descriptions.concat([]) })
                 } else {
                     this.showWarn(json.result.message)
                 }
             })
     }
 
-    handleClickImage(e, file) {
-        (!this.state.disabled) && this.setState({ gallery: { url: file.url } })
+    handleClickImage(index, e, file) {
+        (!this.state.disabled) && this.setState({ gallery: { url: `${api.imgHost}/${file.originalUrl}`, index } })
     }
 
     handleDeleteImage() {
+        const { gallery, descriptions } = this.state
+        const description = descriptions[gallery.index]
+
+        description.url = ''
+        description.originalUrl = ''
+
         this.setState({
-            images: [],
+            descriptions: descriptions.concat([]),
             gallery: false
         })
     }
 
     handleSubmit() {
+        const descriptions = this.state.descriptions.filter(d => d.originalUrl && d.text).map(d => {
+            d.image = d.originalUrl
+            return d
+        })
+
         if (this.state.name !== '' &&
             this.state.phoneNumber !== '' &&
             this.state.desc !== '' &&
-            this.state.images.length > 0) {
+            descriptions.length > 0) {
             this.props.onSubmit({
                 name: this.state.name,
                 phoneNumber: this.state.phoneNumber,
                 desc: this.state.desc,
                 topicId: '',
-                headerimage: this.state.images[0].url
-            }, () => {
-            })
+                descriptions
+            }, () => { })
         } else {
             this.showWarn('您的报名信息不完整')
         }
@@ -232,6 +285,30 @@ class SignupFrom extends React.Component {
 
     handleHideShare() {
         this.setState({ showShare: false })
+    }
+
+    handleAddDescription() {
+        let { descriptions } = this.state
+        if (descriptions.length >= 10) {
+            this.showWarn('最多10张图片')
+        } else {
+            this.setState({
+                descriptions: descriptions.concat([{ url: '', text: '' }])
+            })
+        }
+    }
+
+    getShareContent() {
+        const faceDescription = this.props.signup && this.props.signup.descriptions
+            ? this.props.signup.descriptions[0]
+            : { text: '', image: '' }
+
+        return {
+            title: '支持我得千元约会现金',
+            desc: faceDescription.text,
+            link: `http://${window.location.host}/topic/voter/${this.props.signup.id}`,
+            headerimage: `${api.imgHost}/${faceDescription.image}`
+        }
     }
 }
 
