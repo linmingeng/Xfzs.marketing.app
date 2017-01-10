@@ -118,14 +118,14 @@ class SignupFrom extends React.Component {
                                                 title={`${index / 2 + 1}.图片上传`}
                                                 maxCount={1}
                                                 disabled={this.state.disabled}
-                                                {...this.setDescImageField(index / 2) }
+                                                {...this.setDescImageField(index / 2)}
                                                 />
                                         </CellBody>
                                     </FormCell>
                                     : <FormCell key={index}>
                                         <CellBody>
                                             <TextArea placeholder="请输入图片介绍" rows="3" maxlength="200"
-                                                {...this.setDescTextField((index - 1) / 2) }
+                                                {...this.setDescTextField((index - 1) / 2)}
                                                 disabled={this.state.disabled} />
                                         </CellBody>
                                     </FormCell>
