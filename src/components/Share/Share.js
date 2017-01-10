@@ -20,7 +20,7 @@ import linkIcon from './assets/link.png'
 class Share extends React.Component {
     static propTypes = {
         show: React.PropTypes.bool,
-        voter: React.PropTypes.object,
+        content: React.PropTypes.object,
         onHide: React.PropTypes.func.isRequired
     }
 
@@ -39,22 +39,29 @@ class Share extends React.Component {
         this.renderWxShare = this.renderWxShare.bind(this)
         this.renderWebShare = this.renderWebShare.bind(this)
         this.handleSwitchCatDialog = this.handleSwitchCatDialog.bind(this)
+    }
 
-        this.shareTitle = '支持我得千元约会现金'
+    componentDidMount() {
+        const { show, content } = this.props
+
+        if (show) {
+            this.state.isWx ? this.handleShare(show, content) : this.setState({ showShareBg: true })
+        }
     }
 
     componentWillReceiveProps(nextProps) {
-        const { show, voter } = nextProps
+        const { show, content } = nextProps
 
         if (show) {
-            this.state.isWx ? this.handleShare(show, voter) : this.setState({ showShareBg: true })
+            this.state.isWx ? this.handleShare(show, content) : this.setState({ showShareBg: true })
         } else {
             this.setState({ showShareBg: false })
         }
     }
 
     render() {
-        const children = this.state.isWx ? this.renderWxShare() : this.renderWebShare()
+        const { content } = this.props
+        const children = this.state.isWx ? this.renderWxShare() : this.renderWebShare(content.title)
 
         return (
             <div>
@@ -62,7 +69,7 @@ class Share extends React.Component {
                     title="复制链接"
                     show={this.state.showCat}
                     buttons={[{ type: 'default', label: '确定', onClick: this.handleSwitchCatDialog }]}>
-                    <Input defaultValue={window.location.href} className="cat-input" />
+                    <Input defaultValue={content.link} className="cat-input" />
                 </Dialog>
                 {children}
             </div>
@@ -78,9 +85,9 @@ class Share extends React.Component {
         )
     }
 
-    renderWebShare() {
+    renderWebShare(title) {
         const joinLink = (webid) =>
-            `http://www.jiathis.com/send/?webid=${webid}&url=${window.location.href}&title=${this.shareTitle}`
+            `http://www.jiathis.com/send/?webid=${webid}&url=${window.location.href}&title=${title}`
 
         return (
             <Popup
@@ -136,18 +143,16 @@ class Share extends React.Component {
         )
     }
 
-    handleShare(show, voter) {
+    handleShare(show, content) {
         this.setState({
             showLoading: show
         })
 
         wxSdk.share(
-            this.shareTitle,
-            voter ? voter.desc : this.shareTitle,
-            voter
-                ? `http://${window.location.host}/topic/voter/${voter.id}`
-                : `http://${window.location.host}/`,
-            voter.headerimage,
+            content.title,
+            content.desc,
+            content.link,
+            content.headerimage,
             () => {
                 this.setState({
                     showShareBg: true,

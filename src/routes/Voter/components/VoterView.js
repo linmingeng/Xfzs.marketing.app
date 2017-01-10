@@ -79,7 +79,10 @@ class VoterView extends React.Component {
                         <Button onClick={this.handleShare}>拉票</Button>
                         <Button type="default" onClick={this.handleToNext}>下一条</Button>
                     </ButtonArea>
-                    <Share show={this.state.showShare} voter={voter} onHide={this.handleHideShare} />
+                    <Share
+                        show={this.state.showShare}
+                        content={this.getShareContent()}
+                        onHide={this.handleHideShare} />
                 </div>
             </TopicContainer >
         )
@@ -97,6 +100,19 @@ class VoterView extends React.Component {
 
     handleHideShare() {
         this.setState({ showShare: false })
+    }
+
+    getShareContent() {
+        const faceDescription = this.props.voter && this.props.voter.descriptions
+            ? this.props.voter.descriptions[0]
+            : { text: '', image: '' }
+
+        return {
+            title: '支持我得千元约会现金',
+            desc: faceDescription.text,
+            link: `http://${window.location.host}/topic/voter/${this.props.voter.id}`,
+            headerimage: `${api.imgHost}/${faceDescription.image}`
+        }
     }
 }
 

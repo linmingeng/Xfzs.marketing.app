@@ -57,12 +57,13 @@ class Turntable extends React.PureComponent {
 
     rednerPrize(products, ctx) {
         const turnplate = {
-            outsideRadius: this.offsetWidth - 193, // 大转盘外圆的半径
-            textRadius: this.offsetWidth - 220, // 大转盘奖品位置距离圆心的距离
-            insideRadius: this.offsetWidth - 295, // 大转盘内圆的半径
+            outsideRadius: (this.offsetWidth - 31) / 2, // 大转盘外圆的半径
+            textRadius: (this.offsetWidth - 85) / 2, // 大转盘奖品位置距离圆心的距离
+            insideRadius: (this.offsetWidth - 235) / 2, // 大转盘内圆的半径
             startAngle: 0 // 开始角度
         }
-
+        console.log(this.offsetWidth)
+        console.log(turnplate)
         const arc = Math.PI / (products.length / 2)
 
         // 在给定矩形内清空一个矩形

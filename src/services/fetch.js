@@ -7,8 +7,8 @@ export const DEFAULT_FAILURE = 'FAILURE'
 export const LOADING = 'LOADING'
 export const CLEART_ERROR = 'CLEART_ERROR'
 
-const baseUrl = 'http://dev.hxzcgf.cn:62115'
-// const baseUrl = 'http://api.dev.shop.hxzcgf.cn'
+// const baseUrl = 'http://dev.hxzcgf.cn:62115'
+const baseUrl = 'http://api.dev.shop.hxzcgf.cn'
 
 const imageUrl = 'http://img.hxzcgf.com'
 

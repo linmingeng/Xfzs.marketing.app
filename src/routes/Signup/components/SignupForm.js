@@ -118,14 +118,14 @@ class SignupFrom extends React.Component {
                                                 title={`${index / 2 + 1}.图片上传`}
                                                 maxCount={1}
                                                 disabled={this.state.disabled}
-                                                {...this.setDescImageField(index / 2)}
+                                                {...this.setDescImageField(index / 2) }
                                                 />
                                         </CellBody>
                                     </FormCell>
                                     : <FormCell key={index}>
                                         <CellBody>
                                             <TextArea placeholder="请输入图片介绍" rows="3" maxlength="200"
-                                                {...this.setDescTextField((index - 1) / 2)}
+                                                {...this.setDescTextField((index - 1) / 2) }
                                                 disabled={this.state.disabled} />
                                         </CellBody>
                                     </FormCell>
@@ -151,7 +151,7 @@ class SignupFrom extends React.Component {
                 </ButtonArea>
                 <Toptips type="default" show={this.state.showWarn}>{this.state.showWarnText}</Toptips>
                 <Toast icon="loading" show={this.state.loading}>加载中</Toast>
-                <Share show={this.state.showShare} voter={this.props.signup} onHide={this.handleHideShare} />
+                <Share show={this.state.showShare} content={this.getShareContent()} onHide={this.handleHideShare} />
             </div>
         )
     }
@@ -295,6 +295,19 @@ class SignupFrom extends React.Component {
             this.setState({
                 descriptions: descriptions.concat([{ url: '', text: '' }])
             })
+        }
+    }
+
+    getShareContent() {
+        const faceDescription = this.props.signup && this.props.signup.descriptions
+            ? this.props.signup.descriptions[0]
+            : { text: '', image: '' }
+
+        return {
+            title: '支持我得千元约会现金',
+            desc: faceDescription.text,
+            link: `http://${window.location.host}/topic/voter/${this.props.signup.id}`,
+            headerimage: `${api.imgHost}/${faceDescription.image}`
         }
     }
 }
