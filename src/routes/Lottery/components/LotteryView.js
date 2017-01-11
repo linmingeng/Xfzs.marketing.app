@@ -38,8 +38,8 @@ class LotteryView extends React.PureComponent {
     }
 
     shareContent = {
-        title: '蜂币抽奖 - 小蜂找事',
-        desc: '蜂动全城,百分百中奖,百万蜂币等你来抽',
+        title: '蜂动全城,百分百中奖,百万蜂币等你来抽',
+        desc: '免费贺岁大片,优惠意大利西餐,韩国智力拼图,20w份大礼全城随心抽',
         link: window.location.href,
         headerimage: `${api.imgHost}/f0/f0a3e45b5957dd55916085198212abd3.png`
     }
