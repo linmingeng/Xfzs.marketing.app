@@ -47,7 +47,7 @@ class TopicContainer extends React.Component {
         return (
             <div className="container">
                 {
-                    topic.focus && <img src={`${api.imgHost}/100_100_h/${topic.focus}`} className="banner" />
+                    topic.focus && <img src={`${api.imgHost}/414_100_w/${topic.focus}`} className="banner" />
                 }
                 <div className="region">
                     <TrafficCount
