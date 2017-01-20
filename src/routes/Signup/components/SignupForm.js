@@ -40,7 +40,8 @@ class SignupFrom extends React.Component {
         onUpload: React.PropTypes.func.isRequired,
         onSubmit: React.PropTypes.func.isRequired,
         getSignup: React.PropTypes.func.isRequired,
-        signup: React.PropTypes.object.isRequired
+        signup: React.PropTypes.object.isRequired,
+        topicId: React.PropTypes.string.isRequired
     }
 
     state = {
@@ -117,15 +118,15 @@ class SignupFrom extends React.Component {
                                             <Uploader
                                                 title={`${index / 2 + 1}.图片上传`}
                                                 maxCount={1}
-                                                disabled={this.state.disabled}
-                                                {...this.setDescImageField(index / 2) }
+                                                disabled={this.state.disabled || desc.disabled}
+                                                {...this.setDescImageField(index / 2)}
                                                 />
                                         </CellBody>
                                     </FormCell>
                                     : <FormCell key={index}>
                                         <CellBody>
                                             <TextArea placeholder="请输入图片介绍" rows="3" maxlength="200"
-                                                {...this.setDescTextField((index - 1) / 2) }
+                                                {...this.setDescTextField((index - 1) / 2)}
                                                 disabled={this.state.disabled} />
                                         </CellBody>
                                     </FormCell>
@@ -232,6 +233,7 @@ class SignupFrom extends React.Component {
 
                     description.url = `${api.imgHost}/75x75_wh/${json.url}`
                     description.originalUrl = json.url
+                    description.disabled = true
 
                     this.setState({ descriptions: this.state.descriptions.concat([]) })
                 } else {
@@ -250,7 +252,7 @@ class SignupFrom extends React.Component {
 
         description.url = ''
         description.originalUrl = ''
-
+        description.disabled = false
         this.setState({
             descriptions: descriptions.concat([]),
             gallery: false
@@ -304,9 +306,9 @@ class SignupFrom extends React.Component {
             : { text: '', image: '' }
 
         return {
-            title: '支持我得千元约会现金',
+            title: '你回家你旅游我买单',
             desc: faceDescription.text,
-            link: `http://${window.location.host}/topic/voter/${this.props.signup.id}`,
+            link: `http://${window.location.host}/topic/voter/${this.props.signup.id}?id=${this.props.topicId}`,
             headerimage: `${api.imgHost}/${faceDescription.image}`
         }
     }

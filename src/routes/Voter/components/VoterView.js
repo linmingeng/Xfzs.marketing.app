@@ -108,9 +108,9 @@ class VoterView extends React.Component {
             : { text: '', image: '' }
 
         return {
-            title: '支持我得千元约会现金',
+            title: '你回家你旅游我买单',
             desc: faceDescription.text,
-            link: `http://${window.location.host}/topic/voter/${this.props.voter.id}`,
+            link: `http://${window.location.host}/topic/voter/${this.props.voter.id}?id=${this.props.topic.id}`,
             headerimage: `${api.imgHost}/${faceDescription.image}`
         }
     }

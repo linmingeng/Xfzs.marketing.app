@@ -22,7 +22,8 @@ export const SignupView = (props) => {
                     onUpload={upload}
                     onSubmit={handleOnSubmit}
                     signup={signup}
-                    getSignup={bindGeSignup} />
+                    getSignup={bindGeSignup}
+                    topicId={this.props.signup.id} />
             </div>
         </TopicContainer>
     )
