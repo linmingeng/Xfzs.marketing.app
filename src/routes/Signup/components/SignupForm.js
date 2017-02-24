@@ -118,7 +118,6 @@ class SignupFrom extends React.Component {
                                             <Uploader
                                                 title={`${index / 2 + 1}.图片上传`}
                                                 maxCount={1}
-                                                disabled={this.state.disabled || desc.disabled}
                                                 {...this.setDescImageField(index / 2)}
                                                 />
                                         </CellBody>
@@ -191,7 +190,8 @@ class SignupFrom extends React.Component {
             files: description.url ? [description] : [],
             onError: this.handleUploadError,
             onChange: (file) => this.handleUploadChange(index, file),
-            onFileClick: (e, file) => this.handleClickImage(index, e, file)
+            onFileClick: (e, file) => this.handleClickImage(index, e, file),
+            disabled: this.state.disabled || description.disabled
         }
     }
 
@@ -233,6 +233,7 @@ class SignupFrom extends React.Component {
 
                     description.url = `${api.imgHost}/75x75_wh/${json.url}`
                     description.originalUrl = json.url
+                    console.log(index)
                     description.disabled = true
 
                     this.setState({ descriptions: this.state.descriptions.concat([]) })

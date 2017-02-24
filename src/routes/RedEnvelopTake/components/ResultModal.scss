@@ -1,0 +1,47 @@
+.result-modal {
+    background: url(assets/result-modal-bg.png) repeat 100%;
+}
+
+.result-modal .weui-dialog__bd {
+    padding: 0;
+}
+
+.result-modal .close {
+    background: url(assets/close.png) no-repeat 100%;
+    background-position-x: 95%;
+    display: block;
+    padding: 20px 10px;
+}
+
+.result-modal .content {
+    margin: 10px 20px 0px 20px;
+    background: url(assets/result-content-bg.png) no-repeat;
+    min-height: 300px;
+    position: relative;
+    padding-top: 16px;
+    color: #cb0202;
+}
+
+.result-modal .content .status {
+    position: absolute;
+    top: -100px;
+    left: 20%;
+}
+
+.result-modal .content .text {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.result-modal .content .bg {
+    background-color: #fdd597;
+    padding-top: 30px;
+    padding-bottom: 10px;
+}
+
+.result-modal .content .face {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+}

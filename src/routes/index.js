@@ -9,6 +9,9 @@ import RankingRoute from './Ranking'
 import VoterRoute from './Voter'
 import CounterRoute from './Counter'
 import LotteryRoute from './Lottery'
+import RedEnvelopTopicRoute from './RedEnvelopTopic'
+import RedEnvelopTakeRoute from './RedEnvelopTake'
+import RedEnvelopRecordRoute from './RedEnvelopRecord'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -38,7 +41,10 @@ export const createRoutes = (store) => ([
             SignupRoute(store),
             RankingRoute(store),
             VoterRoute(store),
-            LotteryRoute(store)
+            LotteryRoute(store),
+            RedEnvelopTopicRoute(store),
+            RedEnvelopTakeRoute(store),
+            RedEnvelopRecordRoute(store)
         ]
     }
 ])

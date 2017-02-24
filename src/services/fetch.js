@@ -11,6 +11,8 @@ const baseUrl = 'http://api.shop.hxzcgf.cn'
 
 const imageUrl = 'http://img.hxzcgf.com'
 
+const queueUrl = 'http://mk.queue.hxzcgf.cn'
+
 export const api = {
     passport: 'http://passport.hxzcgf.cn',
 
@@ -30,11 +32,20 @@ export const api = {
 
     order: baseUrl + '/api/services/app/order',
 
-    delivery: baseUrl + '/api/services/app/delivery'
+    delivery: baseUrl + '/api/services/app/delivery',
+
+    redEnvelop: baseUrl + '/api/services/app/redEnvelop',
+
+    redEnvelopQueue: queueUrl + '/api/queue'
 }
 
 function isNotConent(response) {
-    return (response == null || response.status === 204)
+    if (response !== null && response.status === 401) {
+        auth.login()
+        return
+    }
+
+    return (response === null || response.status === 204)
         ? Promise.resolve({ json: {}, response: { ok: true } })
         : response.json().then(json => ({ json, response }))
 }
@@ -112,6 +123,8 @@ export const injectApi = (options) => {
                                     convertResult = json.result.items
                                         ? listConvert(json, schema, body)
                                         : entityConvert(json, schema)
+                                } else {
+                                    convertResult.json = json
                                 }
 
                                 convertResult.body = body
