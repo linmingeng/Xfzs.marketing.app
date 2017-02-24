@@ -61,7 +61,7 @@ class Share extends React.Component {
 
     render() {
         const { content } = this.props
-        const children = this.state.isWx ? this.renderWxShare() : this.renderWebShare(content.title)
+        const children = this.state.isWx ? this.renderWxShare() : this.renderWebShare(content.title, content.link)
 
         return (
             <div>
@@ -69,7 +69,7 @@ class Share extends React.Component {
                     title="复制链接"
                     show={this.state.showCat}
                     buttons={[{ type: 'default', label: '确定', onClick: this.handleSwitchCatDialog }]}>
-                    <Input defaultValue={content.link} className="cat-input" />
+                    <Input value={content.link} className="cat-input" onChange={() => { }} />
                 </Dialog>
                 {children}
             </div>
@@ -85,9 +85,9 @@ class Share extends React.Component {
         )
     }
 
-    renderWebShare(title) {
+    renderWebShare(title, link) {
         const joinLink = (webid) =>
-            `http://www.jiathis.com/send/?webid=${webid}&url=${window.location.href}&title=${title}`
+            `http://www.jiathis.com/send/?webid=${webid}&url=${link}&title=${title}`
 
         return (
             <Popup
@@ -96,7 +96,7 @@ class Share extends React.Component {
                 <PopupHeader
                     right="确定"
                     rightOnClick={this.props.onHide}
-                    />
+                />
                 <div className="share-web">
                     <Flex>
                         <FlexItem>

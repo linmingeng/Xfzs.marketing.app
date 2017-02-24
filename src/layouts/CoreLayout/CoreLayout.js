@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Toast } from 'react-weui'
 import Footer from '../../components/Footer'
+import Toptips from '../../components/Toptips'
 import './CoreLayout.scss'
 
 export const CoreLayout = (props) => {
@@ -16,7 +17,7 @@ export const CoreLayout = (props) => {
             </div>
             <Footer />
             <Toast icon="loading" show={props.loading}>加载中</Toast>
-            <Toast icon="" iconSize="small" show={!!props.error} className="toast-error">{props.error}</Toast>
+            <Toptips show={!!props.error} text={props.error} />
         </div >
     )
 }
