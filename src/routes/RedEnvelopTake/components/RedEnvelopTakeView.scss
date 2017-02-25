@@ -1,12 +1,26 @@
 .red-envelop-take-container {
-    background: url(assets/take-bg.png) no-repeat 100%;
-    min-height: 736px;
+    background: url(assets/take-bg.png) no-repeat;
+    background-size: cover;
+    background-color: #fb3838;
+    height: 100%;
+    width: 100%;
 }
 
 .red-envelop-take-container .merchants-warp {
     margin: 0 auto;
     text-align: center;
-    padding-top: 140px;
+    @media screen and (min-width:200px) {
+        padding-top: 90px;
+    }
+    @media screen and (min-width:360px) {
+        padding-top: 100px;
+    }
+    @media screen and (min-width:375px) {
+        padding-top: 110px;
+    }
+    @media screen and (min-width:414px) {
+        padding-top: 140px;
+    }
     color: #ffd592;
 }
 
@@ -22,7 +36,7 @@
 .red-envelop-take-container .take-warp {
     margin: 0 auto;
     text-align: center;
-    padding-top: 70px;
+    padding-top: 60px;
 }
 
 .take-warp .take-btn {
@@ -52,4 +66,11 @@
     text-align: center;
     font-size: 21px;
     line-height: 42px;
+}
+
+.red-envelop-take-container .share-text {
+    display: block;
+    margin-bottom: 10px;
+    text-align: center;
+    color:#ffd592;
 }

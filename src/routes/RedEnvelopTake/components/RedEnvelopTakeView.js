@@ -65,7 +65,8 @@ class RedEnvelopTakeView extends React.PureComponent {
                     <Link to={`/rd/record/${this.props.topic.id}`} className="take-records-btn">我的领取记录</Link>
                 </div>
                 <Countdown redEnvelopList={this.props.redEnvelopList} />
-                <a className="share-btn" onClick={this.handleShowShare}>分享得抢次数</a>
+                <a className="share-btn" onClick={this.handleShowShare}>立即分享</a>
+                <p className="share-text">分享赢更多抢红包次数</p>
                 {
                     this.state.showResult && <ResultModal
                         show={this.state.showResult}
@@ -95,7 +96,8 @@ class RedEnvelopTakeView extends React.PureComponent {
     getCurrentCanTakeRedEnvelop() {
         const { redEnvelopList } = this.props
         const hasTakeRedEnvelop = redEnvelopList.length > 0
-            ? new Date(redEnvelopList[0].canTakeTime.replace('T', ' ')) <= new Date()
+            ? (new Date(redEnvelopList[0].canTakeTime.replace('T', ' ').replace(/-/g, '/')).getTime() -
+                new Date().getTime() < 0)
             : false
 
         return hasTakeRedEnvelop ? redEnvelopList[0] : null
@@ -112,6 +114,13 @@ class RedEnvelopTakeView extends React.PureComponent {
             this.setState({ showShare: true })
         } else {
             getShareCode({ id: topic.id }).then(({ json }) => {
+                const redEnvelop = this.getCurrentCanTakeRedEnvelop()
+                if (redEnvelop) {
+                    this.state.shareContent.desc = `${redEnvelop.senderName}邀请您领取红包【小蜂找事】`
+                } else {
+                    this.state.shareContent.desc = '小蜂找事邀请您领取红包'
+                }
+
                 this.state.shareContent.link = this.state.shareContent.link + '?c=' + json.result
                 console.log(this.state.shareContent)
                 this.setState({

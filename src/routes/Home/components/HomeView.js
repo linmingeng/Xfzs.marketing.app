@@ -30,7 +30,6 @@ class HomeView extends React.Component {
     render() {
         const { voters, voting } = this.props
         const options = { transitionDuration: 0 }
-
         return (
             <TopicContainer {...this.props}>
                 <VoterList>

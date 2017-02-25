@@ -8,7 +8,8 @@ class Countdown extends React.PureComponent {
 
     render() {
         const { redEnvelopList } = this.props
-        const filters = redEnvelopList.filter(r => new Date(r.canTakeTime.replace('T', ' ')) > new Date())
+        const filters = redEnvelopList
+            .filter(r => new Date(r.canTakeTime.replace('T', ' ').replace(/-/g, '/')) > new Date())
         const nextRedEnvelop = filters.length > 0 ? filters[0] : null
         const zfill = (num, fill) => {
             var len = ('' + num).length
@@ -19,7 +20,7 @@ class Countdown extends React.PureComponent {
 
         if (nextRedEnvelop) {
             const timer = setInterval((function countdown() {
-                var endTime = new Date(nextRedEnvelop.canTakeTime.replace('T', ' '))
+                var endTime = new Date(nextRedEnvelop.canTakeTime.replace('T', ' ').replace(/-/g, '/'))
                 return () => {
                     const ele = document.getElementById('countdown')
                     const startTime = new Date().getTime()
