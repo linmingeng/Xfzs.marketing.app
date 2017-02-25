@@ -1,5 +1,20 @@
 .red-envelop-topic-container {
-    background: #fb3838;
+    background: #fb3838; 
+}
+
+.red-envelop-topic-container .top-bg {
+    background-color: #ffba00;
+    line-height: 0;
+    font-size: 0;
+    margin-bottom: 10px;
+}
+
+.red-envelop-topic-container .top-bg img {
+    display: block;
+}
+
+.red-envelop-topic-container .img {
+    max-width: 100%;
 }
 
 .red-envelop-topic-container .start-btn {

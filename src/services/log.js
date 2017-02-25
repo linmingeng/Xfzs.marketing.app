@@ -1,7 +1,6 @@
 import { api, fetchJson } from './fetch'
 
 window.onerror = function (errorMessage, scriptURI, lineNumber, columnNumber, error) {
-    console.log(errorMessage)
     fetchJson(
         api.log,
         {
