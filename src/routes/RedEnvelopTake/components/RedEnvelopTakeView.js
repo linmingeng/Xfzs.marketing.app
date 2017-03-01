@@ -136,24 +136,24 @@ class RedEnvelopTakeView extends React.PureComponent {
         const redEnvelop = this.getCurrentCanTakeRedEnvelop()
         const { getTakeResult, takeRedEnvelop } = this.props
 
+        this.setState({ loading: true })
+
         const getTakeResultLoop = (backend) => {
-            this.setState({ loading: true })
             getTakeResult(redEnvelop.id, backend, ({ result }) => {
                 if (result.status > 0) {
                     result.face = redEnvelop.senderFace
-                    this.setState({ showResult: true, result })
+                    this.setState({ loading: false, showResult: true, result })
                 } else if (retries > 0) {
                     getTakeResultLoop(backend)
                     retries--
                 } else {
                     this.setState({
                         showResult: true,
+                        loading: false,
                         status: 0,
                         face: redEnvelop.senderFace
                     })
                 }
-
-                this.setState({ loading: false })
             })
         }
 
