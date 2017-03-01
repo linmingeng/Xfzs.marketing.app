@@ -12,8 +12,8 @@ const baseUrl = 'http://api.dev.shop.hxzcgf.cn'
 
 const imageUrl = 'http://img.hxzcgf.com'
 
-const queueUrl = 'http://mk.queue.dev.hxzcgf.cn'
-// const queueUrl = 'http://dev.hxzcgf.cn:57059'
+// const queueUrl = 'http://mk.queue.dev.hxzcgf.cn'
+const queueUrl = 'http://dev.hxzcgf.cn:57059'
 
 export const api = {
     passport: 'http://passport.dev.hxzcgf.cn',

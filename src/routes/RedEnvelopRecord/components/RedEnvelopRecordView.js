@@ -29,10 +29,10 @@ class RedEnvelopRecordView extends React.PureComponent {
                         this.props.takeRecordList.filter(item => item.value > 0).map(item => (
                             <Cell key={item.id}>
                                 <CellBody>
-                                    {`${this.typeToText(item.type)}:${item.value}${this.typeToValue(item.type)}`}
+                                    {`${this.typeToText(item.type)}：${item.value}${this.typeToValue(item.type)}`}
                                 </CellBody>
                                 <CellFooter>
-                                    2017/02/24 14:23:00
+                                    {item.creationTime.replace('T', ' ')}
                                 </CellFooter>
                             </Cell>
                         ))
