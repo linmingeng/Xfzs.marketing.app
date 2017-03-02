@@ -4,6 +4,7 @@ import { api } from 'services/fetch'
 import './RedEnvelopTakeView.scss'
 import Countdown from './Countdown'
 import Share from 'components/Share'
+import Toptips from 'components/Toptips'
 import ResultModal from './ResultModal'
 import { Toast } from 'react-weui'
 
@@ -26,6 +27,7 @@ class RedEnvelopTakeView extends React.PureComponent {
         showResult: false,
         result: {},
         loading: false,
+        error: '',
         shareContent: {
             title: '蜂抢红包',
             desc: '点击领取红包',
@@ -55,6 +57,10 @@ class RedEnvelopTakeView extends React.PureComponent {
         this.handleShareCode(topicId)
     }
 
+    componentWillUnmount() {
+        this.timer && clearTimeout(this.timer)
+    }
+
     render() {
         return (
             <div className="red-envelop-take-container">
@@ -78,17 +84,23 @@ class RedEnvelopTakeView extends React.PureComponent {
                     content={this.state.shareContent}
                     onHide={this.handleHideShare} />
                 <Toast icon="loading" show={this.state.loading}>加载中</Toast>
+                <Toptips show={!!this.state.error} text={this.state.error} />
             </div>
         )
     }
 
     renderMerchants() {
         const redEnvelop = this.getCurrentCanTakeRedEnvelop()
+        const nextRedEnvelop = this.getNextCanTakeRedEnvelop()
 
         return (
             <div className="merchants-warp">
-                <p className="name">{redEnvelop ? redEnvelop.senderName : '目前没有红包'}</p>
-                <p className="number">红包总数:{redEnvelop ? redEnvelop.number : 0}个</p>
+                <p className="name">{redEnvelop ? redEnvelop.senderName : (nextRedEnvelop ? '敬请期待下一轮' : '没有红包了~')}</p>
+                {
+                    ((!redEnvelop) && nextRedEnvelop) && <p className="number">由{nextRedEnvelop.senderName}赞助</p>
+                }
+                <p className="number">红包总数:
+                    {redEnvelop ? redEnvelop.number : (nextRedEnvelop ? nextRedEnvelop.number : 0)}个</p>
             </div>
         )
     }
@@ -101,6 +113,17 @@ class RedEnvelopTakeView extends React.PureComponent {
             : false
 
         return hasTakeRedEnvelop ? redEnvelopList[0] : null
+    }
+
+    getNextCanTakeRedEnvelop() {
+        var current = this.getCurrentCanTakeRedEnvelop()
+        const { redEnvelopList } = this.props
+
+        if (current) {
+            return redEnvelopList.length >= 2 ? redEnvelopList[1] : null
+        } else {
+            return redEnvelopList.length > 0 ? redEnvelopList[0] : null
+        }
     }
 
     handleHideShare() {
@@ -132,11 +155,19 @@ class RedEnvelopTakeView extends React.PureComponent {
     }
 
     handleTake() {
+        const { getTakeResult, takeRedEnvelop, topic } = this.props
+
+        if (topic.currentUserCanReceiveTimes <= 0) {
+            this.setState({ error: '次数不足' })
+            this.timer = setTimeout(() => {
+                this.setState({ error: '' })
+            }, 2000)
+
+            return
+        }
+
         let retries = 10
         const redEnvelop = this.getCurrentCanTakeRedEnvelop()
-        const { getTakeResult, takeRedEnvelop } = this.props
-
-        this.setState({ loading: true })
 
         const getTakeResultLoop = (backend) => {
             getTakeResult(redEnvelop.id, backend, ({ result }) => {
@@ -158,9 +189,15 @@ class RedEnvelopTakeView extends React.PureComponent {
         }
 
         if (redEnvelop) {
+            this.setState({ loading: true })
             takeRedEnvelop(redEnvelop.id, (json) => {
                 getTakeResultLoop(json.backend)
             })
+        } else {
+            this.setState({ error: '敬请期待下一轮' })
+            this.timer = setTimeout(() => {
+                this.setState({ error: '' })
+            }, 2000)
         }
     }
 
