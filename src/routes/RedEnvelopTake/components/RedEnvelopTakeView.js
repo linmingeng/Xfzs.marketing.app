@@ -155,16 +155,16 @@ class RedEnvelopTakeView extends React.PureComponent {
     }
 
     handleTake() {
-        const { getTakeResult, takeRedEnvelop, topic } = this.props
+        const { getTakeResult, takeRedEnvelop } = this.props
 
-        if (topic.currentUserCanReceiveTimes <= 0) {
-            this.setState({ error: '次数不足' })
-            this.timer = setTimeout(() => {
-                this.setState({ error: '' })
-            }, 2000)
+        // if (topic.currentUserCanReceiveTimes <= 0) {
+        //     this.setState({ error: '次数不足' })
+        //     this.timer = setTimeout(() => {
+        //         this.setState({ error: '' })
+        //     }, 2000)
 
-            return
-        }
+        //     return
+        // }
 
         let retries = 10
         const redEnvelop = this.getCurrentCanTakeRedEnvelop()
