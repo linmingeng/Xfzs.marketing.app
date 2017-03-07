@@ -35,7 +35,7 @@ class RedEnvelopTopicView extends React.PureComponent {
                 <div className="top-bg">
                     <img src={topicHeaer} className="img" />
                 </div>
-                <Link className="start-btn" to="/rd/take/1">蜂抢红包</Link>
+                <Link className="start-btn" to={`/rd/take/${topic.id}`}>蜂抢红包</Link>
                 <img src={`${api.imgHost}/${topic.desc}`} className="img" />
                 <div className="app-download">
                     <img src={appQR} className="img" />
