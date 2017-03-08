@@ -148,7 +148,9 @@ class LotteryView extends React.PureComponent {
             if (json.success) {
                 const { result } = json
 
-                result.image = products.filter(p => p.id === result.productId)[0].image
+                var filterProduct = products.filter(p => p.id === result.productId)
+                if (filterProduct.length > 0) result.image = filterProduct[0].image
+
                 cb(result)
 
                 setTimeout(() => {

@@ -173,6 +173,7 @@ class RedEnvelopTakeView extends React.PureComponent {
             getTakeResult(redEnvelop.id, backend, ({ result }) => {
                 if (result.status > 0) {
                     result.face = redEnvelop.senderFace
+                    result.link = redEnvelop.senderLink
                     this.setState({ loading: false, showResult: true, result })
                 } else if (retries > 0) {
                     getTakeResultLoop(backend)
@@ -182,7 +183,8 @@ class RedEnvelopTakeView extends React.PureComponent {
                         showResult: true,
                         loading: false,
                         status: 0,
-                        face: redEnvelop.senderFace
+                        face: redEnvelop.senderFace,
+                        link: redEnvelop.senderLink
                     })
                 }
             })

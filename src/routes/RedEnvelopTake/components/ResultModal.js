@@ -16,7 +16,8 @@ export const ResultModal = ({ show, result, onClose }) => (
                     : '分享好友,再来一次'}
                 </p>
                 <p>红包由以下企业赞助</p>
-                <img src={`${api.imgHost}/${result.face}`} className="face" />
+                <a href={result.link}><img src={`${api.imgHost}/${result.face}`} className="face" /></a>
+                <a href={result.link} className="link">查看商家信息</a>
             </div>
         </div>
     </Dialog>
