@@ -62,8 +62,6 @@ class Turntable extends React.PureComponent {
             insideRadius: (this.offsetWidth - 235) / 2, // 大转盘内圆的半径
             startAngle: 0 // 开始角度
         }
-        console.log(this.offsetWidth)
-        console.log(turnplate)
         const arc = Math.PI / (products.length / 2)
 
         // 在给定矩形内清空一个矩形
