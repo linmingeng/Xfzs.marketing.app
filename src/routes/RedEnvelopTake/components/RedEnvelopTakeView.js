@@ -145,7 +145,6 @@ class RedEnvelopTakeView extends React.PureComponent {
                 }
 
                 this.state.shareContent.link = this.state.shareContent.link + '?c=' + json.result
-                console.log(this.state.shareContent)
                 this.setState({
                     showShare: true,
                     shareContent: { ...this.state.shareContent }
