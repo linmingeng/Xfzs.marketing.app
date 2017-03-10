@@ -4,7 +4,7 @@ var ftp = require('vinyl-ftp')
 
 gulp.task('ftp', function () {
     var conn = ftp.create({
-        host: '118.178.136.241',
+        host: 'vote.hxzcgf.cn',
         port: 215,
         user: 'vote.app',
         password: '96e7921E965eL72c92a549dd5a330112',
