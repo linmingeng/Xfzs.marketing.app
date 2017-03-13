@@ -13,11 +13,13 @@ export const ResultModal = ({ show, result, onClose }) => (
             <div className="bg">
                 <p className="text">{result.status === 1
                     ? `获得${result.type === 1 ? '现金' : '蜂币'}${result.value}${result.type === 1 ? '元' : '个'}`
-                    : '分享好友,再来一次'}
+                    : '很遗憾~没有抢到'}
                 </p>
                 <p>红包由以下企业赞助</p>
                 <a href={result.link}><img src={`${api.imgHost}/${result.face}`} className="face" /></a>
-                <a href={result.link} className="link">查看商家信息</a>
+                {
+                    result.status === 1 && <a href={result.link} className="link">领取</a>
+                }
             </div>
         </div>
     </Dialog>
