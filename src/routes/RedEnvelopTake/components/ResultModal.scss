@@ -48,5 +48,10 @@
 .result-modal .content .link {
     display: inline-block;
     margin-top: 20px;   
-    color: #cb0202;
+    background: url(assets/take-result-btn-bg.png) no-repeat 100%;
+    color: #fff;
+    width: 86px;
+    height: 33px;
+    line-height: 33px;
+    font-size: 20px;
 }

@@ -24,7 +24,7 @@ class RedEnvelopTakeView extends React.PureComponent {
 
     state = {
         showShare: false,
-        showResult: false,
+        showResult: true,
         result: {},
         loading: false,
         error: '',
