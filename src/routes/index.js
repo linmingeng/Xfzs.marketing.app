@@ -1,5 +1,6 @@
 // We only need to import the modules necessary for initial render
 import NProgress from 'nprogress'
+import auth from 'services/auth'
 import { injectReducer } from '../store/reducers'
 import CoreLayout from '../layouts/CoreLayout/CoreLayout'
 import Home from './Home'
@@ -45,7 +46,11 @@ export const createRoutes = (store) => ([
             RedEnvelopTopicRoute(store),
             RedEnvelopTakeRoute(store),
             RedEnvelopRecordRoute(store)
-        ]
+        ],
+        onEnter: () => {
+            auth.fetchAntiForgery()
+            auth.fetchUserInfo()
+        }
     }
 ])
 

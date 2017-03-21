@@ -10,6 +10,7 @@ import {
     Input
 } from 'react-weui'
 import './Share.scss'
+import auth from 'services/auth'
 import wxSdk from 'services/wxSdk'
 import wxIcon from './assets/wx.png'
 import qqIcon from './assets/qq.png'
@@ -61,6 +62,15 @@ class Share extends React.Component {
 
     render() {
         const { content } = this.props
+        const code = auth.getUserInfo().code
+        console.log(code)
+        // 加入分享code
+        if (content.link.indexOf('_c') === -1 && code) {
+            content.link = content.link.indexOf('?') > -1
+                ? `${content.link}&_c=${code}`
+                : `${content.link}?_c=${code}`
+        }
+
         const children = this.state.isWx ? this.renderWxShare() : this.renderWebShare(content.title, content.link)
 
         return (
