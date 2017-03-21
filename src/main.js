@@ -12,12 +12,6 @@ import 'react-weui/lib/react-weui.min.css'
 import 'styles/core.scss'
 
 import './services/log'
-import auth from './services/auth'
-
-// ========================================================
-// Set AntiForgery
-// ========================================================
-auth.fetchAntiForgery()
 
 // ========================================================
 // Set Touch Click

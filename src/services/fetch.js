@@ -16,6 +16,8 @@ const queueUrl = 'http://mk.queue.hxzcgf.cn'
 export const api = {
     passport: 'http://passport.hxzcgf.cn',
 
+    passportApi: 'http://passport.api.dev.hxzcgf.cn',
+
     upload: imageUrl + '/api/upload/base64',
 
     antiForgery: baseUrl + '/api/antiForgery',
