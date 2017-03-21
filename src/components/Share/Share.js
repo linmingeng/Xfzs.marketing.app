@@ -63,15 +63,16 @@ class Share extends React.Component {
     render() {
         const { content } = this.props
         const code = auth.getUserInfo().code
-        console.log(code)
+
+        let link = content.link
         // 加入分享code
         if (content.link.indexOf('_c') === -1 && code) {
-            content.link = content.link.indexOf('?') > -1
+            link = content.link.indexOf('?') > -1
                 ? `${content.link}&_c=${code}`
                 : `${content.link}?_c=${code}`
         }
 
-        const children = this.state.isWx ? this.renderWxShare() : this.renderWebShare(content.title, content.link)
+        const children = this.state.isWx ? this.renderWxShare() : this.renderWebShare(content.title, link)
 
         return (
             <div>
@@ -158,10 +159,19 @@ class Share extends React.Component {
             showLoading: show
         })
 
+        const code = auth.getUserInfo().code
+        let link = content.link
+        // 加入分享code
+        if (content.link.indexOf('_c') === -1 && code) {
+            link = content.link.indexOf('?') > -1
+                ? `${content.link}&_c=${code}`
+                : `${content.link}?_c=${code}`
+        }
+
         wxSdk.share(
             content.title,
             content.desc,
-            content.link,
+            link,
             content.headerimage,
             () => {
                 this.setState({
