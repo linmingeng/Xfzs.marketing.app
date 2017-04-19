@@ -62,17 +62,17 @@ class Share extends React.Component {
 
     render() {
         const { content } = this.props
-        const code = auth.getUserInfo().code
+        // const code = auth.getUserInfo().code
 
-        let link = content.link
-        // 加入分享code
-        if (content.link.indexOf('_c') === -1 && code) {
-            link = content.link.indexOf('?') > -1
-                ? `${content.link}&_c=${code}`
-                : `${content.link}?_c=${code}`
-        }
+        // let link = content.link
+        // // 加入分享code
+        // if (content.link.indexOf('_c') === -1 && code) {
+        //     link = content.link.indexOf('?') > -1
+        //         ? `${content.link}&_c=${code}`
+        //         : `${content.link}?_c=${code}`
+        // }
 
-        const children = this.state.isWx ? this.renderWxShare() : this.renderWebShare(content.title, link)
+        const children = this.state.isWx ? this.renderWxShare(content) : this.renderAppWxShare(content)
 
         return (
             <div>
@@ -152,6 +152,31 @@ class Share extends React.Component {
                 </div>
             </Popup >
         )
+    }
+
+    renderAppWxShare(content) {
+        try {
+            const code = auth.getUserInfo().code
+            let link = content.link
+            // 加入分享code
+            if (content.link.indexOf('_c') === -1 && code) {
+                link = content.link.indexOf('?') > -1
+                    ? `${content.link}&_c=${code}`
+                    : `${content.link}?_c=${code}`
+            }
+
+            if (navigator.userAgent.indexOf('Android') > -1) {
+                window.wxobj.androidShare(content.title, content.desc, link, content.headerimage)
+            } else if (navigator.userAgent.indexOf('iPhone') > -1) {
+                window.location.href =
+                    `xfzs://share#{"title":"
+                        ${content.title}","desc":"${content.desc}","link":"${link}","image":"${content.headerimage}"}`
+            } else {
+                alert('请升级app版本')
+            }
+        } catch (err) {
+            alert(err.message)
+        }
     }
 
     handleShare(show, content) {
