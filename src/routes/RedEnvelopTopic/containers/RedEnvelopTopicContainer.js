@@ -1,16 +1,18 @@
 import { connect } from 'react-redux'
 import * as actions from '../modules/redEnvelopTopic'
-
+import { getCanTakeRedEnvelopList } from '../../RedEnvelopTake/modules/redEnvelopTake'
 import RedEnvelopTopicView from '../components/RedEnvelopTopicView'
 
 const mapDispatchToProps = {
-    ...actions
+    ...actions,
+    getCanTakeRedEnvelopList
 }
 
-const mapStateToProps = ({ redEnvelopTopic }, ownProps) => {
+const mapStateToProps = ({ redEnvelopTopic, redEnvelopTake }, ownProps) => {
     return {
         params: ownProps.params,
-        topic: redEnvelopTopic.topic
+        topic: redEnvelopTopic.topic,
+        redEnvelopList: redEnvelopTake.redEnvelopPagination.ids.map(id => redEnvelopTake.redEnvelop[id])
     }
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router'
 import { api } from 'services/fetch'
+import RedEnvelopList from './RedEnvelopList'
 import './RedEnvelopTopicView.scss'
 import topicHeaer from './assets/topic-heaer.png'
 import appQR from './assets/appQR.png'
@@ -10,13 +10,16 @@ class RedEnvelopTopicView extends React.PureComponent {
         params: React.PropTypes.object.isRequired,
         location: React.PropTypes.object.isRequired,
         topic: React.PropTypes.object.isRequired,
-        getRedEnvelopTopic: React.PropTypes.func.isRequired
+        getRedEnvelopTopic: React.PropTypes.func.isRequired,
+        getCanTakeRedEnvelopList: React.PropTypes.func.isRequired,
+        redEnvelopList: React.PropTypes.func.isRequired
     }
 
     componentDidMount() {
-        const { getRedEnvelopTopic, params } = this.props
+        const { getRedEnvelopTopic, getCanTakeRedEnvelopList, params } = this.props
 
         getRedEnvelopTopic(params.id)
+        getCanTakeRedEnvelopList(params.id)
     }
 
     constructor(props) {
@@ -28,14 +31,14 @@ class RedEnvelopTopicView extends React.PureComponent {
     }
 
     render() {
-        const { topic } = this.props
+        const { topic, redEnvelopList } = this.props
 
         return (
             <div className="red-envelop-topic-container">
                 <div className="top-bg">
                     <img src={topicHeaer} className="img" />
                 </div>
-                <Link className="start-btn" to={`/rd/take/${topic.id}`}>蜂抢红包</Link>
+                <RedEnvelopList data={redEnvelopList} />
                 <img src={`${api.imgHost}/${topic.desc}`} className="img" />
                 <div className="app-download">
                     <img src={appQR} className="img" />
