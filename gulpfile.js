@@ -7,7 +7,7 @@ gulp.task('ftp', function () {
         host: '118.178.192.111',
         port: 22,
         user: 'administrator',
-        password: '1QAZxsw23edc',
+        password: 'Hxzcgf111200***',
         parallel: 3,
         log: gutil.log
     })
