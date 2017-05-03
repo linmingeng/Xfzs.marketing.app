@@ -18,7 +18,7 @@ const RedEnvelopList = ({ data }) => (
                 {
                     (new Date(value.canTakeTime.replace('T', ' ').replace(/-/g, '/')).getTime() -
                         new Date().getTime() < 0)
-                        ? <Link className="link" to={`/rd/take/${value.id}`}>蜂抢红包</Link>
+                        ? <Link className="link" to={`/rd/take/${value.topicId}`}>蜂抢红包</Link>
                         : <span className="link">敬请期待</span>
                 }
             </div>
