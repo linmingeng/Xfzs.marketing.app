@@ -7,7 +7,7 @@ const RedEnvelopList = ({ data }) => (
     <ul className="red-envelop-list">
         {data.map((value, index) => <li className={index % 2 === 0 ? 'item' : 'item high-bg'}>
             <div>
-                <img src={`${api.imgHost}/60_60_w/${value.senderFace}`} />
+                <img src={`${api.imgHost}/50_50_w/${value.senderFace}`} />
             </div>
             <div>
                 <h3>{value.senderName}</h3>
