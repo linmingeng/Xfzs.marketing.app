@@ -1,0 +1,30 @@
+.red-envelop-list {
+    overflow: hidden;
+    color: #ffd592;
+}
+
+.red-envelop-list .item {
+    padding: 10px 10px;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #fb4c4c;   
+}
+
+.red-envelop-list .high-bg {
+    background-color: #fc7474;
+}
+
+.red-envelop-list .item .link {
+    background-color: #ffba00;
+    color: #fb3838;
+    display: block;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.red-envelop-list .item .link.disabled{
+    background-color: #949494;
+    color: white;
+}

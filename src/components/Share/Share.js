@@ -72,7 +72,9 @@ class Share extends React.Component {
         //         : `${content.link}?_c=${code}`
         // }
 
-        const children = this.state.isWx ? this.renderWxShare(content) : this.renderAppWxShare(content)
+        const children = this.state.isWx
+            ? this.renderWxShare(content)
+            : (this.state.showShareBg ? this.renderAppWxShare(content) : <p />)
 
         return (
             <div>
