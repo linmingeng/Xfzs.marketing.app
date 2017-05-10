@@ -71,7 +71,7 @@ class RedEnvelopTakeView extends React.PureComponent {
                     <Link to={`/rd/record/${this.props.params.topicId}`} className="take-records-btn">领取记录</Link>
                     <Link to={`/rd/topic/${this.props.params.topicId}`} className="take-records-btn">更多红包</Link>
                 </div>
-                <Countdown redEnvelop={this.props.redEnvelop} />
+                <Countdown redEnvelop={this.props.redEnvelop} skipMinutes={this.props.topic.skipMinutes} />
                 <a className="share-btn" onClick={this.handleShowShare}>立即分享</a>
                 <p className="share-text">分享赢更多抢红包次数</p>
                 {
