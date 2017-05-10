@@ -11,9 +11,9 @@ import { Toast } from 'react-weui'
 class RedEnvelopTakeView extends React.PureComponent {
     static propTypes = {
         params: React.PropTypes.object.isRequired,
-        redEnvelopList: React.PropTypes.array.isRequired,
+        redEnvelop: React.PropTypes.object.isRequired,
         topic: React.PropTypes.object.isRequired,
-        getCanTakeRedEnvelopList: React.PropTypes.func.isRequired,
+        getRedEnvelop: React.PropTypes.func.isRequired,
         getRedEnvelopTopic: React.PropTypes.func.isRequired,
         takeRedEnvelop: React.PropTypes.func.isRequired,
         getTakeResult: React.PropTypes.func.isRequired,
@@ -45,14 +45,14 @@ class RedEnvelopTakeView extends React.PureComponent {
     }
 
     componentDidMount() {
-        const { getCanTakeRedEnvelopList, getRedEnvelopTopic, params, topic } = this.props
-        const topicId = params.id
+        const { getRedEnvelop, getRedEnvelopTopic, params, topic } = this.props
+        const { topicId, id } = params
 
         if (!topic.id) {
             getRedEnvelopTopic(topicId)
         }
 
-        getCanTakeRedEnvelopList(topicId)
+        getRedEnvelop(id)
 
         this.handleShareCode(topicId)
     }
@@ -68,9 +68,10 @@ class RedEnvelopTakeView extends React.PureComponent {
                 <div className="take-warp">
                     <a href="javascript:void(0)" className="take-btn" onClick={this.handleTake} />
                     <p className="my-has-take-number">剩余次数:{this.props.topic.currentUserCanReceiveTimes}次</p>
-                    <Link to={`/rd/record/${this.props.topic.id}`} className="take-records-btn">我的领取记录</Link>
+                    <Link to={`/rd/record/${this.props.params.topicId}`} className="take-records-btn">领取记录</Link>
+                    <Link to={`/rd/topic/${this.props.params.topicId}`} className="take-records-btn">更多红包</Link>
                 </div>
-                <Countdown redEnvelopList={this.props.redEnvelopList} />
+                <Countdown redEnvelop={this.props.redEnvelop} />
                 <a className="share-btn" onClick={this.handleShowShare}>立即分享</a>
                 <p className="share-text">分享赢更多抢红包次数</p>
                 {
@@ -90,40 +91,15 @@ class RedEnvelopTakeView extends React.PureComponent {
     }
 
     renderMerchants() {
-        const redEnvelop = this.getCurrentCanTakeRedEnvelop()
-        const nextRedEnvelop = this.getNextCanTakeRedEnvelop()
+        const { redEnvelop } = this.props
 
         return (
             <div className="merchants-warp">
-                <p className="name">{redEnvelop ? redEnvelop.senderName : (nextRedEnvelop ? '敬请期待下一轮' : '没有红包了~')}</p>
-                {
-                    ((!redEnvelop) && nextRedEnvelop) && <p className="number">由{nextRedEnvelop.senderName}赞助</p>
-                }
+                <p className="name">{redEnvelop.senderName}</p>
                 <p className="number">红包总数:
-                    {redEnvelop ? redEnvelop.number : (nextRedEnvelop ? nextRedEnvelop.number : 0)}个</p>
+                    {redEnvelop.number}个</p>
             </div>
         )
-    }
-
-    getCurrentCanTakeRedEnvelop() {
-        const { redEnvelopList } = this.props
-        const hasTakeRedEnvelop = redEnvelopList.length > 0
-            ? (new Date(redEnvelopList[0].canTakeTime.replace('T', ' ').replace(/-/g, '/')).getTime() -
-                new Date().getTime() < 0)
-            : false
-
-        return hasTakeRedEnvelop ? redEnvelopList[0] : null
-    }
-
-    getNextCanTakeRedEnvelop() {
-        var current = this.getCurrentCanTakeRedEnvelop()
-        const { redEnvelopList } = this.props
-
-        if (current) {
-            return redEnvelopList.length >= 2 ? redEnvelopList[1] : null
-        } else {
-            return redEnvelopList.length > 0 ? redEnvelopList[0] : null
-        }
     }
 
     handleHideShare() {
@@ -131,13 +107,12 @@ class RedEnvelopTakeView extends React.PureComponent {
     }
 
     handleShowShare() {
-        const { getShareCode, topic } = this.props
+        const { getShareCode, topic, redEnvelop } = this.props
 
         if (this.state.shareContent.link.indexOf('?') > -1) {
             this.setState({ showShare: true })
         } else {
             getShareCode({ id: topic.id }).then(({ json }) => {
-                const redEnvelop = this.getCurrentCanTakeRedEnvelop()
                 if (redEnvelop) {
                     this.state.shareContent.desc = `${redEnvelop.senderName}邀请您领取红包【小蜂找事】`
                 } else {
@@ -154,20 +129,27 @@ class RedEnvelopTakeView extends React.PureComponent {
     }
 
     handleTake() {
-        const { getTakeResult, takeRedEnvelop } = this.props
+        const { redEnvelop, getTakeResult, takeRedEnvelop, topic } = this.props
 
-        // if (topic.currentUserCanReceiveTimes <= 0) {
-        //     this.setState({ error: '次数不足' })
-        //     this.timer = setTimeout(() => {
-        //         this.setState({ error: '' })
-        //     }, 2000)
+        if (topic.currentUserCanReceiveTimes <= 0) {
+            this.setState({ error: '次数不足' })
+            this.timer = setTimeout(() => {
+                this.setState({ error: '' })
+            }, 1000)
 
-        //     return
-        // }
+            return
+        }
+
+        if (new Date(redEnvelop.canTakeTime.replace('T', ' ').replace(/-/g, '/')) < new Date()) {
+            this.setState({ error: '红包还未开启' })
+            this.timer = setTimeout(() => {
+                this.setState({ error: '' })
+            }, 1000)
+
+            return
+        }
 
         let retries = 10
-        const redEnvelop = this.getCurrentCanTakeRedEnvelop()
-
         const getTakeResultLoop = (backend) => {
             getTakeResult(redEnvelop.id, backend, ({ result }) => {
                 if (result.status > 0) {

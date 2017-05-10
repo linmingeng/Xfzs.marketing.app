@@ -12,12 +12,11 @@ class RedEnvelopTopicView extends React.PureComponent {
         topic: React.PropTypes.object.isRequired,
         getRedEnvelopTopic: React.PropTypes.func.isRequired,
         getCanTakeRedEnvelopList: React.PropTypes.func.isRequired,
-        redEnvelopList: React.PropTypes.func.isRequired
+        redEnvelopList: React.PropTypes.array.isRequired
     }
 
     componentDidMount() {
         const { getRedEnvelopTopic, getCanTakeRedEnvelopList, params } = this.props
-
         getRedEnvelopTopic(params.id)
         getCanTakeRedEnvelopList(params.id)
     }

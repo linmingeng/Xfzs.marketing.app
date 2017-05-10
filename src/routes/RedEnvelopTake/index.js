@@ -2,7 +2,7 @@ import NProgress from 'nprogress'
 import { injectReducer } from '../../store/reducers'
 
 export default (store) => ({
-    path: 'rd/take/:id',
+    path: 'rd/take/:topicId/:id',
     getComponent(nextState, cb) {
         require.ensure([], (require) => {
             const Container = require('./containers/RedEnvelopTakeContainer').default
