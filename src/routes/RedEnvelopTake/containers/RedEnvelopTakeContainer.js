@@ -10,12 +10,12 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = ({ redEnvelopTake, redEnvelopTopic }, ownProps) => {
-    const { redEnvelop, redEnvelopPagination } = redEnvelopTake
+    const { redEnvelop } = redEnvelopTake
     const { topic } = redEnvelopTopic
 
     return {
         params: ownProps.params,
-        redEnvelopList: redEnvelopPagination.ids.map(id => redEnvelop[id]),
+        redEnvelop,
         topic,
         getShareCode,
         trySaveShareRecords

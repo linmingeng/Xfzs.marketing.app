@@ -2,6 +2,7 @@ import { api, injectApi, DEFAULT_FAILURE } from 'services/fetch'
 import { Schema, arrayOf } from 'normalizr'
 import { RECEIVE_TAKE_RESULT_SUCCESS } from '../../RedEnvelopTake/modules/redEnvelopTake'
 
+const redEnvelopSchema = new Schema('redEnvelop')
 const redEnvelopTopicSchema = new Schema('redEnvelopTopic')
 
 // ------------------------------------
@@ -11,9 +12,25 @@ export const RED_ENVELOP_TOPIC_REQUEST = 'RED_ENVELOP_TOPIC_REQUEST'
 export const RED_ENVELOP_TOPIC_SUCCESS = 'RED_ENVELOP_TOPIC_SUCCESS'
 export const RED_ENVELOP_TOPIC_FAILURE = DEFAULT_FAILURE
 
+export const RED_ENVELOP_LIST_REQUEST = 'RED_ENVELOP_LIST_REQUEST'
+export const RED_ENVELOP_LIST_SUCCESS = 'RED_ENVELOP_LIST_SUCCESS'
+export const RED_ENVELOP_LIST_FAILURE = DEFAULT_FAILURE
+
 // ------------------------------------
 // Actions
 // ------------------------------------
+export const getCanTakeRedEnvelopList = (id) => injectApi({
+    endpoint: api.redEnvelop + '/getCanTakeRedEnvelopList',
+    method: 'get',
+    body: { id },
+    schema: arrayOf(redEnvelopSchema),
+    types: [
+        RED_ENVELOP_LIST_REQUEST,
+        RED_ENVELOP_LIST_SUCCESS,
+        RED_ENVELOP_LIST_FAILURE
+    ]
+})
+
 export const getRedEnvelopTopic = (id) => injectApi({
     endpoint: api.redEnvelop + '/getTopic',
     method: 'get',
@@ -27,13 +44,21 @@ export const getRedEnvelopTopic = (id) => injectApi({
 })
 
 export const actions = {
-    getRedEnvelopTopic
+    getRedEnvelopTopic,
+    getCanTakeRedEnvelopList
 }
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
+    [RED_ENVELOP_LIST_SUCCESS]: (state, { payload }) => {
+        state.redEnvelops = payload.entities.redEnvelop
+        state.redEnvelopsPagination = payload.pagination
+
+        return Object.assign({}, state)
+    },
+
     [RED_ENVELOP_TOPIC_SUCCESS]: (state, { payload }) => {
         state.topic = payload.result
 
@@ -55,7 +80,9 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = {
-    topic: {}
+    topic: {},
+    redEnvelops: {},
+    redEnvelopsPagination: { ids: [] }
 }
 export default function counterReducer(state = initialState, action) {
     const handler = ACTION_HANDLERS[action.type]

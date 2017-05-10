@@ -7,7 +7,7 @@ import lose from './assets/lose.png'
 
 export const ResultModal = ({ show, result, onClose }) => (
     <Dialog type="ios" show={show} className="result-modal">
-        <p className="close" onClick={onClose}>&nbsp;</p>
+        <a className="close" onClick={onClose} href="javascript:void(0)">&nbsp;</a>
         <div className="content">
             <img src={result.status === 1 ? win : lose} className="status" />
             <div className="bg">
