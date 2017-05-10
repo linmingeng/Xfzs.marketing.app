@@ -1,9 +1,10 @@
 import React from 'react'
 import './Countdown.scss'
 
-class Countdown extends React.PureComponent {
+class Countdown extends React.Component {
     static propTypes = {
-        redEnvelop: React.PropTypes.object.isRequired
+        redEnvelop: React.PropTypes.object.isRequired,
+        skipMinutes: React.PropTypes.any
     }
 
     timer = null
@@ -13,8 +14,7 @@ class Countdown extends React.PureComponent {
     }
 
     render() {
-        const { redEnvelop } = this.props
-
+        const { redEnvelop, skipMinutes } = this.props
         // const filters = redEnvelopList
         //     .filter(r => new Date(r.canTakeTime.replace('T', ' ').replace(/-/g, '/')) > new Date())
         // const nextRedEnvelop = filters.length > 0 ? filters[0] : null
@@ -28,24 +28,29 @@ class Countdown extends React.PureComponent {
         let endTime
 
         if (redEnvelop && redEnvelop.canTakeTime) {
+            this.timer && clearInterval(this.timer)
+
             endTime = new Date(redEnvelop.canTakeTime.replace('T', ' ').replace(/-/g, '/'))
-            this.timer = setInterval((() => {
-                return () => {
-                    const ele = document.getElementById('countdown')
-                    const startTime = new Date().getTime()
-                    const diff = endTime.getTime() - startTime
-                    const num1 = zfill(parseInt(diff / 1000 / 60 / 60, 10), 2)
-                    const num2 = zfill(parseInt(diff / 1000 / 60 % 60, 10), 2)
-                    const num3 = zfill(parseInt(diff / 1000 % 60, 10), 2)
-                    const result = `${num1}：${num2}：${num3}`
-                    if (diff < 0) {
-                        clearInterval(this.timer)
-                        // if (ele) window.location.reload()
-                    } else {
-                        if (ele) ele.innerText = result
-                    }
+
+            if (endTime < new Date()) {
+                endTime.setMinutes(skipMinutes)
+            }
+
+            this.timer = setInterval(() => {
+                const ele = document.getElementById('countdown')
+                const startTime = new Date().getTime()
+                const diff = endTime.getTime() - startTime
+                const num1 = zfill(parseInt(diff / 1000 / 60 / 60, 10), 2)
+                const num2 = zfill(parseInt(diff / 1000 / 60 % 60, 10), 2)
+                const num3 = zfill(parseInt(diff / 1000 % 60, 10), 2)
+                const result = `${num1}：${num2}：${num3}`
+                if (diff < 0) {
+                    clearInterval(this.timer)
+                    // if (ele) window.location.reload()
+                } else {
+                    if (ele) ele.innerText = result
                 }
-            })(), 1000)
+            }, 1000)
         }
 
         return (
