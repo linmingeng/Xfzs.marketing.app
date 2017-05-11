@@ -140,7 +140,9 @@ class RedEnvelopTakeView extends React.PureComponent {
             return
         }
 
-        if (new Date(redEnvelop.canTakeTime.replace('T', ' ').replace(/-/g, '/')) < new Date()) {
+        var endTime = new Date(redEnvelop.canTakeTime.replace('T', ' ').replace(/-/g, '/'))
+        console.log(endTime)
+        if (endTime > new Date()) {
             this.setState({ error: '红包还未开启' })
             this.timer = setTimeout(() => {
                 this.setState({ error: '' })

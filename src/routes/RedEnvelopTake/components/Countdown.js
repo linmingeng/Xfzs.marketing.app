@@ -26,13 +26,13 @@ class Countdown extends React.Component {
         }
 
         let endTime
+        let isStart
 
         if (redEnvelop && redEnvelop.canTakeTime) {
             this.timer && clearInterval(this.timer)
-
             endTime = new Date(redEnvelop.canTakeTime.replace('T', ' ').replace(/-/g, '/'))
-
             if (endTime < new Date()) {
+                isStart = true
                 endTime.setMinutes(skipMinutes)
             }
 
@@ -55,7 +55,7 @@ class Countdown extends React.Component {
 
         return (
             <div className="next-red-envelop">
-                <p>{(endTime - new Date().getTime() < 0) ? '距离结束' : '距离开始'}</p>
+                <p>{isStart ? '距离结束' : '距离开始'}</p>
                 <p id="countdown" className="countdown">{redEnvelop ? '00：00：00' : '没有红包'}</p>
             </div>
         )
