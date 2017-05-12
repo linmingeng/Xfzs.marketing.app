@@ -31,7 +31,7 @@ class RedEnvelopTakeView extends React.PureComponent {
         shareContent: {
             title: '蜂抢红包',
             desc: '点击领取红包',
-            link: window.location.href.replace('take', 'topic'),
+            link: window.location.href,
             headerimage: `${api.imgHost}/e1/e135988a39a1f307a8eb0995bfc06847.png`
         }
     }
@@ -129,19 +129,18 @@ class RedEnvelopTakeView extends React.PureComponent {
     }
 
     handleTake() {
-        const { redEnvelop, getTakeResult, takeRedEnvelop, topic } = this.props
+        const { redEnvelop, getTakeResult, takeRedEnvelop } = this.props
 
-        if (topic.currentUserCanReceiveTimes <= 0) {
-            this.setState({ error: '次数不足' })
-            this.timer = setTimeout(() => {
-                this.setState({ error: '' })
-            }, 1000)
+        // if (topic.currentUserCanReceiveTimes <= 0) {
+        //     this.setState({ error: '次数不足' })
+        //     this.timer = setTimeout(() => {
+        //         this.setState({ error: '' })
+        //     }, 1000)
 
-            return
-        }
+        //     return
+        // }
 
         var endTime = new Date(redEnvelop.canTakeTime.replace('T', ' ').replace(/-/g, '/'))
-        console.log(endTime)
         if (endTime > new Date()) {
             this.setState({ error: '红包还未开启' })
             this.timer = setTimeout(() => {
