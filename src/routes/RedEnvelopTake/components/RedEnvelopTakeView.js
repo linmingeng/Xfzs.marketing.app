@@ -6,7 +6,7 @@ import Countdown from './Countdown'
 import Share from 'components/Share'
 import Toptips from 'components/Toptips'
 import ResultModal from './ResultModal'
-import { Toast } from 'react-weui'
+// import { Toast } from 'react-weui'
 
 class RedEnvelopTakeView extends React.PureComponent {
     static propTypes = {
@@ -84,7 +84,7 @@ class RedEnvelopTakeView extends React.PureComponent {
                     show={this.state.showShare}
                     content={this.state.shareContent}
                     onHide={this.handleHideShare} />
-                {/*<Toast icon="loading" show={this.state.loading}>加载中</Toast>*/}
+                {/* <Toast icon="loading" show={this.state.loading}>加载中</Toast> */}
                 <Toptips show={!!this.state.error} text={this.state.error} />
             </div>
         )
