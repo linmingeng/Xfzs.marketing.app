@@ -6,11 +6,17 @@
     padding: 0;
 }
 
+.result-modal .close-wapper{
+    text-align: right;
+    padding-right: 10px;
+}
+
 .result-modal .close {
     background: url(assets/close.png) no-repeat 100%;
     background-position-x: 95%;
-    display: block;
-    padding: 20px 10px;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
 }
 
 .result-modal .content {
