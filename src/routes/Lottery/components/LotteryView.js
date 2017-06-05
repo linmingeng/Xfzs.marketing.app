@@ -69,9 +69,9 @@ class LotteryView extends React.PureComponent {
         getWallet()
 
         getGlobalDrawRecords(id)
-        this.timer = setInterval(() => {
-            getGlobalDrawRecords(id)
-        }, 5000)
+        // this.timer = setInterval(() => {
+        //     getGlobalDrawRecords(id)
+        // }, 5000)
 
         getUserDrawRecords(id)
     }

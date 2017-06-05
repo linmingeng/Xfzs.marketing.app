@@ -84,7 +84,7 @@ class RedEnvelopTakeView extends React.PureComponent {
                     show={this.state.showShare}
                     content={this.state.shareContent}
                     onHide={this.handleHideShare} />
-                <Toast icon="loading" show={this.state.loading}>加载中</Toast>
+                {/*<Toast icon="loading" show={this.state.loading}>加载中</Toast>*/}
                 <Toptips show={!!this.state.error} text={this.state.error} />
             </div>
         )

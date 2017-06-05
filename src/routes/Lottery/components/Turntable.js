@@ -114,6 +114,17 @@ class Turntable extends React.PureComponent {
 
         const { onRotate, products } = this.props
 
+        const cfg = {
+            angle: 0,
+            animateTo: 1800,
+            duration: 8000,
+            callback: () => {
+                this.state.isStop = true
+            }
+        }
+
+        const wilq32 = new window.Wilq32.PhotoEffect(this.refs.prize, cfg)
+
         onRotate(result => {
             let index = 0
 
@@ -130,16 +141,18 @@ class Turntable extends React.PureComponent {
                 angles = 360 - angles + 270
             }
 
-            const cfg = {
-                angle: 0,
-                animateTo: angles + 1800,
-                duration: 8000,
-                callback: () => {
-                    this.state.isStop = true
-                }
-            }
+            cfg.animateTo = angles + 1800
+            // const cfg = {
+            //     angle: 0,
+            //     animateTo: angles + 1800,
+            //     duration: 8000,
+            //     callback: () => {
+            //         this.state.isStop = true
+            //     }
+            // }
 
-            return new window.Wilq32.PhotoEffect(this.refs.prize, cfg)
+            // return new window.Wilq32.PhotoEffect(this.refs.prize, cfg)
+            wilq32._handleRotation(cfg)
         })
     }
 }
