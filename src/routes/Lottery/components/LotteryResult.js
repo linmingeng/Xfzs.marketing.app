@@ -9,8 +9,6 @@ export const LotteryResult = ({ result, onAgain, onCancel }) => {
         ? `恭喜您抽中${result.productName}`
         : '很遗憾！未中奖'
 
-    const onClick = onAgain
-
     return <div className="lottery-result">
         <Dialog
             show>
@@ -29,7 +27,7 @@ export const LotteryResult = ({ result, onAgain, onCancel }) => {
                 <Button onClick={onCancel} type="default">
                     关闭
                 </Button>
-                <Button className="weui-btn_xf" onClick={onClick}>
+                <Button className="weui-btn_xf" onClick={onAgain}>
                     继续
                 </Button>
             </ButtonArea>
