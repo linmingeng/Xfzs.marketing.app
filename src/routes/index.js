@@ -4,6 +4,7 @@ import auth from 'services/auth'
 import { injectReducer } from '../store/reducers'
 import CoreLayout from '../layouts/CoreLayout/CoreLayout'
 import Home from './Home'
+import Index from './Index/index.js'
 import TopicDescRoute from './TopicDesc'
 import SignupRoute from './Signup'
 import RankingRoute from './Ranking'
@@ -51,7 +52,8 @@ export const createRoutes = (store) => ([
             auth.fetchAntiForgery()
             auth.fetchUserInfo()
         }
-    }
+    },
+    Index(store)
 ])
 
 /*  Note: childRoutes can be chunked or otherwise loaded programmatically

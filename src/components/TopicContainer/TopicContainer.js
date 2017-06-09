@@ -6,6 +6,15 @@ import TrafficCount from 'components/TrafficCount'
 import MiniSearch from 'components/MiniSearch'
 import './TopicContainer.scss'
 import { api } from 'services/fetch'
+import index from './assets/index.png'
+import topicDate from './assets/topic-date.png'
+import topicDesc from './assets/topic-desc.png'
+import ranking from './assets/ranking.png'
+import search from './assets/search.png'
+import singup from './assets/signup.png'
+import usercenter from './assets/usercenter.png'
+import share from './assets/share.png'
+import auth from 'services/auth'
 
 class TopicContainer extends React.Component {
     static propTypes = {
@@ -44,6 +53,21 @@ class TopicContainer extends React.Component {
     render() {
         const { topic, children } = this.props
 
+        const navs = [
+            { icon: <img src={index} />, label: '投票首页', onClick: () => this.context.router.push('/') },
+            { icon: <img src={topicDate} />, label: '活动日期', onClick: this.ShowTopicDate },
+            { icon: <img src={topicDesc} />, label: '活动介绍', onClick: () => this.context.router.push('/topic/desc') },
+            { icon: <img src={ranking} />, label: '实时排名', onClick: () => this.context.router.push('/topic/ranking') },
+            { icon: <img src={singup} />, label: '我要报名', onClick: () => this.context.router.push('/topic/signup') },
+            { icon: <img src={search} />, label: '投票搜索', onClick: this.handleShowSearch },
+            { icon: <img src={share} />, label: '分享拉票', onClick: () => this.context.router.push('/topic/signup') },
+            {
+                icon: <img src={usercenter} />,
+                label: '注销登录',
+                onClick: auth.logout
+            }
+        ]
+
         return (
             <div className="container">
                 {
@@ -52,9 +76,7 @@ class TopicContainer extends React.Component {
                 <div className="region">
                     <TrafficCount
                         {...topic} />
-                    <Nav
-                        onSearch={this.handleShowSearch}
-                        onShowTopicDate={this.ShowTopicDate} />
+                    <Nav navs={navs} />
                     <Dialog
                         title="活动日期"
                         buttons={[{ label: '确定', onClick: this.hideShowTopicDate }]}
@@ -69,7 +91,7 @@ class TopicContainer extends React.Component {
                     onSubmit={this.handleSubmitSearch}
                     onCancel={this.handleCancelSearch}
                     onChange={this.handleChangeSearch}
-                    />
+                />
                 {children}
             </div>
         )
