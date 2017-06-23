@@ -1,0 +1,75 @@
+body{
+            background-color: #f7f7f7;
+        }
+        .topContant h1{
+            width: 90%;
+            font-size: 100%;
+            padding: 15px;
+            padding-left: 0px;
+
+        }
+        .topContant span{
+            width: 22%;
+            padding-top: 3.8%;
+            padding-left: 4%;
+        }
+        .topContant{
+            background-color: #fff;
+            display: -webkit-flex;
+            display: flex;
+            margin-bottom: 10px;
+        }
+        .consultContant{
+            background-color: #fff;
+            padding-top: 10px;
+            border-radius: 5px;
+        }
+        .consultContant input{
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            width: 75%;
+            line-height: 30px;
+            left: 20%;
+            position: relative;
+
+        }
+
+        .consultContant span{
+            position: absolute;
+            width: 20%;
+            margin-right: 15px;
+            margin-left: 15px;
+            font-size: 100%;
+            padding-top: 1%;
+        }
+        .con{
+            /*position: relative;*/
+            margin-bottom: 15px;
+            padding-bottom: 10px
+        }
+        .inputConsult .consult{
+            /*position: absolute;*/
+        }
+        .inputConsult {
+            /*position: relative;*/
+        }
+        .inputConsult textarea{
+            /*position: relative;*/
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            width: 75%;
+            left: 20%;
+            position: relative;
+        }
+        .subBtn{
+            width: 100%;
+            background-color:  #f08833;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 100%;
+            /*margin-left: 1%;*/
+            /*margin-right: 1%;*/
+            line-height: 30px;
+            margin-top: 10px;
+        }
+      

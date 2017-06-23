@@ -2,18 +2,18 @@ import NProgress from 'nprogress'
 import { injectReducer } from '../../store/reducers'
 
 export default (store) => ({
-    path: 'train/index',
+    path: 'train/consult',
     getComponent(nextState, cb) {
         require.ensure([], (require) => {
-            const Container = require('./containers/TrainContainer').default
-            const reducer = require('./modules/train').default
+            const Container = require('./containers/TrainConsultContainer').default
+            const reducer = require('./modules/trainconsult').default
 
-            injectReducer(store, { key: 'train', reducer })
+            injectReducer(store, { key: 'trainconsult', reducer })
 
             cb(null, Container)
 
             NProgress.done()
-        }, 'train')
+        }, 'trainconsult')
     },
     onEnter: () => {
         NProgress.start()

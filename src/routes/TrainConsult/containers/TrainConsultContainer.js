@@ -1,7 +1,5 @@
 import { connect } from 'react-redux'
-
-
-import TrainView from '../components/TrainView'
+import TrainConsultView from '../components/TrainConsultView'
 
 const mapDispatchToProps = {
    
@@ -15,4 +13,4 @@ const mapStateToProps = ({ home }) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TrainView)
+export default connect(mapStateToProps, mapDispatchToProps)(TrainConsultView)

@@ -41,7 +41,7 @@ export const IndexView = (props, context) => {
             {
                 icon: < img src = { train }/>,
                 label: '培训活动',
-                onClick: () => { location.href = 'http://shop.hxzcgf.cn/?' + query }
+                onClick: () => { location.href = 'train/index' }
             },
             {
                 icon: < img src = { health }/>,

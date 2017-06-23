@@ -7,14 +7,14 @@ export const DEFAULT_FAILURE = 'FAILURE'
 export const LOADING = 'LOADING'
 export const CLEART_ERROR = 'CLEART_ERROR'
 
-const baseUrl = 'http://api.shop.hxzcgf.cn'
+const baseUrl = 'http://api.dev.shop.hxzcgf.cn'
 
 const imageUrl = 'http://img.hxzcgf.com'
 
 const queueUrl = 'http://mk.queue.hxzcgf.cn'
 
 export const api = {
-    passport: 'http://passport.hxzcgf.cn',
+    passport: 'http://passport.dev.hxzcgf.cn',
 
     passportApi: 'http://passport.api.dev.hxzcgf.cn',
 

@@ -1,0 +1,118 @@
+        .body{
+            background-color: #f7f7f7;
+        }
+        .allContant{
+            background-color: #fff;
+            border-radius: 10px;
+        }
+
+        .traincontain{
+            margin: 10px auto;
+            display: -webkit-flex;
+            display: flex;
+            padding-top: 10px;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+        .leftcontant img{
+            width: 100%;
+            border-radius: 10px;
+
+        }
+        .leftcontant{
+
+            width: 30%;
+
+
+        }
+        .rightcontant{
+
+            margin-left: 10px;
+            width: 68%;
+
+
+        }
+        .rightcontant h1{
+            // font-family: Microsoft Yahei;
+            font-size: 100%;
+            margin-bottom: 8px;
+            padding-left: 1%;
+            padding-right: 1.8%;
+        }
+        .rightcontant h3{
+            // font-family: Microsoft Yahei;
+            font-size: 100%;
+            color: #f08833;
+            margin: 0px;
+            margin-bottom: 8px;
+        }
+        .rightcontant span{
+            font-size: 90%;
+            margin: 0px;
+            margin-bottom: 8px;
+            color: #767676;
+          }
+        .rightcontant .buy{
+            font-size: 100%;
+            width: 60%;
+            background-color:  #f08833;
+            color: #fff;
+            border-radius: 10px;
+            margin-right: 15px;
+            box-shadow:0;
+        }
+        .rightcontant .consult{
+            font-size: 100%;
+              width: 30%;
+            border-radius: 10px;
+            border: 1px solid #767676;
+            background-color: #fff;
+          }
+
+        .buttomContant h1{
+            font-size: 90%;
+            text-align: center;
+            border-top: 1px solid #f2f2f2;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            color: #949494;
+
+        }
+        .left_btn{
+            line-height: 2.1;
+        }
+        .right_btn{
+            line-height: 2.1;
+            color: #949494;
+            border-color: #CFCFCF;
+            
+        }
+        .buttomContant h1 span img{
+            width: 2.8%;
+            height: 2.8%;
+        }
+        .buttomContant h1 span{
+            padding-left: 5px;
+            top: 1px;
+            position: relative;
+        }
+        .train_btn_area{
+            margin-left: 0;
+        }
+        .show_conatant h1{
+            font-size: 100%;
+            padding-left: 3%;
+            border-left: 3px solid #f08833;
+            margin-left: 5%;
+        }
+        .show_conatant div span{
+            padding: 10px;
+            padding-left: 5%;
+            padding-right: 5%;
+            display: inline-block;
+            color: #767676;
+            font-size: 90%;
+        }
+       
+     
+        
