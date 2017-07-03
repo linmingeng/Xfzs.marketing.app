@@ -38,7 +38,10 @@ export const api = {
 
     redEnvelop: baseUrl + '/api/services/app/redEnvelop',
 
-    redEnvelopQueue: queueUrl + '/api/queue'
+    redEnvelopQueue: queueUrl + '/api/queue',
+    
+    companyServices: baseUrl + '/api/services/app/companyService'
+
 }
 
 function isNotConent(response) {
