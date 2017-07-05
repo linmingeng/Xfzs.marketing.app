@@ -1,7 +1,7 @@
 import { api, injectApi, DEFAULT_FAILURE } from 'services/fetch'
-import { Schema } from 'normalizr'
+import { Schema, arrayOf } from 'normalizr'
 
-const trainGetServiceCategorySchema = new Schema('getServiceCategory')
+const companyServiceSchema = new Schema('companyService')
 
 // ------------------------------------
 // Constants
@@ -13,10 +13,11 @@ export const SERVICE_CATEGORY_TAKE_LIST_FAILURE = DEFAULT_FAILURE
 // ------------------------------------
 // Actions
 // ------------------------------------
-export const getServiceCategoryList = (id) => injectApi({
-    endpoint: api.companyService + '/getServiceCategoryList',
+export const getService = (Id) => injectApi({
+    endpoint: api.companyService + '/getServiceList',
     method: 'get',
-    schema: trainGetServiceCategorySchema,
+    body: { Id, pageSize: 100, current: 1 },
+    schema: arrayOf(companyServiceSchema),
     types: [
         SERVICE_CATEGORY_TAKE_LIST_REQUEST,
         SERVICE_CATEGORY_TAKE_LIST_SUCCESS,
@@ -25,7 +26,7 @@ export const getServiceCategoryList = (id) => injectApi({
 })
 
 export const actions = {
-    getServiceCategoryList
+    getService
 }
 
 // ------------------------------------
@@ -33,19 +34,30 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
     [SERVICE_CATEGORY_TAKE_LIST_SUCCESS]: (state, { payload }) => {
-        state.getServiceCategory = payload.entities.getServiceCategory
-        state.getServiceCategory = payload.pagination
+        console.log(payload)
+        state.services = payload.entities.companyService
+        state.servicePagination = payload.pagination
 
         return Object.assign({}, state)
     }
+    // [SERVICE_CATEGORY_TAKE_LIST_SUCCESS]: (state, action) => {
+    //     const { payload } = action
+    //     console.log(payload)
+
+    //     return Object.assign({}, state, {
+    //         // services: payload.entities.voter,
+    //         servicePagination: payload.pagination
+
+    //     })
+    // }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
 const initialState = {
-    getServiceCategory: {},
-    getServiceCategoryPagination: { ids: [] }
+    services: {},
+    servicePagination: { ids: [], total: 0, current: 0, pageSize: 100 }
 }
 export default function counterReducer(state = initialState, action) {
     const handler = ACTION_HANDLERS[action.type]

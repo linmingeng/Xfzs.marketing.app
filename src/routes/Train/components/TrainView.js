@@ -8,31 +8,43 @@ import { Button, ButtonArea } from 'react-weui'
 import { Link } from 'react-router'
 
 class TrainView extends React.PureComponent {
+    static propTypes = {
+        params: React.PropTypes.object.isRequired,
+        services: React.PropTypes.array.isRequired,
+        getService: React.PropTypes.func.isRequired
+        // topic: React.PropTypes.object.isRequired
+    }
+
     constructor(props) {
         super(props)
-        this.state={
+        this.show = this.show.bind(this)
+        this.state = {
             display:'none',
             text:'查看详情',
-            image:{Down},
+            image:{ Down },
             class_name:'show_conatant'
         }
     }
     show() {
         this.setState({
-            display:this.state.display=='block' ? 'none':'block',
-            text:this.state.display=='block' ? '查看详情' : '收起内容',
-            image:this.state.display=='block' ? {Down}:{Up},
-            class_name:this.state.display=='block' ? 'show_conatant animated fadeOut' :'show_conatant animated fadeIn'
-          })
+            display:this.state.display === 'block' ? 'none' : 'block',
+            text:this.state.display === 'block' ? '查看详情' : '收起内容',
+            image:this.state.display === 'block' ? { Down } : { Up },
+            class_name:this.state.display === 'block' ? 'show_conatant animated fadeOut' : 'show_conatant animated fadeIn'
+        })
     }
-
+    componentDidMount() {
+        const { getService, params } = this.props
+        getService(params.id)
+    }
     render() {
+        const { services } = this.props
         return (
             <div>
                 <div className="allContant">
                     <div className="traincontain">
                         <div className="leftcontant">
-                            <img src= {pic1} alt=""/>
+                            <img src={pic1} alt="" />
                         </div>
                         <div className="rightcontant">
                             <h1>小狮子支援救治集团内部精英成员训练营</h1>
@@ -42,16 +54,15 @@ class TrainView extends React.PureComponent {
                                 <Button className="weui-btn_xf weui-btn_xf_mini left_btn">
                                             购买
                                 </Button>
-                                        
-                                <Link to={`/train/consult`}>
+                                <Link to={`/train/consult/:id`}>
                                     <Button type="default" plain className="weui-btn_xf_mini right_btn">
                                                 咨询
-                                            </Button>
+                                    </Button>
                                 </Link>
                             </ButtonArea>
                         </div>
                     </div>
-                    <div className={this.state.class_name} style={{display:this.state.display}}>
+                    <div className={this.state.class_name} style={{ display:this.state.display }}>
                         <h1>活动详情</h1>
                         <div>
                             <span>&nbsp;&nbsp;&nbsp;&nbsp;6月22日，习近平总书记在太原考察了两家企业。太原重工轨道交通设备有限公司车轮车间机声隆隆，
@@ -62,69 +73,22 @@ class TrainView extends React.PureComponent {
                         </div>
 
                     </div>
-                    <div className="buttomContant" onClick={this.show.bind(this)}>
-                               
-                        <h1>{this.state.text}<span><img src={Down} alt=""/></span></h1>
+                    <div className="buttomContant" onClick={this.show}>
+                        <h1>{this.state.text}<span><img src={Down} alt="" /></span></h1>
                     </div>
                 </div>
-
-
-
-
-                        <div className="allContant">
-                            <div className="traincontain">
-                                <div className="leftcontant">
-                                    <img src={pic1} alt=""/>
-                                </div>
-                                <div className="rightcontant">
-                                    <h1>小狮子支援救治集团内部精英成员训练营</h1>
-                                    <h3>￥200+1200蜂币</h3>
-                                    <span>福州天瑞人力资源有限公司</span>
-                                     <ButtonArea direction="horizontal">
-                                        <Button className="weui-btn_xf weui-btn_xf_mini left_btn">
-                                            购买
-                                        </Button>
-                                        <Link to={`/train/consult`}>
-                                            <Button type="default" plain className="weui-btn_xf_mini right_btn">
-                                                咨询
-                                            </Button>
-                                        </Link>
-                                    </ButtonArea>
-                                </div>
-                            </div>
-                            <div className="buttomContant ">
-                               <h1>查看详情<span><img src={Down} alt=""/></span></h1>
-                            </div>
-                        </div>
-
-                        <div className="allContant">
-                            <div className="traincontain">
-                                <div className="leftcontant">
-                                    <img src={pic1} alt=""/>
-                                </div>
-                                <div className="rightcontant">
-                                    <h1>小狮子支援救治集团内部精英成员训练营</h1>
-                                    <h3>￥200+1200蜂币</h3>
-                                    <span>福州天瑞人力资源有限公司</span>
-                                     <ButtonArea direction="horizontal" className="train_btn_area" >
-                                        <Button className="weui-btn_xf weui-btn_xf_mini left_btn">
-                                            购买
-                                        </Button>
-                                         <Link to={`/train/consult`}>
-                                            <Button type="default" plain className="weui-btn_xf_mini right_btn">
-                                                咨询
-                                            </Button>
-                                        </Link>
-                                    </ButtonArea>
-                                </div>
-                            </div>
-                            <div className="buttomContant">
-                               <h1>查看详情<span><img src={Down} alt=""/></span></h1>
-                            </div>
-                        </div>
-                    </div>
+                {
+                    services.map((companyService) => this.renderRankingRow(companyService))
+                }
+            </div>
         )
     }
+    renderRankingRow(companyService) {
+        <div>
+            <p>
+                {companyService.provide}
+            </p>
+        </div>
+    }
 }
-
 export default TrainView

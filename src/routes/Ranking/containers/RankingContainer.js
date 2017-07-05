@@ -10,7 +10,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = ({ home }) => {
     const { voters, voterPagination } = home
-
+    // console.log(home)
     return {
         topic: home.topic,
         voters: voterPagination.ids.map(id => voters[id]) || []

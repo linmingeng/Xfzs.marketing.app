@@ -1,17 +1,16 @@
 import { connect } from 'react-redux'
-import * as actions from '../modules/train'
+import { getService } from '../modules/train'
 import TrainView from '../components/TrainView'
 
 const mapDispatchToProps = {
-    ...actions
+    getService
 }
 
-const mapStateToProps = ({ train }, ownProps) => {
-    const { takeRecord, takeRecordPagination } = train
-
+const mapStateToProps = ({ train }) => {
+    const { services, servicePagination } = train
+    console.log(train)
     return {
-        params: ownProps.params,
-        takeRecordList: takeRecordPagination.ids.map(id => takeRecord[id])
+        services: servicePagination.ids.map(id => services[id]) || []
     }
 }
 
