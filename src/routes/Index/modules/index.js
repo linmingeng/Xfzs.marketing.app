@@ -1,5 +1,5 @@
 import { api, injectApi, DEFAULT_FAILURE } from 'services/fetch'
-import { Schema } from 'normalizr'
+import { Schema, arrayOf } from 'normalizr'
 
 const serviceCategorySchema = new Schema('serviceCategory')
 
@@ -13,10 +13,10 @@ export const SERVICE_CATEGORY_LIST_FAILURE = DEFAULT_FAILURE
 // ------------------------------------
 // Actions
 // ------------------------------------
-export const getServiceCategoryList = () => injectApi({
+export const getServiceCategory = () => injectApi({
     endpoint: api.companyService + '/getServiceCategoryList',
     method: 'get',
-    schema: serviceCategorySchema,
+    schema: arrayOf(serviceCategorySchema),
     types: [
         SERVICE_CATEGORY_LIST_REQUEST,
         SERVICE_CATEGORY_LIST_SUCCESS,
@@ -25,7 +25,7 @@ export const getServiceCategoryList = () => injectApi({
 })
 
 export const actions = {
-    getServiceCategoryList
+    getServiceCategory
 }
 
 // ------------------------------------
@@ -33,22 +33,20 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
     [SERVICE_CATEGORY_LIST_SUCCESS]: (state, { payload }) => {
-        const { entities: { serviceCategory }, result } = payload
-        console.log(111)
-        // console.log(payload)
-
-        return Object.assign({}, state, serviceCategory[result])
+        return Object.assign({}, state, {
+            serviceCategorys: payload.entities.serviceCategory,
+            servicePagination: payload.pagination
+        })
     }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState =
-    {
-        serviceCategory: {},
-        serviceCategoryPagination: { ids: [], total: 0, current: 0, pageSize: 10 }
-    }
+const initialState = {
+    serviceCategorys: {},
+    servicePagination: { ids: [] }
+}
 export default function counterReducer(state = initialState, action) {
     const handler = ACTION_HANDLERS[action.type]
 

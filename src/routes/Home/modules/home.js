@@ -89,7 +89,6 @@ const ACTION_HANDLERS = {
 
     [TOPIC_INFO_SUCCESS]: (state, { payload }) => {
         const { entities: { topic }, result } = payload
-
         return Object.assign({}, state, {
             topic: topic[result]
         })
@@ -97,7 +96,7 @@ const ACTION_HANDLERS = {
 
     [VOTER_LIST_SUCCESS]: (state, action) => {
         const { payload } = action
-
+        // console.log(action)
         return Object.assign({}, state, {
             voters: payload.entities.voter,
             voterPagination: payload.pagination
@@ -143,8 +142,7 @@ const initialState =
             voteTime: { startTime: '', endTime: '' }
         },
         voters: {},
-        voterPagination: { ids: [], total: 0, current: 0, pageSize: 100 },
-        myVoter: {}
+        voterPagination: { ids: [], total: 0, current: 0, pageSize: 100 }
     }
 export default function counterReducer(state = initialState, action) {
     const handler = ACTION_HANDLERS[action.type]

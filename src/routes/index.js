@@ -17,7 +17,6 @@ import RedEnvelopRecordRoute from './RedEnvelopRecord'
 import TrainRoute from './Train'
 import TrainConsultRoute from './TrainConsult'
 
-
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
