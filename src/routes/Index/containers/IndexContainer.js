@@ -1,16 +1,18 @@
 import { connect } from 'react-redux'
 import IndexView from '../components/IndexView'
-import * as actions from '../modules/index'
+import { getServiceCategory } from '../modules/index'
 
 const mapDispatchToProps = {
-    ...actions
+    getServiceCategory
 }
 
 const mapStateToProps = ({ index }) => {
+    // console.log(index)
     const { serviceCategorys, servicePagination } = index
     return {
-        serviceList: servicePagination.ids.map(id => serviceCategorys[id]) || []
+        serviceList: servicePagination.map(id => serviceCategorys[id]) || []
     }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(IndexView)
+

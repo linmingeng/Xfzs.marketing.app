@@ -96,7 +96,7 @@ const ACTION_HANDLERS = {
 
     [VOTER_LIST_SUCCESS]: (state, action) => {
         const { payload } = action
-        // console.log(action)
+        // console.log(payload)
         return Object.assign({}, state, {
             voters: payload.entities.voter,
             voterPagination: payload.pagination

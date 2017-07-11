@@ -2,6 +2,7 @@ import React from 'react'
 import './IndexView.scss'
 import Nav from 'components/Nav'
 import shop from './assets/shop.png'
+import { api } from 'services/fetch'
 
 class IndexView extends React.Component {
     static propTypes = {
@@ -19,6 +20,8 @@ class IndexView extends React.Component {
     }
 
     render() {
+        console.log(this.props)
+        console.log(111)
         const query = location.href.split('?')[1] || ''
         const { serviceList } = this.props
         const icons = [{
@@ -33,9 +36,25 @@ class IndexView extends React.Component {
 
         return (<div className="index-view">
             <img className="banner" src="http://api.shop.hxzcgf.cn/Assets/upload/2016/11/10/赚蜂币，抢豪礼1478770496.png" />
-            <div className="navs-wapper"><Nav navs={[...icons, ...serviceList]} /></div>
+            <div className="navs-wapper"><Nav navs={[...icons]} />
+                {
+                        serviceList.map((service) => this.renderRankingRow(service))
+                }
+            </div>
         </div>
         )
+    }
+    renderRankingRow(service) {
+        return <div className="navs">
+            <a className="nav" key={service.name} href="javascript:void(0);" onClick={service.onClick}>
+                <div className="nav-icon">
+                    <img src={`${api.imgHost}/${service.icon}`} />
+                </div>
+                <p className="nav-label">
+                    {service.name}
+                </p>
+            </a>
+        </div >
     }
 }
 

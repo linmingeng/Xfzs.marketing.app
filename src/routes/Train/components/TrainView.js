@@ -12,7 +12,10 @@ class TrainView extends React.PureComponent {
         params: React.PropTypes.object.isRequired,
         services: React.PropTypes.array.isRequired,
         getService: React.PropTypes.func.isRequired
-        // topic: React.PropTypes.object.isRequired
+    }
+    componentDidMount() {
+        const { getService } = this.props
+        getService()
     }
 
     constructor(props) {
@@ -33,12 +36,13 @@ class TrainView extends React.PureComponent {
             class_name:this.state.display === 'block' ? 'show_conatant animated fadeOut' : 'show_conatant animated fadeIn'
         })
     }
-    componentDidMount() {
-        const { getService, params } = this.props
-        getService(params.id)
-    }
+    // componentDidMount() {
+    //     const { getService, params } = this.props
+    //     getService(params.id)
+    // }
     render() {
         const { services } = this.props
+        console.log(this.props)
         return (
             <div>
                 <div className="allContant">

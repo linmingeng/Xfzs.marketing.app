@@ -33,11 +33,18 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
     [SERVICE_CATEGORY_LIST_SUCCESS]: (state, { payload }) => {
+        // console.log(payload)
         return Object.assign({}, state, {
             serviceCategorys: payload.entities.serviceCategory,
-            servicePagination: payload.pagination
+            servicePagination: payload.result
         })
     }
+    // [SERVICE_CATEGORY_LIST_SUCCESS]: (state, { payload }) => {
+    //     state.serviceCategorys = payload.entities.serviceCategory
+    //     state.servicePagination = payload.result
+    //     console.log(state.servicePagination)
+    //     return Object.assign({}, state)
+    // }
 }
 
 // ------------------------------------
@@ -45,7 +52,7 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 const initialState = {
     serviceCategorys: {},
-    servicePagination: { ids: [] }
+    servicePagination: []
 }
 export default function counterReducer(state = initialState, action) {
     const handler = ACTION_HANDLERS[action.type]

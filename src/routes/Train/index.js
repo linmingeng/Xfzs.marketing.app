@@ -9,9 +9,7 @@ export default (store) => ({
             const reducer = require('./modules/train').default
 
             injectReducer(store, { key: 'train', reducer })
-
             cb(null, Container)
-
             NProgress.done()
         }, 'train')
     },

@@ -34,7 +34,8 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
     [SERVICE_CATEGORY_TAKE_LIST_SUCCESS]: (state, { payload }) => {
-        console.log(payload)
+        // console.log(payload)
+        // console.log(1111)
         state.services = payload.entities.companyService
         state.servicePagination = payload.pagination
 
