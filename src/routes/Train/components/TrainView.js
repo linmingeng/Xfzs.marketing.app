@@ -14,8 +14,9 @@ class TrainView extends React.PureComponent {
         getService: React.PropTypes.func.isRequired
     }
     componentDidMount() {
-        const { getService } = this.props
-        getService()
+        // console.log(topic.id)
+        const { params, getService } = this.props
+        getService(params.id)
     }
 
     constructor(props) {

@@ -88,6 +88,7 @@ const ACTION_HANDLERS = {
     [LOADING]: (state, action) => Object.assign({}, state, { loading: action.loading }),
 
     [TOPIC_INFO_SUCCESS]: (state, { payload }) => {
+        console.log(sessionStorage.getItem('id'))
         const { entities: { topic }, result } = payload
         return Object.assign({}, state, {
             topic: topic[result]

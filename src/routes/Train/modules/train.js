@@ -13,10 +13,10 @@ export const SERVICE_CATEGORY_TAKE_LIST_FAILURE = DEFAULT_FAILURE
 // ------------------------------------
 // Actions
 // ------------------------------------
-export const getService = (Id) => injectApi({
+export const getService = (topicid) => injectApi({
     endpoint: api.companyService + '/getServiceList',
     method: 'get',
-    body: { Id, pageSize: 100, current: 1 },
+    body: { id:topicid },
     schema: arrayOf(companyServiceSchema),
     types: [
         SERVICE_CATEGORY_TAKE_LIST_REQUEST,
@@ -35,7 +35,7 @@ export const actions = {
 const ACTION_HANDLERS = {
     [SERVICE_CATEGORY_TAKE_LIST_SUCCESS]: (state, { payload }) => {
         // console.log(payload)
-        // console.log(1111)
+        console.log(sessionStorage.getItem('id'))
         state.services = payload.entities.companyService
         state.servicePagination = payload.pagination
 
@@ -57,6 +57,7 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = {
+    params:{ id:sessionStorage.getItem('id') },
     services: {},
     servicePagination: { ids: [], total: 0, current: 0, pageSize: 100 }
 }

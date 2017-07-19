@@ -8,8 +8,9 @@ const mapDispatchToProps = {
 
 const mapStateToProps = ({ train }) => {
     const { services, servicePagination } = train
-    // console.log(train)
+    console.log(train)
     return {
+        params:train.params,
         services: servicePagination.ids.map(id => services[id]) || []
     }
 }

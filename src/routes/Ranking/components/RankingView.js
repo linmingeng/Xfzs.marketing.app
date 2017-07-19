@@ -20,6 +20,8 @@ class RankingView extends React.Component {
     }
 
     componentDidMount() {
+        // console.log(this.props)
+        // console.log(topic.id)
         const { topic, getVoters } = this.props
 
         getVoters(topic.id)
