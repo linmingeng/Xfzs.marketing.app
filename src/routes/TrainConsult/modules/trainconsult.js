@@ -1,5 +1,7 @@
 import { api, injectApi, DEFAULT_FAILURE } from 'services/fetch'
-// import { Schema, arrayOf } from 'normalizr'
+import { Schema } from 'normalizr'
+
+const workOrderSchema = new Schema('workOrder')
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -11,10 +13,11 @@ export const TRAIN_CONSULT_FAILURE = DEFAULT_FAILURE
 // ------------------------------------
 // Actions
 // ------------------------------------
-export const voting = (trainId, onSuccess) => injectApi({
+export const saveWorkOrder = (trainId, onSuccess) => injectApi({
     endpoint: api.companyService + '/saveWorkOrder',
     method: 'post',
     body: { id: trainId },
+    schema: workOrderSchema,
     onSuccess,
     types: [
         TRAIN_CONSULT_REQUEST,
@@ -22,17 +25,36 @@ export const voting = (trainId, onSuccess) => injectApi({
         TRAIN_CONSULT_FAILURE
     ]
 })
+// export const saveShippingAddress = (sa) => injectApi({
+//     endpoint: api.delivery + '/saveShippingAddress',
+//     method: 'post',
+//     body: sa,
+//     schema: shippingAddressSchema,
+//     types: [
+//         SAVE_SHIPPING_ADDRESS_REQUEST,
+//         SAVE_SHIPPING_ADDRESS_SUCCESS,
+//         SAVE_SHIPPING_ADDRESS_FAILURE
+//     ]
+// })
 
 export const actions = {
-    voting
+    saveWorkOrder
 }
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
+    // [TRAIN_CONSULT_SUCCESS]: (state, { payload }) => {
+    //     state.voters[payload.body.id].numberOfVotes++
+
+    //     return Object.assign({}, state)
+    // },
     [TRAIN_CONSULT_SUCCESS]: (state, { payload }) => {
-        state.voters[payload.body.id].numberOfVotes++
+        const { entities: { workOrder }, result } = payload
+
+        state.workOrder[result] = workOrder[result]
+        state.workOrderPagination.ids.push(result)
 
         return Object.assign({}, state)
     },
@@ -49,16 +71,8 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 const initialState =
     {
-        topic: {
-            id: sessionStorage.getItem('id'),
-            voterSum: 0,
-            numberOfVoteSum: 0,
-            viewSum: 0,
-            voteTime: { startTime: '', endTime: '' }
-        },
-        voters: {},
-        voterPagination: { ids: [], total: 0, current: 0, pageSize: 100 },
-        myVoter: {}
+        workOrder: {},
+        workOrderPagination: { ids: [] }
     }
 export default function counterReducer(state = initialState, action) {
     const handler = ACTION_HANDLERS[action.type]

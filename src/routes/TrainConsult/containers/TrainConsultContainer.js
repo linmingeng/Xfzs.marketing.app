@@ -1,15 +1,16 @@
 import { connect } from 'react-redux'
+import { saveWorkOrder } from '../modules/trainconsult'
 import TrainConsultView from '../components/TrainConsultView'
 
 const mapDispatchToProps = {
-   
+    saveWorkOrder
 }
 
-const mapStateToProps = ({ home }) => {
-    const { voters, voterPagination } = home
+const mapStateToProps = ({ trainconsult }) => {
+    const { workOrder, workOrderPagination } = trainconsult
 
     return {
-       topic: home.topic
+        workOrder: workOrderPagination.ids.map(id => workOrder[id]) || []
     }
 }
 

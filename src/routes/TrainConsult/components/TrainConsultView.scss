@@ -77,4 +77,20 @@ body{
             line-height: 30px;
             margin-top: 10px;
         }
+        ::-webkit-input-placeholder { /* WebKit browsers */
+            color:    #cccccc;
+        }
+        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color:    #cccccc;
+        }
+        ::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color:    #cccccc;
+        }
+        :-ms-input-placeholder { /* Internet Explorer 10+ */
+            color:    #cccccc;
+        }
+        .CellTextArea{
+            font-family: "Microsoft Yahei";
+            padding-left: 10px;
+        }
       
