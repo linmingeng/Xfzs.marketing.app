@@ -16,7 +16,7 @@ export const SERVICE_CATEGORY_TAKE_LIST_FAILURE = DEFAULT_FAILURE
 export const getService = (topicid) => injectApi({
     endpoint: api.companyService + '/getServiceList',
     method: 'get',
-    body: { id:topicid },
+    body: { CategoryId:topicid, pageSize: 100, current: 1 },
     schema: arrayOf(companyServiceSchema),
     types: [
         SERVICE_CATEGORY_TAKE_LIST_REQUEST,

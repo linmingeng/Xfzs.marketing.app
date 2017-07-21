@@ -13,17 +13,30 @@ import {
 } from 'react-weui'
 
 class TrainConsultView extends React.PureComponent {
+    static propTypes = {
+        // params: React.PropTypes.object.isRequired,
+        // services: React.PropTypes.array.isRequired,
+        // getService: React.PropTypes.func.isRequired
+    }
     constructor(props) {
         super(props)
     }
+    // componentDidMount() {
+    //     // console.log(topic.id)
+    //     const { params, getService } = this.props
+    //     // console.log(params)
+    //     getService(params.id)
+    // }
     render() {
+        // const { services } = this.props
+        // console.log(services)
         return (
             <div>
                 <Form>
 
                     <div className="topContant ">
                         <span>服务：</span>
-                        <h1>小狮子资源救治集团内部精英成员训练营内部精英成员</h1>
+                        <h1>小狮子资源救治成员</h1>
                     </div>
                     <FormCell>
                         <CellHeader>

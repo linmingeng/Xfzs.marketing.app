@@ -7,8 +7,10 @@ export default (store) => ({
         require.ensure([], (require) => {
             const Container = require('./containers/TrainConsultContainer').default
             const reducer = require('./modules/trainconsult').default
-
             injectReducer(store, { key: 'trainconsult', reducer })
+            // injectReducer(store, { key: 'train', reducer: require('../Train/modules/train').default })
+            const takeReducer = require('../Train/modules/train').default
+            injectReducer(store, { key: 'train', reducer: takeReducer })
 
             cb(null, Container)
 
