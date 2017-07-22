@@ -28,6 +28,8 @@ class TrainConsultView extends React.PureComponent {
     //     getService(params.id)
     // }
     render() {
+        // const query = location.href
+        // console.log(query)
         // const { services } = this.props
         // console.log(services)
         return (

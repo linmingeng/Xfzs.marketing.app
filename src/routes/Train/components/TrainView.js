@@ -43,7 +43,6 @@ class TrainView extends React.PureComponent {
     // }
     render() {
         const { services } = this.props
-        console.log(services)
         return (
             <div>
                 {/* <div className="allContant">
@@ -102,7 +101,7 @@ class TrainView extends React.PureComponent {
                         <Button className="weui-btn_xf weui-btn_xf_mini left_btn">
                             购买
                         </Button>
-                        <Link to={`/train/consult/${service.id}`}>
+                        <Link to={`/train/consult/?id=${service.id}`}>
                             <Button type="default" plain className="weui-btn_xf_mini right_btn">
                                 咨询
                             </Button>

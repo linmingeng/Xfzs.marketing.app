@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { saveWorkOrder } from '../modules/trainconsult'
-import { getService } from '../../Train/modules/train'
+import { saveWorkOrder, getService } from '../modules/trainconsult'
+// import { getService } from '../../Train/modules/train'
 import TrainConsultView from '../components/TrainConsultView'
 
 const mapDispatchToProps = {

@@ -1,7 +1,8 @@
 import { api, injectApi, DEFAULT_FAILURE } from 'services/fetch'
-import { Schema } from 'normalizr'
+import { Schema, arrayOf } from 'normalizr'
 
 const workOrderSchema = new Schema('workOrder')
+const companyServiceSchema = new Schema('companyService')
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -9,6 +10,10 @@ const workOrderSchema = new Schema('workOrder')
 export const TRAIN_CONSULT_REQUEST = 'TRAIN_CONSULT_REQUEST'
 export const TRAIN_CONSULT_SUCCESS = 'TRAIN_CONSULT_SUCCESS'
 export const TRAIN_CONSULT_FAILURE = DEFAULT_FAILURE
+
+export const SERVICE_CATEGORY_TAKE_LIST_REQUEST = 'SERVICE_CATEGORY_TAKE_LIST_REQUEST'
+export const SERVICE_CATEGORY_TAKE_LIST_SUCCESS = 'SERVICE_CATEGORY_TAKE_LIST_SUCCESS'
+export const SERVICE_CATEGORY_TAKE_LIST_FAILURE = DEFAULT_FAILURE
 
 // ------------------------------------
 // Actions
@@ -25,6 +30,18 @@ export const saveWorkOrder = (trainId, onSuccess) => injectApi({
         TRAIN_CONSULT_FAILURE
     ]
 })
+
+export const getService = (topicid) => injectApi({
+    endpoint: api.companyService + '/getServiceList',
+    method: 'get',
+    body: { CategoryId:topicid, pageSize: 100, current: 1 },
+    schema: arrayOf(companyServiceSchema),
+    types: [
+        SERVICE_CATEGORY_TAKE_LIST_REQUEST,
+        SERVICE_CATEGORY_TAKE_LIST_SUCCESS,
+        SERVICE_CATEGORY_TAKE_LIST_FAILURE
+    ]
+})
 // export const saveShippingAddress = (sa) => injectApi({
 //     endpoint: api.delivery + '/saveShippingAddress',
 //     method: 'post',
@@ -38,7 +55,8 @@ export const saveWorkOrder = (trainId, onSuccess) => injectApi({
 // })
 
 export const actions = {
-    saveWorkOrder
+    saveWorkOrder,
+    getService
 }
 
 // ------------------------------------
@@ -69,10 +87,16 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
+// const urlId=sessionStorage.(first-url)
+const uid = location.href.split('=')[1]
 const initialState =
     {
+        uid: { id:uid },
         workOrder: {},
-        workOrderPagination: { ids: [] }
+        workOrderPagination: { ids: [] },
+        params:{ id:sessionStorage.getItem('id') },
+        services: {},
+        servicePagination: { ids: [], total: 0, current: 0, pageSize: 100 }
     }
 export default function counterReducer(state = initialState, action) {
     const handler = ACTION_HANDLERS[action.type]
