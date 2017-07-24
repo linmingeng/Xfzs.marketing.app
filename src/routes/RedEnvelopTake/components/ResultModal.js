@@ -2,14 +2,14 @@ import React from 'react'
 import './ResultModal.scss'
 import { Dialog } from 'react-weui'
 import { api } from 'services/fetch'
-import win from './assets/win.png'
-import lose from './assets/lose.png'
+// import win from './assets/win.png'
+// import lose from './assets/lose.png'
 
 export const ResultModal = ({ show, result, onClose }) => (
     <Dialog type="ios" show={show} className="result-modal">
-        <a className="close" onClick={onClose} href="javascript:void(0)">&nbsp;</a>
+        <div className="close-wapper"><a className="close" onClick={onClose} href="javascript:void(0)">&nbsp;</a></div>
         <div className="content">
-            <img src={result.status === 1 ? win : lose} className="status" />
+            {/* <img src={result.status === 1 ? win : lose} className="status" /> */}
             <div className="bg">
                 <p className="text">{result.status === 1
                     ? `获得${result.type === 1 ? '现金' : '蜂币'}${result.value}${result.type === 1 ? '元' : '个'}`

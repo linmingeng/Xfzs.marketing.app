@@ -4,6 +4,9 @@
     background-color:#ffba00;
     height: 100%;
     width: 100%;
+    @media screen and (max-width:320px) {
+        background-size: contain;
+    }
 }
 
 .red-envelop-take-container .merchants-warp {

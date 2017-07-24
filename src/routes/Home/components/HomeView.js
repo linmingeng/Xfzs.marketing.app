@@ -10,7 +10,6 @@ class HomeView extends React.Component {
     static propTypes = {
         topic: React.PropTypes.object.isRequired,
         voters: React.PropTypes.array.isRequired,
-        getTopic: React.PropTypes.func.isRequired,
         getVoters: React.PropTypes.func.isRequired,
         voting: React.PropTypes.func.isRequired
     }

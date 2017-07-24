@@ -12,7 +12,6 @@ class VoterView extends React.Component {
         id: React.PropTypes.string.isRequired,
         topic: React.PropTypes.object.isRequired,
         voter: React.PropTypes.object.isRequired,
-        getTopic: React.PropTypes.func.isRequired,
         getVoterDetail: React.PropTypes.func.isRequired,
         voting: React.PropTypes.func.isRequired
     }

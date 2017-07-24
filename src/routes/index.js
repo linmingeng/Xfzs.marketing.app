@@ -4,6 +4,7 @@ import auth from 'services/auth'
 import { injectReducer } from '../store/reducers'
 import CoreLayout from '../layouts/CoreLayout/CoreLayout'
 import Home from './Home'
+import Index from './Index/index.js'
 import TopicDescRoute from './TopicDesc'
 import SignupRoute from './Signup'
 import RankingRoute from './Ranking'
@@ -13,6 +14,9 @@ import LotteryRoute from './Lottery'
 import RedEnvelopTopicRoute from './RedEnvelopTopic'
 import RedEnvelopTakeRoute from './RedEnvelopTake'
 import RedEnvelopRecordRoute from './RedEnvelopRecord'
+import TrainRoute from './Train'
+import TrainConsultRoute from './TrainConsult'
+import PersonageIndexRoute from './PersonageIndex'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -45,13 +49,17 @@ export const createRoutes = (store) => ([
             LotteryRoute(store),
             RedEnvelopTopicRoute(store),
             RedEnvelopTakeRoute(store),
-            RedEnvelopRecordRoute(store)
+            RedEnvelopRecordRoute(store),
+            TrainRoute(store),
+            TrainConsultRoute(store),
+            PersonageIndexRoute(store)
         ],
         onEnter: () => {
             auth.fetchAntiForgery()
             auth.fetchUserInfo()
         }
-    }
+    },
+    Index(store)
 ])
 
 /*  Note: childRoutes can be chunked or otherwise loaded programmatically

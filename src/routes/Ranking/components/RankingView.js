@@ -10,7 +10,6 @@ class RankingView extends React.Component {
     static propTypes = {
         topic: React.PropTypes.object.isRequired,
         voters: React.PropTypes.array.isRequired,
-        getTopic: React.PropTypes.func.isRequired,
         getVoters: React.PropTypes.func.isRequired
     }
 
@@ -21,9 +20,11 @@ class RankingView extends React.Component {
     }
 
     componentDidMount() {
+        // console.log(this.props)
+        // console.log(topic.id)
         const { topic, getVoters } = this.props
 
-        getVoters(topic.id, 2)
+        getVoters(topic.id)
     }
 
     render() {
