@@ -33,7 +33,10 @@ class IndexView extends React.Component {
         {
             icon: < img src={Lottery} />,
             label: '蜂狂抽奖',
-            onClick: () => { location.href = 'http://vote.hxzcgf.cn/lottery/index?' + query }
+            onClick: () => {
+                location.href =
+                    'http://vote.hxzcgf.cn/lottery/index?id=9616469a-e26d-45e1-a7aa-53b22f4f53dc&' + query
+            }
             // http://vote.hxzcgf.cn/lottery/index?id=9616469a-e26d-45e1-a7aa-53b22f4f53dc");
         },
         {
@@ -44,7 +47,7 @@ class IndexView extends React.Component {
         {
             icon: < img src={canvass} />,
             label: '蜂拥拉票',
-            onClick: () => { location.href = 'http://vote.hxzcgf.cn?' + query }
+            onClick: () => { location.href = 'http://vote.hxzcgf.cn?id=9e74e4de-35b3-4b2e-9701-69ae7f9fc1ca&' + query }
             // http://vote.hxzcgf.cn?id=9e74e4de-35b3-4b2e-9701-69ae7f9fc1ca");
         }
         ]
