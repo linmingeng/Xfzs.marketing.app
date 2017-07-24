@@ -18,8 +18,7 @@ class RedEnvelopTakeView extends React.PureComponent {
         takeRedEnvelop: React.PropTypes.func.isRequired,
         getTakeResult: React.PropTypes.func.isRequired,
         getShareCode: React.PropTypes.func.isRequired,
-        trySaveShareRecords: React.PropTypes.func.isRequired,
-        shareCode: React.PropTypes.string
+        trySaveShareRecords: React.PropTypes.func.isRequired
     }
 
     state = {
