@@ -1,6 +1,5 @@
 import React from 'react'
 import './TrainView.scss'
-import pic1 from './assets/pic1.png'
 import Down from './assets/down.png'
 import Up from './assets/up.png'
 import './animate.css'
@@ -34,7 +33,9 @@ class TrainView extends React.PureComponent {
             display: this.state.display === 'block' ? 'none' : 'block',
             text: this.state.display === 'block' ? '查看详情' : '收起内容',
             image: this.state.display === 'block' ? { Down } : { Up },
-            class_name: this.state.display === 'block' ? 'show_conatant animated fadeOut' : 'show_conatant animated fadeIn'
+            class_name: this.state.display === 'block'
+                ? 'show_conatant animated fadeOut'
+                : 'show_conatant animated fadeIn'
         })
     }
     // componentDidMount() {

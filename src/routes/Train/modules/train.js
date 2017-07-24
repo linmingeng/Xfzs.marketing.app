@@ -34,23 +34,11 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
     [SERVICE_CATEGORY_TAKE_LIST_SUCCESS]: (state, { payload }) => {
-        // console.log(payload)
-        // console.log(sessionStorage.getItem('id'))
         state.services = payload.entities.companyService
         state.servicePagination = payload.pagination
 
         return Object.assign({}, state)
     }
-    // [SERVICE_CATEGORY_TAKE_LIST_SUCCESS]: (state, action) => {
-    //     const { payload } = action
-    //     console.log(payload)
-
-    //     return Object.assign({}, state, {
-    //         // services: payload.entities.voter,
-    //         servicePagination: payload.pagination
-
-    //     })
-    // }
 }
 
 // ------------------------------------

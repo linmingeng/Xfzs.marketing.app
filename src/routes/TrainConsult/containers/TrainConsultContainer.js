@@ -9,13 +9,13 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = ({ trainconsult }) => {
-    const { } = trainconsult
-    console.log(trainconsult)
+    const { workOrder, workOrderPagination, services, servicePagination } = trainconsult
 
     return {
-        // workOrder: workOrderPagination.ids.map(id => workOrder[id]) || [],
-        // params:trainconsult.params
-        // services: servicePagination.ids.map(id => services[id]) || []
+        uid:trainconsult.uid,
+        workOrder: workOrderPagination.ids.map(id => workOrder[id]) || [],
+        params:trainconsult.params,
+        services: servicePagination.ids.map(id => services[id]) || []
     }
 }
 

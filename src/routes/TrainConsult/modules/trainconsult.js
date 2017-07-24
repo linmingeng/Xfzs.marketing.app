@@ -18,12 +18,12 @@ export const SERVICE_CATEGORY_TAKE_LIST_FAILURE = DEFAULT_FAILURE
 // ------------------------------------
 // Actions
 // ------------------------------------
-export const saveWorkOrder = (trainId, onSuccess) => injectApi({
+export const saveWorkOrder = (sa) => injectApi({
     endpoint: api.companyService + '/saveWorkOrder',
     method: 'post',
-    body: { id: trainId },
+    body: sa,
     schema: workOrderSchema,
-    onSuccess,
+    // onSuccess,
     types: [
         TRAIN_CONSULT_REQUEST,
         TRAIN_CONSULT_SUCCESS,
@@ -34,7 +34,7 @@ export const saveWorkOrder = (trainId, onSuccess) => injectApi({
 export const getService = (topicid) => injectApi({
     endpoint: api.companyService + '/getServiceList',
     method: 'get',
-    body: { CategoryId:topicid, pageSize: 100, current: 1 },
+    body: { CategoryId: topicid, pageSize: 100, current: 1 },
     schema: arrayOf(companyServiceSchema),
     types: [
         SERVICE_CATEGORY_TAKE_LIST_REQUEST,
@@ -42,17 +42,6 @@ export const getService = (topicid) => injectApi({
         SERVICE_CATEGORY_TAKE_LIST_FAILURE
     ]
 })
-// export const saveShippingAddress = (sa) => injectApi({
-//     endpoint: api.delivery + '/saveShippingAddress',
-//     method: 'post',
-//     body: sa,
-//     schema: shippingAddressSchema,
-//     types: [
-//         SAVE_SHIPPING_ADDRESS_REQUEST,
-//         SAVE_SHIPPING_ADDRESS_SUCCESS,
-//         SAVE_SHIPPING_ADDRESS_FAILURE
-//     ]
-// })
 
 export const actions = {
     saveWorkOrder,
@@ -63,11 +52,13 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-    // [TRAIN_CONSULT_SUCCESS]: (state, { payload }) => {
-    //     state.voters[payload.body.id].numberOfVotes++
+    [SERVICE_CATEGORY_TAKE_LIST_SUCCESS]: (state, { payload }) => {
+        state.services = payload.entities.companyService
+        state.servicePagination = payload.pagination
 
-    //     return Object.assign({}, state)
-    // },
+        return Object.assign({}, state)
+    },
+
     [TRAIN_CONSULT_SUCCESS]: (state, { payload }) => {
         const { entities: { workOrder }, result } = payload
 
@@ -87,14 +78,14 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-// const urlId=sessionStorage.(first-url)
+
 const uid = location.href.split('=')[1]
 const initialState =
     {
-        uid: { id:uid },
+        uid: { id: uid },
         workOrder: {},
         workOrderPagination: { ids: [] },
-        params:{ id:sessionStorage.getItem('id') },
+        params: { id: 5 },
         services: {},
         servicePagination: { ids: [], total: 0, current: 0, pageSize: 100 }
     }

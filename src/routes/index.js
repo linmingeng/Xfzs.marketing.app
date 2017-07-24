@@ -16,6 +16,7 @@ import RedEnvelopTakeRoute from './RedEnvelopTake'
 import RedEnvelopRecordRoute from './RedEnvelopRecord'
 import TrainRoute from './Train'
 import TrainConsultRoute from './TrainConsult'
+import  PersonageIndexRoute from './PersonageIndex'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -50,7 +51,8 @@ export const createRoutes = (store) => ([
             RedEnvelopTakeRoute(store),
             RedEnvelopRecordRoute(store),
             TrainRoute(store),
-            TrainConsultRoute(store)
+            TrainConsultRoute(store),
+            PersonageIndexRoute(store)
         ],
         onEnter: () => {
             auth.fetchAntiForgery()
