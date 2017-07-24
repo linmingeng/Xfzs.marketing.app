@@ -39,7 +39,7 @@ export const api = {
     redEnvelop: baseUrl + '/api/services/app/redEnvelop',
 
     redEnvelopQueue: queueUrl + '/api/queue',
-    
+
     companyService: baseUrl + '/api/services/app/companyService'
 
 }

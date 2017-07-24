@@ -19,7 +19,7 @@ class TrainConsultView extends React.PureComponent {
         params: React.PropTypes.object.isRequired,
         services: React.PropTypes.array.isRequired,
         getService: React.PropTypes.func.isRequired,
-        workOrder: React.PropTypes.array.isRequired,
+        // workOrder: React.PropTypes.array.isRequired,
         saveWorkOrder: React.PropTypes.func.isRequired
     }
 
@@ -50,7 +50,7 @@ class TrainConsultView extends React.PureComponent {
         // const query = location.href
         // console.log(query)
         // console.log(this.state.editService)
-        const { services, params, workOrder, uid } = this.props
+        const { services } = this.props
 
         // const idd=uid.id
         // const renderName = () => services.filter(m => m.id === uid.id)[0].title
@@ -106,7 +106,9 @@ class TrainConsultView extends React.PureComponent {
                             <Label className="celllable">咨询</Label>
                         </CellHeader>
                         <CellBody className="cellinput">
-                            <TextArea className="CellTextArea" placeholder="请输入要咨询的内容" rows="5" maxlength="200" onChange={this.handleChangeForm('Content')}></TextArea>
+                            <TextArea className="CellTextArea"
+                                placeholder="请输入要咨询的内容" rows="5" maxlength="200"
+                                onChange={this.handleChangeForm('Content')} />
                         </CellBody>
                     </FormCell>
                 </Form>

@@ -24,7 +24,6 @@ export const CoreLayout = (props) => {
 
 CoreLayout.propTypes = {
     children: React.PropTypes.element.isRequired,
-    location: React.PropTypes.object.isRequired,
     loading: React.PropTypes.bool,
     error: React.PropTypes.string
 }

@@ -14,8 +14,7 @@ export const TopicDescView = (props) => {
 }
 
 TopicDescView.propTypes = {
-    topic: React.PropTypes.object.isRequired,
-    getTopic: React.PropTypes.func.isRequired
+    topic: React.PropTypes.object.isRequired
 }
 
 export default TopicDescView

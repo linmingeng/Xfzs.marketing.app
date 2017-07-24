@@ -1,7 +1,5 @@
 import React from 'react'
 import './IndexView.scss'
-import Nav from 'components/Nav'
-import shop from './assets/shop.png'
 import { api } from 'services/fetch'
 
 class IndexView extends React.Component {
@@ -24,7 +22,6 @@ class IndexView extends React.Component {
         console.log(this.props)
         const query = location.href.split('?')[1] || ''
         const { serviceList } = this.props
-        
         // const icons = [{
         //     icon: < img src={shop} />,
         //     label: '蜂币商城',
