@@ -2,6 +2,7 @@ import React from 'react'
 import './IndexView.scss'
 import { api } from 'services/fetch'
 import { Dialog } from 'react-weui'
+import shopIcon from './assets/shop.png'
 
 class IndexView extends React.Component {
     static propTypes = {
@@ -35,61 +36,30 @@ class IndexView extends React.Component {
     componentDidMount() {
         const { getServiceCategory } = this.props
         getServiceCategory()
-        // console.log(serviceList)
     }
 
     render() {
-        // const query = location.href.split('?')[1] || ''
+        const query = location.href.split('?')[1] || ''
         const { serviceList } = this.props
-        // const icons = [{
-        //     icon: < img src={shop} />,
-        //     label: '蜂币商城',
-        //     onClick: () => { location.href = 'http://shop.hxzcgf.cn/?' + query }
-        // },
-        // {
-        //     icon: < img src={shop} />,
-        //     label: '蜂币商城2',
-        //     onClick: () => this.context.router.push('train/index/?id=' + '5')
-        // }]
-
-        for (let i = 0; i < serviceList.length; i++) {
-            switch (i) {
-                case 0:
-                    serviceList[i].onClick = () => this.context.router.push('train/index/?id=' + '5')
-                    break
-                case 1:
-                    serviceList[i].onClick = () => this.setState({ showIOS1: true })
-                    break
-                case 2:
-                    serviceList[i].onClick = () => this.setState({ showIOS1: true })
-                    break
-                case 3:
-                    serviceList[i].onClick = () => this.setState({ showIOS1: true })
-                    break
-                case 4:
-                    serviceList[i].onClick = () => this.setState({ showIOS1: true })
-                    break
-                case 5:
-                    serviceList[i].onClick = () => this.setState({ showIOS1: true })
-                    break
-                case 6:
-                    serviceList[i].onClick = () => this.setState({ showIOS1: true })
-                    break
-                case 7:
-                    serviceList[i].onClick = () => this.setState({ showIOS1: true })
-                    break
-                default:
-                    serviceList[i].onClick = () => this.context.router.push('train/index/?id=' + '7')
-            }
-        }
+        const fixServiceList = [{
+            icon: shopIcon,
+            id: 0,
+            name: '蜂币商城',
+            sort: 0,
+            onClick: () => { location.href = 'http://shop.hxzcgf.cn/?' + query }
+        }]
+        const allServiceList = fixServiceList.concat(
+            serviceList.map(s => {
+                s.onClick = () => this.context.router.push('train/index/?id=' + s.id)
+                return s
+            }))
 
         return (<div className="index-view">
             <img className="banner" src="http://api.shop.hxzcgf.cn/Assets/upload/2016/11/10/赚蜂币，抢豪礼1478770496.png" />
             <div className="navs-wapper">
-                {/* <Nav navs={[...icons]} /> */}
                 <div className="navs">
                     {
-                        serviceList.map((service) => this.renderRankingRow(service))
+                        allServiceList.map((service) => this.renderRankingRow(service))
                     }
                 </div>
             </div >
@@ -104,9 +74,13 @@ class IndexView extends React.Component {
         this.setState({ showIOS1: true })
     }
     renderRankingRow(service) {
-        return <a className="nav" key={service.name} href="javascript:void(0);" onClick={service.onClick}>
+        return <a
+            className="nav"
+            key={service.name}
+            href="javascript:void(0);"
+            onClick={service.onClick}>
             <div className="nav-icon">
-                <img src={`${api.imgHost}/${service.icon}`} />
+                <img src={service.icon.indexOf('data') > -1 ? service.icon : `${api.imgHost}/${service.icon}`} />
             </div>
             <p className="nav-label">
                 {service.name}
