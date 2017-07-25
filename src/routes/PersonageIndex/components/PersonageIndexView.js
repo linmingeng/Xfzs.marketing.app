@@ -25,13 +25,13 @@ class IndexView extends React.Component {
         const query = location.href.split('?')[1] || ''
 
         const icons = [{
-            icon: < img src={shop} />,
+            icon: < img src={shop} style={{ height: '45.5px' }} />,
             label: '蜂币商城',
             onClick: () => { location.href = 'http://shop.hxzcgf.cn?' + query }
             // http://shop.hxzcgf.cn?l=15927678095&p=fe35c6a960bf8a2560c237cc9b516dcf
         },
         {
-            icon: < img src={Lottery} />,
+            icon: < img src={Lottery} style={{ height: '45.5px' }} />,
             label: '蜂狂抽奖',
             onClick: () => {
                 location.href =
@@ -40,12 +40,12 @@ class IndexView extends React.Component {
             // http://vote.hxzcgf.cn/lottery/index?id=9616469a-e26d-45e1-a7aa-53b22f4f53dc");
         },
         {
-            icon: < img src={RedEnvelop} />,
+            icon: < img src={RedEnvelop} style={{ height: '45.5px' }} />,
             label: '蜂抢红包',
             onClick: () => { location.href = 'http://vote.hxzcgf.cn/rd/topic/1' }
         },
         {
-            icon: < img src={canvass} />,
+            icon: < img src={canvass} style={{ height: '45.5px' }} />,
             label: '蜂拥拉票',
             onClick: () => { location.href = 'http://vote.hxzcgf.cn?id=9e74e4de-35b3-4b2e-9701-69ae7f9fc1ca&' + query }
             // http://vote.hxzcgf.cn?id=9e74e4de-35b3-4b2e-9701-69ae7f9fc1ca");

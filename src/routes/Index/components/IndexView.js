@@ -20,7 +20,7 @@ class IndexView extends React.Component {
 
     render() {
         console.log(this.props)
-        const query = location.href.split('?')[1] || ''
+        // const query = location.href.split('?')[1] || ''
         const { serviceList } = this.props
         // const icons = [{
         //     icon: < img src={shop} />,
@@ -36,16 +36,16 @@ class IndexView extends React.Component {
         for (let i = 0; i < serviceList.length; i++) {
             switch (i) {
                 case 0:
-                    serviceList[i].onClick = () => { location.href = 'http://shop.hxzcgf.cn/?' + query }
+                    serviceList[i].onClick = () => this.context.router.push('train/index/?id=' + '5')
                     break
                 case 1:
-                    serviceList[i].onClick = () => { location.href = 'http://shop.hxzcgf.cn/?' + query }
+                    serviceList[i].onClick = () => this.context.router.push('train/index/?id=' + '5')
                     break
                 case 2:
-                    serviceList[i].onClick = () => { location.href = 'http://shop.hxzcgf.cn/?' + query }
+                    serviceList[i].onClick = () => this.context.router.push('train/index/?id=' + '5')
                     break
                 case 3:
-                    serviceList[i].onClick = () => { location.href = 'http://shop.hxzcgf.cn/?' + query }
+                    serviceList[i].onClick = () => this.context.router.push('train/index/?id=' + '5')
                     break
                 case 4:
                     serviceList[i].onClick = () => this.context.router.push('train/index/?id=' + '5')

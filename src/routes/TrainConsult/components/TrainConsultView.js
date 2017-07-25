@@ -9,30 +9,42 @@ import {
     CellHeader,
     Label,
     CellBody,
-    Input
+    Input,
+    Dialog
 } from 'react-weui'
 
 class TrainConsultView extends React.PureComponent {
     static propTypes = {
         uid: React.PropTypes.object.isRequired,
-        // ServiceTitle: React.PropTypes.object.isRequired,
         params: React.PropTypes.object.isRequired,
         services: React.PropTypes.array.isRequired,
         getService: React.PropTypes.func.isRequired,
-        // workOrder: React.PropTypes.array.isRequired,
         saveWorkOrder: React.PropTypes.func.isRequired
+    }
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired
     }
 
     state = {
-        editService: { serviceId: null }
+        editService: { serviceId: null },
+        showIOS1: false,
+        style1: {
+            buttons: [
+                {
+                    label: 'Ok',
+                    onClick: this.hideDialog.bind(this)
+                }
+            ]
+        }
     }
     constructor(props) {
         super(props)
         this.handleOnOk = this.handleOnOk.bind(this)
         this.handleChangeForm = this.handleChangeForm.bind(this)
-        // this.show = this.show.bind(this)
-        // this.handleChangeForms = this.handleChangeForms.bind(this)
-        // this.saveFormToServer = this.saveFormToServer.bind(this)
+    }
+    hideDialog() {
+        const query = location.href.split('//')[1].split('/')[0]
+        location.href = `http://${query}/train/index/?id=5`
     }
     componentDidMount() {
         // console.log(topic.id)
@@ -47,9 +59,6 @@ class TrainConsultView extends React.PureComponent {
     //     console.log(1)
     // }
     render() {
-        // const query = location.href
-        // console.log(query)
-        // console.log(this.state.editService)
         const { services } = this.props
 
         // const idd=uid.id
@@ -117,6 +126,15 @@ class TrainConsultView extends React.PureComponent {
                         <Button className="weui-btn_xf weui-btn_xf_mini" onClick={this.handleOnOk} >
                             提交
                         </Button>
+                        <Button type="default" onClick={e => this.setState({ showIOS1: true })} >iOS Style1</Button>
+                        <Dialog type="ios" title={this.state.style1.title}
+                            buttons={this.state.style1.buttons} show={this.state.showIOS1} >
+                            上传成功
+                        </Dialog>
+                        <Dialog type="ios" title={this.state.style1.title}
+                            buttons={this.state.style1.buttons} show={this.state.showIOS2} >
+                            上传成功
+                        </Dialog>
                     </ButtonArea>
                 </div>
             </div >
@@ -154,23 +172,7 @@ class TrainConsultView extends React.PureComponent {
         const { saveWorkOrder } = this.props
         const { editService } = this.state
         saveWorkOrder(editService)
-        // console.log(1111)
-        console.log(11111)
-
-        // if (selectedCityGroups.length > 0) {
-        //     editAddress.provinceCode = selectedCityGroups[0].code
-        //     editAddress.cityCode = selectedCityGroups[1].code
-        //     editAddress.areaCode = selectedCityGroups[2].code
-
-        //     onRequestSave(editAddress)
-        // }
     }
-    // handleSaveVoteTopic(model) {
-    //     const { saveService } = this.props
-
-    //     return saveService(model)
-    // }
-
 }
 
 export default TrainConsultView
