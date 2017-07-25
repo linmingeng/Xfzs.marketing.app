@@ -30,7 +30,7 @@ class TrainView extends React.PureComponent {
     }
     show() {
         this.setState({
-            display: this.state.display === 'block' ? 'none' : 'block',
+            // display: this.state.display === 'block' ? 'none' : 'block',
             text: this.state.display === 'block' ? '查看详情' : '收起内容',
             image: this.state.display === 'block' ? { Down } : { Up },
             class_name: this.state.display === 'block'
@@ -38,56 +38,47 @@ class TrainView extends React.PureComponent {
                 : 'show_conatant animated fadeIn'
         })
     }
-    // componentDidMount() {
-    //     const { getService, params } = this.props
-    //     getService(params.id)
-    // }
     render() {
         const { services } = this.props
+        for (let i = 0; i < services.length; i++) {
+            switch (i) {
+                case 0:
+                    services[i].onClick = () => this.setState({ image: { Up } })
+                    break
+                case 1:
+                    services[i].onClick = () => console.log(1)
+                    break
+                case 2:
+                    services[i].onClick = () => this.setState({ showIOS1: true })
+                    break
+                case 3:
+                    services[i].onClick = () => this.setState({ showIOS1: true })
+                    break
+                case 4:
+                    services[i].onClick = () => this.setState({ showIOS1: true })
+                    break
+                case 5:
+                    services[i].onClick = () => this.setState({ showIOS1: true })
+                    break
+                case 6:
+                    services[i].onClick = () => this.setState({ showIOS1: true })
+                    break
+                case 7:
+                    services[i].onClick = () => this.setState({ showIOS1: true })
+                    break
+                default:
+                    services[i].onClick = () => this.context.router.push('train/index/?id=' + '7')
+            }
+        }
         return (
             <div>
-                {/* <div className="allContant">
-                    <div className="traincontain">
-                        <div className="leftcontant">
-                            <img src={pic1} alt="" />
-                        </div>
-                        <div className="rightcontant">
-                            <h1>小狮子支援救治集团内部精英成员训练营</h1>
-                            <h3>￥200+1200蜂币</h3>
-                            <span>福州天瑞人力资源有限公司</span>
-                            <ButtonArea direction="horizontal">
-                                <Button className="weui-btn_xf weui-btn_xf_mini left_btn">
-                                    购买
-                                </Button>
-                                <Link to={`/train/consult/:id`}>
-                                    <Button type="default" plain className="weui-btn_xf_mini right_btn">
-                                        咨询
-                                    </Button>
-                                </Link>
-                            </ButtonArea>
-                        </div>
-                    </div>
-                    <div className={this.state.class_name} style={{ display: this.state.display }}>
-                        <h1>活动详情</h1>
-                        <div>
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;6月22日，习近平总书记在太原考察了两家企业。太原重工轨道交通设备有限公司车轮车间机声隆隆，
-                                        热轧生产线上钢坯烧得通红。总书记沿着高空走廊察看高铁车轮生产流程，了解企业提升轨道交通装备研发、设计、制造能力的情况。
-                                        习近平还考察了盾构机生产装备情况，观看了山西省自主创新成果展示。在山西钢科碳材料有限公司，总书记同职工亲切交流，
-                                        勉励他们发扬工匠精神，为“中国制造”作出更大贡献。
-                            </span>
-                        </div>
-
-                    </div>
-                    <div className="buttomContant" onClick={this.show}>
-                        <h1>{this.state.text}<span><img src={Down} alt="" /></span></h1>
-                    </div>
-                </div> */}
                 {
                     services.map((service) => this.renderRankingRow(service))
                 }
             </div>
         )
     }
+
     renderRankingRow(service) {
         return <div className="allContant" key={service.id}>
             <div className="traincontain">
@@ -117,7 +108,7 @@ class TrainView extends React.PureComponent {
                 </div>
 
             </div>
-            <div className="buttomContant" onClick={this.show}>
+            <div className="buttomContant" onClick={service.onClick}>
                 <h1>{this.state.text}<span><img src={Down} alt="" /></span></h1>
             </div>
         </div>
