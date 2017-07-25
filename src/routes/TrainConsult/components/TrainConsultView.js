@@ -28,7 +28,16 @@ class TrainConsultView extends React.PureComponent {
     state = {
         editService: { serviceId: null },
         showIOS1: false,
+        showIOS2: false,
         style1: {
+            buttons: [
+                {
+                    label: 'Ok',
+                    onClick: this.goBack.bind(this)
+                }
+            ]
+        },
+        style2: {
             buttons: [
                 {
                     label: 'Ok',
@@ -42,9 +51,14 @@ class TrainConsultView extends React.PureComponent {
         this.handleOnOk = this.handleOnOk.bind(this)
         this.handleChangeForm = this.handleChangeForm.bind(this)
     }
-    hideDialog() {
+    goBack() {
         const query = location.href.split('//')[1].split('/')[0]
         location.href = `http://${query}/train/index/?id=5`
+    }
+    hideDialog() {
+        this.setState({
+            showIOS2: false
+        })
     }
     componentDidMount() {
         // console.log(topic.id)
@@ -59,32 +73,16 @@ class TrainConsultView extends React.PureComponent {
     //     console.log(1)
     // }
     render() {
-        const { services } = this.props
-
-        // const idd=uid.id
-        // const renderName = () => services.filter(m => m.id === uid.id)[0].title
-        // console.log(renderName)
-        // services.map(p => ({ key: p.id, value: p.title }))
-        // for (let i = 0; i < services.length; i++) {
-        //     if (uid.id === services[i].id) {
-        //         console.log(services[i].title)
-        //         // return ServiceTitle
-        //     }
-        // }
-        // const { ServiceTitle } = this.props
-        // console.log(this.props)
-        // let ServiceTitle = services.map((x) => {
-        //     return x.title;
-        // })
+        // const { services } = this.props
         return (
             <div>
                 <Form>
                     <div className="topContant ">
                         <span>服务：</span>
-                        <h1>{
-
-                            services.map((service) => this.renderName(service))
-                        }</h1>
+                        <h1>
+                            {/* {services.map((service) => this.renderName(service))} */}
+                            小狮子救治集团
+                        </h1>
                     </div>
                     <FormCell>
                         <CellHeader>
@@ -126,14 +124,13 @@ class TrainConsultView extends React.PureComponent {
                         <Button className="weui-btn_xf weui-btn_xf_mini" onClick={this.handleOnOk} >
                             提交
                         </Button>
-                        <Button type="default" onClick={e => this.setState({ showIOS1: true })} >iOS Style1</Button>
                         <Dialog type="ios" title={this.state.style1.title}
                             buttons={this.state.style1.buttons} show={this.state.showIOS1} >
                             上传成功
                         </Dialog>
-                        <Dialog type="ios" title={this.state.style1.title}
-                            buttons={this.state.style1.buttons} show={this.state.showIOS2} >
-                            上传成功
+                        <Dialog type="ios" title={this.state.style2.title}
+                            buttons={this.state.style2.buttons} show={this.state.showIOS2} >
+                            表单填写不完整。请重新填写
                         </Dialog>
                     </ButtonArea>
                 </div>
@@ -156,7 +153,7 @@ class TrainConsultView extends React.PureComponent {
         //     return value.id >= 10
         // }
         // return service.filter(m => m.id === 24).title
-        return 2
+        return '2223232'
     }
     handleChangeForm(name) {
         // console.log(this.state.editService)
@@ -172,6 +169,13 @@ class TrainConsultView extends React.PureComponent {
         const { saveWorkOrder } = this.props
         const { editService } = this.state
         saveWorkOrder(editService)
+        if (editService.CompanyName != null && editService.Mobile != null &&
+            editService.Content != null &&
+            editService.Name != null) {
+            this.setState({ showIOS1: true })
+        } else {
+            this.setState({ showIOS2: true })
+        }
     }
 }
 
