@@ -17,7 +17,7 @@ class TrainConsultView extends React.PureComponent {
     static propTypes = {
         uid: React.PropTypes.object.isRequired,
         params: React.PropTypes.object.isRequired,
-        services: React.PropTypes.array.isRequired,
+        // services: React.PropTypes.array.isRequired,
         getService: React.PropTypes.func.isRequired,
         saveWorkOrder: React.PropTypes.func.isRequired
     }
