@@ -3,6 +3,7 @@ import './IndexView.scss'
 import { api } from 'services/fetch'
 import { Dialog } from 'react-weui'
 import shopIcon from './assets/shop.png'
+import train from './assets/train.png'
 
 class IndexView extends React.Component {
     static propTypes = {
@@ -47,6 +48,12 @@ class IndexView extends React.Component {
             name: '蜂币商城',
             sort: 0,
             onClick: () => { location.href = 'http://shop.hxzcgf.cn/?' + query }
+        }, {
+            icon: train,
+            id: 3,
+            name: '培训活动',
+            sort: 1,
+            onClick : () => this.context.router.push('train/index/?id=' + 3)
         }]
         const allServiceList = fixServiceList.concat(
             serviceList.map(s => {
